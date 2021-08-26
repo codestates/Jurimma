@@ -31,8 +31,7 @@ li {
   padding: 0;
   margin: 0;
   border: 0;
-  font-size: 100%;
-  font: inherit;
+  font-size: 0.97rem;
   vertical-align: baseline;
   font-family: "Nanum Gothic", "Noto Sans", sans-serif;
 }
@@ -60,9 +59,9 @@ h1 {
 #jurimma img {
   width: 200px;
   height: 200px;
-  display: block;
+  /* display: block;
   margin: 0 auto;
-  padding-top: 100px;
+  padding-top: 5vh; */
 }
 
 #wrap {
@@ -76,6 +75,8 @@ h1 {
 header {
   height: 35vh;
   min-height: 235px;
+  display:grid;
+  place-items:center;
 }
 
 nav {
@@ -92,5 +93,6 @@ section {
 footer {
   height: 10vh;
   min-height: 67px;
-  background-color: white;
+  /* background-color: white; */
+  text-align:center;
 }
