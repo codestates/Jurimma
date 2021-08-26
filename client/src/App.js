@@ -1,6 +1,7 @@
 import "./app.css";
 import jurimma_logo from "./jurimma_logo.png";
 import dummyData from "./dummy/dummyData";
+import Search from "./pages/Search"
 
 function App() {
   console.log(dummyData);
@@ -15,8 +16,7 @@ function App() {
             <img src={jurimma_logo} alt="logo" />
           </h1>
         </header>
-        <section></section>
-        <article></article>
+        <Search />
         <footer></footer>
       </div>
     </div>
