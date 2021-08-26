@@ -14,12 +14,8 @@ function App() {
 
       <div className="navBar">
         <header>
-          <h1 id="jurimma" onMouseOver={()=>setLogoHover(true)} onMouseOut={()=>setLogoHover(false)}>
-            {logoHover? 
-            <img src={jurimma_logo_hover} alt="logo" />
-            :
+          <h1 id="jurimma" >
             <img src={jurimma_logo} alt="logo" />
-            }
           </h1>
         </header>
         <Search />
