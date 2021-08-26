@@ -1,6 +1,4 @@
 import "./app.css";
-import jurimma_logo from "./jurimma_logo.png";
-import jurimma_logo_hover from "./jurimma_logo_hover.png";
 import dummyData from "./dummy/dummyData";
 import Search from "./pages/Search"
 import { useState } from "react"
@@ -14,9 +12,7 @@ function App() {
 
       <div className="navBar">
         <header>
-          <h1 id="jurimma" >
-            <img src={jurimma_logo} alt="logo" />
-          </h1>
+          <h1 id="jurimma"></h1>
         </header>
         <Search />
         <footer>

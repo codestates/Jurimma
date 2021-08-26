@@ -56,12 +56,16 @@ h1 {
   font-weight: 700;
 }
 
-#jurimma img {
+#jurimma {
   width: 200px;
   height: 200px;
-  /* display: block;
-  margin: 0 auto;
-  padding-top: 5vh; */
+  background-image:url("jurimma_logo.png");
+  background-repeat: no-repeat;
+  background-size: 200px 200px;
+  transition: 0.3s;
+}
+#jurimma:hover{
+  background-image:url("jurimma_logo_hover.png");
 }
 
 #wrap {
@@ -93,6 +97,5 @@ section {
 footer {
   height: 10vh;
   min-height: 67px;
-  /* background-color: white; */
   text-align:center;
 }
