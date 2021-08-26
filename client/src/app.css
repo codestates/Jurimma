@@ -31,8 +31,7 @@ li {
   padding: 0;
   margin: 0;
   border: 0;
-  font-size: 100%;
-  font: inherit;
+  font-size: 0.97rem;
   vertical-align: baseline;
   font-family: "Nanum Gothic", "Noto Sans", sans-serif;
 }
@@ -93,28 +92,6 @@ nav {
 section {
   height: 55vh;
   background-color: #ffe65b;
-}
-
-.searchWrap{
-  width:100%;
-  margin: 0 auto;
-  padding-top:20px;
-  text-align:center;
-}
-.searchInput{
-  width:60%;
-  height:40px;
-  border: 2px solid #000;
-  border-radius:20px;
-  margin-right:10px;
-}
-.searchBtn{
-  width:90px;
-  height:44px;
-  background-color:#000;
-  color:#fff;
-  border:none;
-  border-radius:20px;
 }
 
 footer {

@@ -1,10 +1,11 @@
 import "./app.css";
 import dummyData from "./dummy/dummyData";
 import Search from "./pages/Search"
+import { useState } from "react"
 
 function App() {
-  console.log(dummyData);
-
+  // console.log(dummyData);
+  const [logoHover, setLogoHover] = useState(false)
   return (
     <div id="wrap">
       <nav></nav>

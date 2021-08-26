@@ -39,7 +39,7 @@ const userInfo = [
     username: "김민재",
     email: "blackbean@gmail.com",
     password: "Minjae!123",
-    phone: "01099999999",
+    phone: "01010101010",
     userPic: null,
     created_at: Date.now(),
   },
