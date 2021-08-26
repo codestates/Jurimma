@@ -1,7 +1,7 @@
 ---
 name: "\U0001F4DD Dev Log Card"
 about: Suggest an idea for this project
-title: "[\U0001F4DD Dev-Log] 이름 / 20XX-XX-XX"
+title: "[\U0001F4DD Dev-Log - Client] 이름 / 20XX-XX-XX"
 labels: ''
 assignees: ''
 
