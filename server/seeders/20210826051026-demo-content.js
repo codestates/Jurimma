@@ -9,7 +9,7 @@ module.exports = {
           wordName: "자만추",
           wordMean: "자연스러운 만남 추구",
           thumbsup: 0,
-          user_Id: 1,
+          userId: 1,
           createdAt: new Date(),
           updatedAt: new Date(),
         },

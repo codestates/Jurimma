@@ -1,10 +1,10 @@
 "use strict";
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.addColumn("contents", "user_Id", Sequelize.INTEGER);
+    await queryInterface.addColumn("contents", "userId", Sequelize.INTEGER);
 
     await queryInterface.addConstraint("contents", {
-      fields: ["user_Id"],
+      fields: ["userId"],
       type: "foreign key",
       name: "userIdFK",
       references: {
@@ -17,6 +17,6 @@ module.exports = {
   },
   down: async (queryInterface, Sequelize) => {
     await queryInterface.removeConstraint("contents", "userIdFK");
-    await queryInterface.removeColumn("contents", "user_Id");
+    await queryInterface.removeColumn("contents", "userId");
   },
 };
