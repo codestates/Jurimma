@@ -89,6 +89,28 @@ section {
   background-color: #ffe65b;
 }
 
+.searchWrap{
+  width:100%;
+  margin: 0 auto;
+  padding-top:20px;
+  text-align:center;
+}
+.searchInput{
+  width:60%;
+  height:40px;
+  border: 2px solid #000;
+  border-radius:20px;
+  margin-right:10px;
+}
+.searchBtn{
+  width:90px;
+  height:44px;
+  background-color:#000;
+  color:#fff;
+  border:none;
+  border-radius:20px;
+}
+
 footer {
   height: 10vh;
   min-height: 67px;
