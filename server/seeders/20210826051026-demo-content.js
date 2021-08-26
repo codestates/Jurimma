@@ -71,7 +71,7 @@ module.exports = {
         },
         {
           wordName: "별다줄",
-          wordMean: "별걸 다 줄인다",
+          wordMean: "별걸 다 줄인다...",
           thumbsup: 7,
           userId: 1,
           createdAt: new Date(),
