@@ -8,6 +8,8 @@ function Nav() {
   const NavWrap = styled.nav`
     background-color: #38372e;
     /* background-color: black; */
+    position: sticky;
+    top: 0;
     height: 100vh;
     flex: 1 1 auto;
     display: grid;
