@@ -2,9 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import profile from "../none_profile.jpeg";
 
-function Nav() {
-  const [isLogin, setIsLogin] = useState(true);
-
+function Nav({ isLogin }) {
   const NavWrap = styled.nav`
     background-color: #38372e;
     /* background-color: black; */
