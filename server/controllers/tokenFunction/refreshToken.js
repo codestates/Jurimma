@@ -14,7 +14,7 @@ module.exports = {
       sameSite: "none",
     });
   },
-  isAuthorized: async (req) => {
+  refreshAuthorized: async (req) => {
     // TODO: JWT 토큰 정보를 받아서 검증합니다.
     const token = req.cookies.refreshToken;
     if (!token) {
