@@ -1,4 +1,5 @@
 require("dotenv").config();
+const { user } = require("../../models");
 const { sign, verify } = require("jsonwebtoken");
 
 module.exports = {
@@ -13,13 +14,21 @@ module.exports = {
       sameSite: "none",
     });
   },
-  isAuthorized: (req) => {
+  isAuthorized: async (req) => {
     // TODO: JWT 토큰 정보를 받아서 검증합니다.
-    const token = req.cookies;
+    const token = req.cookies.refreshToken;
     if (!token) {
-      return null;
+      return false;
     } else {
-      return verify(token.refreshToken, process.env.REFRESH_SECRET);
+      const tokenCheck = verify(token, process.env.REFRESH_SECRET);
+      const findData = await user.findOne({
+        where: {id: tokenCheck.id}
+      });
+      if(!findData) {
+        return false;
+      } else {
+        return true;
+      }
     }
   },
 };
