@@ -27,7 +27,8 @@ dt,
 dd,
 ol,
 ul,
-li {
+li,
+button {
   padding: 0;
   margin: 0;
   border: 0;
@@ -59,32 +60,33 @@ h1 {
 #jurimma {
   width: 200px;
   height: 200px;
-  background-image:url("jurimma_logo.png");
+  background-image: url("jurimma_logo.png");
   background-repeat: no-repeat;
   background-size: 200px 200px;
   transition: 0.3s;
 }
-#jurimma:hover{
-  background-image:url("jurimma_logo_hover.png");
+#jurimma:hover {
+  background-image: url("jurimma_logo_hover.png");
 }
 
 #wrap {
   display: flex;
 }
 
-.navBar {
-  flex: 3 1 auto;
+.exNav {
+  flex: 5 1 auto;
 }
 
 header {
   height: 35vh;
   min-height: 235px;
-  display:grid;
-  place-items:center;
+  display: grid;
+  place-items: center;
 }
 
 nav {
-  background-color: #ffff8d;
+  background-color: #38372e;
+  /* background-color: black; */
   height: 100vh;
   flex: 1 1 auto;
 }
@@ -97,5 +99,5 @@ section {
 footer {
   height: 10vh;
   min-height: 67px;
-  text-align:center;
+  text-align: center;
 }
