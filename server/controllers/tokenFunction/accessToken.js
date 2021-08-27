@@ -16,9 +16,9 @@ module.exports = {
       const realToken = token.split(" ")[1];
       const tokenCheck = verify(realToken, process.env.ACCESS_SECRET);
       const findData = await user.findOne({
-        where: { id: tokenCheck.id },
+        where: {id: tokenCheck.id}
       });
-      if (!findData) {
+      if(!findData) {
         return false;
       } else {
         return true;
