@@ -16,6 +16,7 @@ function SearchResult({ data }) {
     flex-direction: column;
     li {
       display: flex;
+      justify-content:space-around;
       height: 8vh;
       margin-top: 2vh;
       border: 2px solid #000;
