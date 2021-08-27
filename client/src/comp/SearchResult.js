@@ -10,7 +10,7 @@ function SearchResult({ data }) {
   //let result = [];
   const ResultList = styled.ul`
     margin-top: 20px;
-    width: 75%;
+    width: 65%;
     margin: 0 auto;
     display: flex;
     flex-direction: column;
@@ -24,7 +24,12 @@ function SearchResult({ data }) {
       line-height: 8vh;
       background-color: #ffff8d;
       p {
-        flex: 1 1 auto;
+        padding: 0 5px;
+        font-size: 75%;
+        flex: 1 0 auto;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
       }
       p:nth-child(2) {
         flex: 3 1 auto;
@@ -42,8 +47,11 @@ function SearchResult({ data }) {
     }
   `;
   const BtnWrap = styled.div`
-    width: 30%;
-    margin: 3% auto;
+    width: 35vh;
+    margin: 0 auto;
+    margin-top: 2vh;
+    display: flex;
+    justify-content: space-evenly;
   `;
   const NewMoreBtn = styled.button`
     width: 15vh;
@@ -52,7 +60,6 @@ function SearchResult({ data }) {
     border: 2px solid black;
     background-color: black;
     color: white;
-    margin-left: 10%;
     font-size: 0.8rem;
     transition: 0.2s;
     :hover {
