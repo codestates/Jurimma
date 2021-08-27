@@ -9,11 +9,13 @@ module.exports = {
   },
   isAuthorized: async (req) => {
     // TODO: JWT 토큰 정보를 받아서 검증합니다.
-    const token = req.headers.Authorization;
+    const token = req.headers.authorization;
+    console.log(token);
     if (!token) {
       return false;
     } else {
       const realToken = token.split(" ")[1];
+      // console.log(realToken);
       const tokenCheck = verify(realToken, process.env.ACCESS_SECRET);
       const findData = await user.findOne({
         where: {id: tokenCheck.id}

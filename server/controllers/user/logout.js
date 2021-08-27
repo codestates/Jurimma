@@ -1,16 +1,15 @@
-const { generateAccessToken, isAuthorized } = require("../tokenFunction/accessToken");
-const { generateRefreshToken, sendRefreshToken } = require("../tokenFunction/refreshToken");
+const { isAuthorized } = require("../tokenFunction/accessToken");
+const { sendRefreshToken } = require("../tokenFunction/refreshToken");
 
 module.exports = {
     post: (req, res) => {
+        console.log(req.headers);
         if(!isAuthorized(req)) {
             res.status(400).json({ message: "You are not loged in!" });
         } else {
-            const accessToken = generateAccessToken(null);
-            const refreshToken = generateRefreshToken(null);
-            sendRefreshToken(res, refreshToken);
+            sendRefreshToken(res, null);
             res.status(200).json({
-                accessToken: accessToken,
+                accessToken: null,
                 message: "Success!"
             });
         }
