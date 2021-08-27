@@ -7,7 +7,7 @@ module.exports = {
   },
   sendRefreshToken: (res, refreshToken) => {
     // TODO: JWT 토큰을 쿠키로 전달합니다.
-    res.cookie("jwt", refreshToken, {
+    res.cookie("refreshToken", refreshToken, {
       httpOnly: true,
       secure: true,
       sameSite: "none",
@@ -19,11 +19,7 @@ module.exports = {
     if (!token) {
       return null;
     } else {
-      try {
-        return verify(token.jwt, process.env.REFRESH_SECRET);
-      } catch (error) {
-        return null;
-      }
+      return verify(token.refreshToken, process.env.REFRESH_SECRET);
     }
   },
 };

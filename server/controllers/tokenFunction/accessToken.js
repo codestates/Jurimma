@@ -1,4 +1,5 @@
 require("dotenv").config();
+const { user } = require("../../models");
 const { sign, verify } = require("jsonwebtoken");
 
 module.exports = {
@@ -12,12 +13,9 @@ module.exports = {
     if (!token) {
       return null;
     } else {
-      try {
-        const realToken = token.split(" ")[1];
-        return verify(realToken, process.env.ACCESS_SECRET);
-      } catch (error) {
-        return null;
-      }
+      const realToken = token.split(" ")[1];
+      const tokenCheck = verify(realToken, process.env.ACCESS_SECRET);
+      
     }
   },
 };
