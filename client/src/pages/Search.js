@@ -1,12 +1,11 @@
 import SearchInput from "../comp/SearchInput";
 import SearchResult from "../comp/SearchResult";
-import dummyData from "../dummy/dummyData";
 
-function Search() {
+function Search({data}) {
   return (
     <section>
       <SearchInput />
-      <SearchResult data={dummyData.word} />
+      <SearchResult data={data} />
     </section>
   );
 }

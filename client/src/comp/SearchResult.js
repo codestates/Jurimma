@@ -16,6 +16,7 @@ function SearchResult({ data }) {
     flex-direction: column;
     li {
       display: flex;
+      justify-content:space-around;
       height: 8vh;
       margin-top: 2vh;
       border: 2px solid #000;
@@ -24,10 +25,10 @@ function SearchResult({ data }) {
       line-height: 8vh;
       background-color: #ffff8d;
       p {
-        flex: 1 1 auto;
+        
       }
       p:nth-child(2) {
-        flex: 3 1 auto;
+        
       }
     }
     li:nth-child(1) {

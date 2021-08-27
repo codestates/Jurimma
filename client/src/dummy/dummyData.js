@@ -31,6 +31,38 @@ const word = [
     created_at: Date.now(),
     userId: 3,
   },
+  {
+    id: 4,
+    wordName: "자만추",
+    wordMean: "자주 만나기 추하다",
+    thumbsup: 20,
+    created_at: Date.now(),
+    userId: 3,
+  },
+  {
+    id: 4,
+    wordName: "자만추",
+    wordMean: "자주 만나기 추하다",
+    thumbsup: 20,
+    created_at: Date.now(),
+    userId: 3,
+  },
+  {
+    id: 4,
+    wordName: "자만추",
+    wordMean: "자주 만나기 추하다",
+    thumbsup: 20,
+    created_at: Date.now(),
+    userId: 3,
+  },
+  {
+    id: 4,
+    wordName: "자만추",
+    wordMean: "자주 만나기 추하다",
+    thumbsup: 20,
+    created_at: Date.now(),
+    userId: 3,
+  },
 ];
 
 const userInfo = [
