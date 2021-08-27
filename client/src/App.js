@@ -1,27 +1,22 @@
 import "./app.css";
-import jurimma_logo from "./jurimma_logo.png";
-import jurimma_logo_hover from "./jurimma_logo_hover.png";
 import dummyData from "./dummy/dummyData";
-import Search from "./pages/Search"
-import { useState } from "react"
+import Search from "./pages/Search";
+import { useState } from "react";
+import Nav from "./comp/Nav";
 
 function App() {
   // console.log(dummyData);
-  const [logoHover, setLogoHover] = useState(false)
+  const [logoHover, setLogoHover] = useState(false);
   return (
     <div id="wrap">
-      <nav></nav>
+      <Nav />
 
-      <div className="navBar">
+      <div className="exNav">
         <header>
-          <h1 id="jurimma" >
-            <img src={jurimma_logo} alt="logo" />
-          </h1>
+          <h1 id="jurimma"></h1>
         </header>
         <Search />
-        <footer>
-          copyright JURIMMA
-        </footer>
+        <footer>copyright JURIMMA</footer>
       </div>
     </div>
   );
