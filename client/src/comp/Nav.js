@@ -20,12 +20,18 @@ function Nav({ isLogin }) {
     height: 7vh;
     border: none;
     border-radius: 40px;
-    font-size: 0.98rem;
+    font-size: max(0.85vw, 12px);
     font-weight: 700;
     display: block;
     margin-top: 5vh;
+    cursor: pointer;
+    transition: 0.3s;
     &:nth-child(1) {
       margin-top: 0;
+    }
+    :hover {
+      background-color: black;
+      color: white;
     }
   `;
 
@@ -34,18 +40,25 @@ function Nav({ isLogin }) {
     height: 7vh;
     border: none;
     border-radius: 40px;
-    font-size: 0.98rem;
+    font-size: max(0.85vw, 12px);
     font-weight: 700;
     display: block;
     margin: 5vh auto 0;
+    cursor: pointer;
+    transition: 0.3s;
     &:nth-child(1) {
       margin-top: 0;
+    }
+    :hover {
+      background-color: black;
+      color: white;
     }
   `;
 
   const ProfileWrap = styled.div`
     width: 100%;
     text-align: center;
+    cursor: pointer;
     > img {
       width: 22vh;
       height: 22vh;
@@ -58,10 +71,15 @@ function Nav({ isLogin }) {
       height: 7vh;
       border: none;
       border-radius: 40px;
-      font-size: 0.98rem;
+      font-size: max(0.85vw, 12px);
       font-weight: 700;
       display: block;
       margin: 0 auto;
+      transition: 0.3s;
+    }
+    > button:hover {
+      background-color: black;
+      color: white;
     }
   `;
 

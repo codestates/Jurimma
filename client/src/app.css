@@ -112,14 +112,13 @@ nav {
 }
 
 section {
-  height: 55vh;
+  height: 60vh;
   background-color: #ffe65b;
 }
 
 footer {
-  height: 10vh;
-  min-height: 67px;
-  line-height: 10vh;
+  height: 4.5vh;
+  line-height: 4.5vh;
   text-align: center;
-  font-size: 0.97rem;
+  font-size: max(0.9vw, 10px);
 }
