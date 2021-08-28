@@ -5,7 +5,10 @@ import SearchMore from "./pages/SearchMore";
 import { useState } from "react";
 import Nav from "./comp/Nav";
 import Modal from "./comp/Modal";
+import Mypage from "./pages/Mypage";
+import {BrowserRouter, Switch, Route, Link} from "react-router-dom"
 import WriteModal from "./comp/WriteModal";
+
 
 function App() {
   // console.log(dummyData);
@@ -13,27 +16,37 @@ function App() {
   const [searched, setSearched] = useState(false);
   const [onModal, setOnModal] = useState(false);
   const [writeModal, setWriteModal] = useState(true);
-
   return (
-    <div id="wrap">
-      {onModal ? <Modal /> : null}
-
-      {writeModal ? <WriteModal /> : null}
-
-      <Nav isLogin={isLogin} />
-
+    <BrowserRouter>
+      <div id="wrap">
+        {onModal ? <Modal /> : null}
+        {writeModal ? <WriteModal /> : null}
+        <Nav isLogin={isLogin} />
+          
       <div className="exNav">
         <header>
-          <h1 id="jurimma"></h1>
+          <Link to="/">
+            <h1 id="jurimma"></h1>
+          </Link>
         </header>
-        {isLogin === true && searched === true ? (
-          <SearchMore data={dummyData.word} />
-        ) : (
-          <Search data={dummyData.word} />
-        )}
-        <footer>copyright JURIMMA</footer>
+
+        <Switch>
+          <div className="exNav">
+            <Route exact path="/mypage">
+              <Mypage />
+            </Route>
+            <Route exact path="/">
+              {isLogin === true && searched === true ? (
+                <SearchMore data={dummyData.word} />
+              ) : (
+                <Search data={dummyData.word} />
+              )}
+            </Route>
+            <footer>copyright JURIMMA</footer>
+          </div>
+        </Switch>
       </div>
-    </div>
+    </BrowserRouter>
   );
 }
 
