@@ -16,7 +16,7 @@ function SearchResult({ data }) {
     flex-direction: column;
     li {
       display: flex;
-      justify-content:space-around;
+      justify-content: space-around;
       height: 8vh;
       margin-top: 2vh;
       border: 2px solid #000;
@@ -48,14 +48,16 @@ function SearchResult({ data }) {
     }
   `;
   const BtnWrap = styled.div`
-    width: 35vh;
+    width: 22vw;
+    min-width: 200px;
     margin: 0 auto;
     margin-top: 2vh;
     display: flex;
     justify-content: space-evenly;
   `;
   const NewMoreBtn = styled.button`
-    width: 15vh;
+    width: 9vw;
+    min-width: 75px;
     height: 5vh;
     border-radius: 5vh;
     border: 2px solid black;
