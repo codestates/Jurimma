@@ -9,7 +9,7 @@ import WriteModal from "./comp/WriteModal";
 
 function App() {
   // console.log(dummyData);
-  const [isLogin, setisLogin] = useState(false);
+  const [isLogin, setisLogin] = useState(tru);
   const [searched, setSearched] = useState(false);
   const [onModal, setOnModal] = useState(false);
   const [writeModal, setWriteModal] = useState(false);
