@@ -52,14 +52,14 @@ const WelcomeBox = styled.div`
   }
   > p {
     font-size: max(12px, 0.8vw);
-    padding: 13px;
+    padding: 10px;
   }
 `;
 
 const KakaoLogin = styled.button`
   width: 80%;
   height: 3vw;
-  min-height: 40px;
+  min-height: 35px;
   background-color: #fee500;
   margin: 0 auto;
   border-radius: 20px;
@@ -86,16 +86,22 @@ const KakaoLogin = styled.button`
 
 const TabMenu = styled.ul`
   width: 100%;
+  height: 50px;
   display: flex;
   flex-direction: row;
   justify-items: center;
   align-items: center;
-  background-color: red;
   min-height: 40px;
   > .submenu {
+    height: 100%;
+    line-height: 50px;
+    border-right: 1px solid orange;
     font-size: max(12px, 0.9vw);
     flex: 1 0 auto;
     text-align: center;
+  }
+  > .submenu:nth-child(2) {
+    border-right: 0;
   }
 `;
 
@@ -104,32 +110,85 @@ const KakaoWrap = styled.div`
 `;
 
 const TabWrap = styled.div`
-  flex: 10 1 auto;
-  display:flex;
-  flex-direction:column;
-  border:1px solid #000;
+  flex: 3 1 auto;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #000;
 `;
 
 const LoginBox = styled.div`
-  background-color: pink;
   display: flex;
-  height:100%;
-  align-items:center;
+  height: 100%;
+  align-items: center;
   flex-direction: column;
-  > input {
+  > #a {
     width: 80%;
-    flex: 1 1 auto;
-    justify-content:center;
+    flex: 2 1 auto;
+    border: 1px solid red;
+    box-sizing: border-box;
+    > label {
+      display: block;
+      text-align: left;
+      position: relative;
+    }
+    > input {
+      width: 100%;
+      height: 30px;
+      font-size: max(12px, 0.9vw);
+      background: transparent;
+      outline: none;
+      border: 0;
+      border-bottom: 2px solid black;
+      justify-content: center;
+    }
+    > button {
+      width: 200px;
+      height: 50px;
+      background-color: yellow;
+    }
   }
-  > button {
+`;
+
+const SignupBox = styled.div`
+  display: flex;
+  height: 100%;
+  align-items: center;
+  flex-direction: column;
+  > #a {
     width: 80%;
-    flex: 1 1 auto;
-    justify-content:center;
+    flex: 2 1 auto;
+    border: 1px solid red;
+    box-sizing: border-box;
+    > label {
+      font-size: max(13px, 0.8vw);
+      display: block;
+      text-align: left;
+      position: relative;
+    }
+    > input {
+      width: 100%;
+      height: 30px;
+      font-size: max(12px, 0.8vw);
+      background: transparent;
+      outline: none;
+      border: 0;
+      border-bottom: 2px solid black;
+      justify-content: center;
+    }
+    > button {
+      width: 100%;
+      height: 3vw;
+      min-height: 30px;
+      background-color: yellow;
+      margin-top: 3vw;
+      border: 2px solid black;
+      border-radius: 20px;
+    }
   }
 `;
 
 function Modal() {
-  const [currentTab, setCurrentTab] = useState(0);
+  const [currentTab, setCurrentTab] = useState(1);
 
   const selectMenuHandler = (index) => {
     setCurrentTab(index);
@@ -160,11 +219,37 @@ function Modal() {
 
             {currentTab === 0 ? (
               <LoginBox>
-                <input type="text" placeholder="email"  />
-                <input type="text" placeholder="password" />
-                <input type="submit" placeholder="" />
+                <div id="a">
+                  <label for="email">Email</label>
+                  <input type="text" placeholder="이메일을 입력해주세요" />
+                  <label for="password">password</label>
+                  <input type="text" placeholder="비밀번호를 입력해주세요" />
+                  <button>Submit</button>
+                </div>
               </LoginBox>
-            ) : null}
+            ) : (
+              <SignupBox>
+                <div id="a">
+                  <label for="email">UserName</label>
+                  <input type="text" placeholder="사용자 이름을 입력해주세요" />
+                  <label for="email">Email</label>
+                  <input type="text" placeholder="이메일을 입력해주세요" />
+                  <label for="email">Phone Number</label>
+                  <input
+                    type="text"
+                    placeholder="사용자 핸드폰 번호를 입력해주세요"
+                  />
+                  <label for="password">password</label>
+                  <input type="text" placeholder="비밀번호를 입력해주세요" />
+                  <label for="password">password</label>
+                  <input
+                    type="text"
+                    placeholder="비밀번호를 다시 입력해주세요"
+                  />
+                  <button>Submit</button>
+                </div>
+              </SignupBox>
+            )}
           </TabWrap>
         </ModalBox>
       </ModalBack>
