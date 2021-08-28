@@ -5,16 +5,20 @@ import SearchMore from "./pages/SearchMore";
 import { useState } from "react";
 import Nav from "./comp/Nav";
 import Modal from "./comp/Modal";
+import WriteModal from "./comp/WriteModal";
 
 function App() {
   // console.log(dummyData);
-  const [isLogin, setisLogin] = useState(false);
+  const [isLogin, setisLogin] = useState(true);
   const [searched, setSearched] = useState(false);
-  const [onModal, setOnModal] = useState(true);
+  const [onModal, setOnModal] = useState(false);
+  const [writeModal, setWriteModal] = useState(true);
 
   return (
     <div id="wrap">
       {onModal ? <Modal /> : null}
+
+      {writeModal ? <WriteModal /> : null}
 
       <Nav isLogin={isLogin} />
 

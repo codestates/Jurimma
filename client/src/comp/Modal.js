@@ -41,10 +41,15 @@ const WelcomeBox = styled.div`
     min-height: 80px;
   }
   > div {
-    font-size: 40px;
+    font-size: max(30px, 2.8vw);
     position: absolute;
-    top: 15px;
-    right: 30px;
+    top: 20px;
+    right: max(2.2vw, 20px);
+    cursor: pointer;
+    transition: 0.4s;
+  }
+  > div:hover {
+    transform: rotate(180deg);
   }
   > h2 {
     // font-size 꼭 찾아보기
@@ -220,9 +225,9 @@ function Modal() {
             {currentTab === 0 ? (
               <LoginBox>
                 <div id="a">
-                  <label for="email">Email</label>
+                  <label htmlFor="email">Email</label>
                   <input type="text" placeholder="이메일을 입력해주세요" />
-                  <label for="password">password</label>
+                  <label htmlFor="password">password</label>
                   <input type="text" placeholder="비밀번호를 입력해주세요" />
                   <button>Submit</button>
                 </div>
@@ -230,18 +235,18 @@ function Modal() {
             ) : (
               <SignupBox>
                 <div id="a">
-                  <label for="email">UserName</label>
+                  <label htmlFor="email">UserName</label>
                   <input type="text" placeholder="사용자 이름을 입력해주세요" />
-                  <label for="email">Email</label>
+                  <label htmlFor="email">Email</label>
                   <input type="text" placeholder="이메일을 입력해주세요" />
-                  <label for="email">Phone Number</label>
+                  <label htmlFor="email">Phone Number</label>
                   <input
                     type="text"
                     placeholder="사용자 핸드폰 번호를 입력해주세요"
                   />
-                  <label for="password">password</label>
+                  <label htmlFor="password">password</label>
                   <input type="text" placeholder="비밀번호를 입력해주세요" />
-                  <label for="password">password</label>
+                  <label htmlFor="password">password</label>
                   <input
                     type="text"
                     placeholder="비밀번호를 다시 입력해주세요"
