@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import logo from "../jurimma_logo.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faComment } from "@fortawesome/free-solid-svg-icons";
+import { faChevronDown, faComment } from "@fortawesome/free-solid-svg-icons";
 
 const ModalBack = styled.div`
   width: 100vw;
@@ -86,7 +86,6 @@ const KakaoLogin = styled.button`
 
 const TabMenu = styled.ul`
   width: 100%;
-  height: 3vw;
   display: flex;
   flex-direction: row;
   justify-items: center;
@@ -100,26 +99,32 @@ const TabMenu = styled.ul`
   }
 `;
 
-const Desc = styled.div`
-  background-color: red;
-`;
-
 const KakaoWrap = styled.div`
   flex: 1 1 auto;
 `;
 
 const TabWrap = styled.div`
   flex: 10 1 auto;
+  display:flex;
+  flex-direction:column;
+  border:1px solid #000;
 `;
 
 const LoginBox = styled.div`
   background-color: pink;
   display: flex;
+  height:100%;
+  align-items:center;
   flex-direction: column;
   > input {
     width: 80%;
-    margin-top: 20px;
     flex: 1 1 auto;
+    justify-content:center;
+  }
+  > button {
+    width: 80%;
+    flex: 1 1 auto;
+    justify-content:center;
   }
 `;
 
@@ -137,7 +142,7 @@ function Modal() {
             <img src={logo} alt="logo" />
             <div>&times;</div>
             <h2>만.반.잘.부!</h2>
-            <p>만난서 반가워 잘 부탁해!</p>
+            <p>만나서 반가워 잘 부탁해!</p>
           </WelcomeBox>
 
           <KakaoWrap>
@@ -153,14 +158,13 @@ function Modal() {
               <li className="submenu">회원가입</li>
             </TabMenu>
 
-            <Desc>
-              {currentTab === 0 ? (
-                <LoginBox>
-                  <input></input>
-                  <input></input>
-                </LoginBox>
-              ) : null}
-            </Desc>
+            {currentTab === 0 ? (
+              <LoginBox>
+                <input type="text" placeholder="email"  />
+                <input type="text" placeholder="password" />
+                <input type="submit" placeholder="" />
+              </LoginBox>
+            ) : null}
           </TabWrap>
         </ModalBox>
       </ModalBack>
