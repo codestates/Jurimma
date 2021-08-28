@@ -7,18 +7,23 @@ import Nav from "./comp/Nav";
 import Modal from "./comp/Modal";
 import Mypage from "./pages/Mypage";
 import {BrowserRouter, Switch, Route, Link} from "react-router-dom"
+import WriteModal from "./comp/WriteModal";
+
 
 function App() {
   // console.log(dummyData);
   const [isLogin, setisLogin] = useState(true);
   const [searched, setSearched] = useState(false);
   const [onModal, setOnModal] = useState(false);
-
+  const [writeModal, setWriteModal] = useState(true);
   return (
     <BrowserRouter>
       <div id="wrap">
         {onModal ? <Modal /> : null}
+        {writeModal ? <WriteModal /> : null}
         <Nav isLogin={isLogin} />
+          
+      <div className="exNav">
         <header>
           <Link to="/">
             <h1 id="jurimma"></h1>

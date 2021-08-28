@@ -36,9 +36,9 @@ button {
   box-sizing: border-box;
 }
 /* HTML5 display-role reset for older browsers */
-/* html {
-  font-size: 16px;
-} */
+html {
+  /* font-size: 16px; */
+}
 
 body {
   line-height: 1;
@@ -53,6 +53,18 @@ body {
 ol,
 ul {
   list-style: none;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+::before,
+::after {
+  position: absolute;
+  content: "";
 }
 
 a {
