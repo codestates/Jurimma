@@ -9,13 +9,13 @@ import Mypage from "./pages/Mypage";
 import {BrowserRouter, Switch, Route, Link} from "react-router-dom"
 import WriteModal from "./comp/WriteModal";
 
-
 function App() {
   // console.log(dummyData);
   const [isLogin, setisLogin] = useState(true);
   const [searched, setSearched] = useState(false);
   const [onModal, setOnModal] = useState(false);
   const [writeModal, setWriteModal] = useState(true);
+  
   return (
     <BrowserRouter>
       <div id="wrap">
@@ -46,6 +46,7 @@ function App() {
           </div>
         </Switch>
       </div>
+    </div>
     </BrowserRouter>
   );
 }
