@@ -1,4 +1,4 @@
-const { user } = require("../../models");
+const { user, thumbs } = require("../../models");
 const { isAuthorized } = require("../tokenFunction/accessToken");
 const { verify } = require("jsonwebtoken");
 
@@ -19,6 +19,10 @@ module.exports = {
           force: true,
         });
         res.status(200).json({ message: "ok" });
+        await thumbs.destroy({
+          where: { user_Id: tokenCheck.id },
+          force: true,
+        });
       }
     } catch (error) {
       console.log(error);
