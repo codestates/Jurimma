@@ -7,21 +7,50 @@ import { faChevronDown, faChevronUp } from '@fortawesome/free-solid-svg-icons'
 function SearchMore({data}){
     let result = data.sort((a,b)=>a.thumbsup-b.thumbsup).reverse()
     // let result = []
+
+    const EmptyResult = styled.div`
+        text-align:center;
+        > img{
+            width:20vh;
+            height:20vh;
+        }
+    `
+    const Result = styled.div`
+        display:flex;
+        flex-direction:column;
+    `
     const ResultName = styled.h2`
-    text-align:center;
-    font-size:1.5em;
-    margin-bottom:5vw;
+        text-align:center;
+        font-size:1.5em;
+        margin-bottom:2vw;
+    `
+    const Morebutton = styled.button`
+        display:block;
+        width:10vw;
+        min-width:80px;
+        height:5vh;
+        background-color:#000;
+        border:2px solid #000;
+        border-radius:20px;
+        margin:0 auto 2vw;
+        font-size:max(12px, 0.8vw);
+        color:#fff;
+        transition: all 0.3s;
+        cursor:pointer;
+        :hover{
+            background-color:#fff;
+            color:#000;
+        }
     `
     const ResultList = styled.ul`
         margin-top:20px;
-        width:75%;
+        width:100%;
         margin: 0 auto;
-        display:flex;
-        flex-direction:column;
         li{
             display:flex;
+            width:75%;
             height:8vh;
-            margin-top:2vh;
+            margin:2vh auto 0;
             border:2px solid #000;
             border-radius:40px;
             text-align:center;
@@ -36,13 +65,6 @@ function SearchMore({data}){
         }
         li:nth-child(1){
             margin-top:0px;
-        }
-    `
-    const EmptyResult = styled.div`
-        text-align:center;
-        > img{
-            width:20vh;
-            height:20vh;
         }
     `
     const MoveDir = styled.div`
@@ -74,8 +96,9 @@ function SearchMore({data}){
                 <p>검색 결과가 없습니다.</p>
             </EmptyResult>
             :
-            <>
+            <Result>
                 <ResultName>"{result[0].wordName}"의 검색 결과 입니다.</ResultName>
+                <Morebutton>뜻 추가하기</Morebutton>
                 <ResultList>
                     {result.map((ele,idx)=>{
                         return (
@@ -91,7 +114,7 @@ function SearchMore({data}){
                     <FontAwesomeIcon icon={faChevronUp} className="fit" />
                     <FontAwesomeIcon icon={faChevronDown} className="fit" />
                 </MoveDir>
-            </>
+            </Result>
         }
         </>
     )
