@@ -20,7 +20,7 @@ function Nav({ isLogin }) {
     height: 7vh;
     border: none;
     border-radius: 40px;
-    font-size: 0.98rem;
+    font-size: max(0.85vw, 12px);
     font-weight: 700;
     display: block;
     margin-top: 5vh;
@@ -33,6 +33,10 @@ function Nav({ isLogin }) {
     &:nth-child(1) {
       margin-top: 0;
     }
+    :hover {
+      background-color: black;
+      color: white;
+    }
   `;
 
   const Button2 = styled.button`
@@ -40,7 +44,7 @@ function Nav({ isLogin }) {
     height: 7vh;
     border: none;
     border-radius: 40px;
-    font-size: 0.98rem;
+    font-size: max(0.85vw, 12px);
     font-weight: 700;
     display: block;
     margin: 5vh auto 0;
@@ -52,6 +56,10 @@ function Nav({ isLogin }) {
     }
     &:nth-child(1) {
       margin-top: 0;
+    }
+    :hover {
+      background-color: black;
+      color: white;
     }
   `;
 
@@ -71,7 +79,7 @@ function Nav({ isLogin }) {
       height: 7vh;
       border: none;
       border-radius: 40px;
-      font-size: 0.98rem;
+      font-size: max(0.85vw, 12px);
       font-weight: 700;
       display: block;
       margin: 0 auto;

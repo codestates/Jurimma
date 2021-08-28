@@ -15,7 +15,7 @@ const SearchWrap = styled.div`
     border-radius: 30px;
     margin-right: 10px;
     outline: none;
-    padding-left: 20px;
+    padding-left: max;
   }
   > .searchBtn {
     width: 6vw;
