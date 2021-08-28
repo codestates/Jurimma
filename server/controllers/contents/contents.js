@@ -4,23 +4,26 @@ const { refreshAuthorized } = require("../tokenFunction/refreshToken");
 const { verify } = require("jsonwebtoken");
 
 module.exports = {
-    post: async (req, res) => {
+    post: (req, res) => {
         if(isAuthorized(req)) {
             // accessToken이 만료되지 않았을 경우,
             // => 바로 요청에 대한 응답 제공
             const { userId, wordName, wordMean } = req.body;
-            const newContent = await content.create({
+            content.create({
                 wordName: wordName,
                 wordMean: wordMean,
                 thumbsup: 0,
                 userId: userId
-            });
-            // console.log(newContent.dataValues);
-            await thumbs.create({
-                user_Id: userId,
-                content_Id: newContent.dataValues.id
-            });
-            res.status(200).json({ message: "ok" });
+            })
+            .then((newContent) => {
+                console.log(newContent.dataValues);
+                return thumbs.create({
+                    user_Id: userId,
+                    content_Id: newContent.dataValues.id
+                });
+            })
+            .then(() => res.status(200).json({ message: "ok" }))
+            .catch((err) => console.log(err));
         } else {
             // accessToken이 만료되어서 refreshToken을 판별하고,
             // refreshToken은 만료되지 않았을 경우,
@@ -31,20 +34,24 @@ module.exports = {
                 const accessToken = generateAccessToken(tokenCheck);
 
                 const { userId, wordName, wordMean } = req.body;
-                const newContent = await content.create({
+                content.create({
                     wordName: wordName,
                     wordMean: wordMean,
                     thumbsup: 0,
                     userId: userId
-                });
-                await thumbs.create({
-                    user_Id: userId,
-                    content_Id: newContent.dataValues.id
-                });
-                res.status(201).json({
+                })
+                .then((newContent) => {
+                    console.log(newContent.dataValues);
+                    return thumbs.create({
+                        user_Id: userId,
+                        content_Id: newContent.dataValues.id
+                    });
+                })
+                .then(() => res.status(201).json({
                     accessToken: accessToken,
                     message: "ok"
-                });
+                }))
+                .catch((err) => console.log(err));
             } else {
                 // accessToken이 만료되어서 refreshToken을 판별하고,
                 // refreshToken도 만료되었을 경우,
