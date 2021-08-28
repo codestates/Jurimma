@@ -14,7 +14,7 @@ function App() {
   const [isLogin, setisLogin] = useState(true);
   const [searched, setSearched] = useState(false);
   const [onModal, setOnModal] = useState(false);
-  const [writeModal, setWriteModal] = useState(true);
+  const [writeModal, setWriteModal] = useState(false);
   
   return (
     <BrowserRouter>
