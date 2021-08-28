@@ -10,22 +10,23 @@ const SearchWrap = styled.div`
   > .searchInput {
     width: 58%;
     height: 3.2vw;
-    min-height: 30px;
+    min-height: 35px;
     border: 2px solid #000;
-    border-radius: 3vw;
+    border-radius: 30px;
     margin-right: 10px;
     outline: none;
     padding-left: max;
   }
   > .searchBtn {
-    width: 100px;
+    width: 6vw;
     height: 3.2vw;
-    min-height: 30px;
+    min-height: 35px;
+    min-width: 50px;
     background-color: #000;
     color: #fff;
     border: none;
     margin-top: 1vh;
-    border-radius: 3.2vw;
+    border-radius: 30px;
     font-size: max(0.8vw, 11px);
     border: 2px solid black;
     cursor: pointer;
