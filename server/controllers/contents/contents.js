@@ -21,12 +21,8 @@ module.exports = {
         })
         .then((newContent) => {
           console.log(newContent.dataValues);
-          return thumbs.create({
-            user_Id: userId,
-            content_Id: newContent.dataValues.id,
-          });
+          res.status(200).json({ message: "ok" });
         })
-        .then(() => res.status(200).json({ message: "ok" }))
         .catch((err) => console.log(err));
     } else {
       // accessToken이 만료되어서 refreshToken을 판별하고,
@@ -47,17 +43,11 @@ module.exports = {
           })
           .then((newContent) => {
             console.log(newContent.dataValues);
-            return thumbs.create({
-              user_Id: userId,
-              content_Id: newContent.dataValues.id,
-            });
-          })
-          .then(() =>
             res.status(201).json({
               accessToken: accessToken,
               message: "ok",
-            })
-          )
+            });
+          })
           .catch((err) => console.log(err));
       } else {
         // accessToken이 만료되어서 refreshToken을 판별하고,
