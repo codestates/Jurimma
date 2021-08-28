@@ -11,8 +11,8 @@ function App() {
   // console.log(dummyData);
   const [isLogin, setisLogin] = useState(true);
   const [searched, setSearched] = useState(false);
-  const [onModal, setOnModal] = useState(true);
-  const [writeModal, setWriteModal] = useState(false);
+  const [onModal, setOnModal] = useState(false);
+  const [writeModal, setWriteModal] = useState(true);
 
   return (
     <div id="wrap">
