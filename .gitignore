@@ -1,12 +1,5 @@
 .env
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
 client/node_modules
 server/node_modules
-scripts
 package-lock.json
-.github
-.DS_Store
 .build
