@@ -9,3 +9,4 @@ scripts
 package-lock.json
 .github
 .DS_Store
+.build
