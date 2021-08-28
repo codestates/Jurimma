@@ -3,6 +3,7 @@ import styled from "styled-components";
 
 const MypageWrap = styled.div`
   width: 100%;
+  height: 55vh;
   display: grid;
   place-items: center;
   font-size: max(16px, 0.8vw);
@@ -44,13 +45,18 @@ const ContentCheck = styled.div`
   display: flex;
   justify-content: space-between;
   > button {
-    height: 2vw;
-    min-height: 25px;
-    width: 8vw;
-    min-width: 80px;
+    width: 9vw;
+    min-width: 75px;
+    height: 5vh;
     border: 2px solid black;
-    border-radius: 20px;
+    border-radius: 5vh;
     word-break: keep-all;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+  > button:hover {
+    background-color: black;
+    color: white;
   }
 `;
 
