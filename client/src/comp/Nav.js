@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import {Link} from "react-router-dom"
 import profile from "../none_profile.jpeg";
 
 function Nav({ isLogin }) {
@@ -74,7 +75,11 @@ function Nav({ isLogin }) {
               <button>EDIT PROFILE</button>
             </ProfileWrap>
             <Button2>LOGOUT</Button2>
-            <Button2>MYPAGE</Button2>
+            <Button2>
+              <Link to="/mypage">
+                MYPAGE
+              </Link>
+            </Button2>
           </div>
         </NavWrap>
       ) : (
