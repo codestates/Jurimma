@@ -36,9 +36,6 @@ button {
   box-sizing: border-box;
 }
 /* HTML5 display-role reset for older browsers */
-html {
-  /* font-size: 16px; */
-}
 
 body {
   line-height: 1;
@@ -121,5 +118,5 @@ footer {
   min-height: 67px;
   line-height: 10vh;
   text-align: center;
-  font-size: 0.97rem;
+  font-size: max(0.85vw, 11px);
 }
