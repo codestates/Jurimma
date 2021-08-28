@@ -8,7 +8,7 @@ const { verify } = require("jsonwebtoken");
 
 module.exports = {
   patch: async (req, res) => {
-    const contentsId = await req.body.contentsId;
+    const contentId = await req.body.contentId;
     const auth = await isAuthorized(req);
     if (!auth) {
       if (refreshAuthorized(req)) {
@@ -17,15 +17,15 @@ module.exports = {
         const tokenCheck = verify(token, process.env.REFRESH_SECRET);
         const accessToken = generateAccessToken(tokenCheck);
         const dbContent = await content.findOne({
-          where: { id: contentsId },
+          where: { id: contentId },
         });
         await dbContent.increment("thumbsup");
         const updatedContent = await content.findOne({
-          where: { id: contentsId },
+          where: { id: contentId },
         });
         await thumbs.create({
           user_Id: tokenCheck.id,
-          content_Id: contentsId,
+          content_Id: contentId,
         });
         res.status(200).json({ accessToken, updatedContent });
       } else {
@@ -38,13 +38,13 @@ module.exports = {
       const realToken = accToken.split(" ")[1];
       const userData = verify(realToken, process.env.ACCESS_SECRET);
       const dbContent = await content.findOne({
-        where: { id: contentsId },
+        where: { id: contentId },
       });
       await dbContent.increment("thumbsup");
       const updatedContent = await content.findOne({
-        where: { id: contentsId },
+        where: { id: contentId },
       });
-      await thumbs.create({ user_Id: userData.id, content_Id: contentsId });
+      await thumbs.create({ user_Id: userData.id, content_Id: contentId });
       res.status(200).json({ data: updatedContent });
     }
   },
