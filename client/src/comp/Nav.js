@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import {Link} from "react-router-dom"
+import { Link } from "react-router-dom";
 import profile from "../none_profile.jpeg";
 
 function Nav({ isLogin }) {
@@ -26,6 +26,10 @@ function Nav({ isLogin }) {
     margin-top: 5vh;
     cursor: pointer;
     transition: 0.3s;
+    :hover {
+      background-color: black;
+      color: white;
+    }
     &:nth-child(1) {
       margin-top: 0;
     }
@@ -46,6 +50,10 @@ function Nav({ isLogin }) {
     margin: 5vh auto 0;
     cursor: pointer;
     transition: 0.3s;
+    :hover {
+      background-color: black;
+      color: white;
+    }
     &:nth-child(1) {
       margin-top: 0;
     }
@@ -80,6 +88,7 @@ function Nav({ isLogin }) {
     > button:hover {
       background-color: black;
       color: white;
+      cursor: pointer;
     }
   `;
 
@@ -94,9 +103,7 @@ function Nav({ isLogin }) {
             </ProfileWrap>
             <Button2>LOGOUT</Button2>
             <Button2>
-              <Link to="/mypage">
-                MYPAGE
-              </Link>
+              <Link to="/mypage">MYPAGE</Link>
             </Button2>
           </div>
         </NavWrap>
