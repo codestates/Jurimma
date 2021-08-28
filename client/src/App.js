@@ -9,10 +9,10 @@ import WriteModal from "./comp/WriteModal";
 
 function App() {
   // console.log(dummyData);
-  const [isLogin, setisLogin] = useState(true);
+  const [isLogin, setisLogin] = useState(false);
   const [searched, setSearched] = useState(false);
   const [onModal, setOnModal] = useState(false);
-  const [writeModal, setWriteModal] = useState(true);
+  const [writeModal, setWriteModal] = useState(false);
 
   return (
     <div id="wrap">

@@ -26,7 +26,7 @@ function SearchResult({ data }) {
       background-color: #ffff8d;
       p {
         padding: 0 5px;
-        font-size: 75%;
+        font-size: max(1vw, 15px);
         flex: 1 0 auto;
         overflow: hidden;
         text-overflow: ellipsis;
@@ -63,7 +63,7 @@ function SearchResult({ data }) {
     border: 2px solid black;
     background-color: black;
     color: white;
-    font-size: 0.8rem;
+    font-size: max(0.8vw, 11px);
     transition: 0.2s;
     :hover {
       background-color: white;
