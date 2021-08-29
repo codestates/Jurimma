@@ -7,29 +7,22 @@ const { refreshAuthorized } = require("../tokenFunction/refreshToken");
 const { verify } = require("jsonwebtoken");
 
 module.exports = {
-  post: (req, res) => {
+  post: async (req, res) => {
     if (isAuthorized(req)) {
       // accessToken이 만료되지 않았을 경우,
       // => 바로 요청에 대한 응답 제공
-      const { contentId } = req.body;
-      content
-        .destroy({
-          where: { id: contentId },
+      const { contentId } = req.body; // 배열
+      for (let i = 0; i < contentId.length; i++) {
+        await content.destroy({
+          where: { id: contentId[i] },
           force: true,
-        })
-        .then(() => {
-          return thumbs.destroy({
-            where: { content_Id: contentId },
-            force: true,
-          });
-        })
-        .then((data) => {
-          console.log(data);
-          res.status(200).json({ message: "ok" });
-        })
-        .catch((err) => {
-          console.log(err);
         });
+        await thumbs.destroy({
+          where: { content_Id: contentId[i] },
+          force: true,
+        });
+      }
+      res.status(200).json({ message: "ok" });
     } else {
       // accessToken이 만료되어서 refreshToken을 판별하고,
       // refreshToken은 만료되지 않았을 경우,
@@ -39,28 +32,21 @@ module.exports = {
         const tokenCheck = verify(token, process.env.REFRESH_SECRET);
         const accessToken = generateAccessToken(tokenCheck);
 
-        const { contentId } = req.body;
-        content
-          .destroy({
-            where: { id: contentId },
+        const { contentId } = req.body; // 배열
+        for (let i = 0; i < contentId.length; i++) {
+          await content.destroy({
+            where: { id: contentId[i] },
             force: true,
-          })
-          .then(() => {
-            return thumbs.destroy({
-              where: { content_Id: contentId },
-              force: true,
-            });
-          })
-          .then((data) => {
-            console.log(data);
-            res.status(201).json({
-              accessToken: accessToken,
-              message: "ok",
-            });
-          })
-          .catch((err) => {
-            console.log(err);
           });
+          await thumbs.destroy({
+            where: { content_Id: contentId[i] },
+            force: true,
+          });
+        }
+        res.status(201).json({
+          accessToken: accessToken,
+          message: "ok",
+        });
       } else {
         // accessToken이 만료되어서 refreshToken을 판별하고,
         // refreshToken도 만료되었을 경우,
