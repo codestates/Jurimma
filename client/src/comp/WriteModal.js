@@ -94,7 +94,7 @@ const Addbutton = styled.button`
   cursor: pointer;
   transition: 0.3s;
   :hover {
-    background-color: #ffe65b;
+    background-color: white;
     color: black;
     border: 2px solid black;
   }
