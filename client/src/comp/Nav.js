@@ -1,48 +1,53 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import {Link} from "react-router-dom"
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faBars } from '@fortawesome/free-solid-svg-icons'
+import { Link } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faBars } from "@fortawesome/free-solid-svg-icons";
 import profile from "../none_profile.jpeg";
 
 // 768px 이상에서는 nav가 보이고, 아이콘 안보임
 // 768px 이하는 nav 안보이고 아이콘 보임
 
 function Nav({ isLogin }) {
+  const [isShow, setIsShow] = useState("none");
+  const onClick = () => {
+    isShow === "none" ? setIsShow("flex") : setIsShow("none");
+  };
+
   const NavBtn = styled.button`
-    position:absolute;
-    top:0px;
-    background-color:transparent;
-    width:max(3vw,60px);
-    height:max(3vw,60px);
-    font-size:max(3vw,30px);
-    transition:all 0.3s;
-    cursor:pointer;
-    z-index:100;
-    :hover{
-      color:#fff;
+    position: absolute;
+    top: 0px;
+    background-color: transparent;
+    width: max(3vw, 60px);
+    height: max(3vw, 60px);
+    font-size: max(3vw, 30px);
+    transition: all 0.3s;
+    cursor: pointer;
+    z-index: 100;
+    :hover {
+      color: #fff;
     }
-    @media screen and (min-width: 768px){
-      display:none;
+    @media screen and (min-width: 768px) {
+      display: block;
     }
-  `
+  `;
 
   const NavWrap = styled.nav`
-    @media screen and (max-width: 767px){
-      flex:none;
-      position:absolute;
-      width:100%;
-      height:100vh;
-      display:flex;
-      justify-content:center;
-      align-items:center;
-    } 
+    @media screen and (max-width: 767px) {
+      flex: none;
+      position: absolute;
+      width: 100%;
+      height: 100vh;
+      display: ${isShow};
+      justify-content: center;
+      align-items: center;
+    }
     background-color: #38372e;
     flex: 1 1 auto;
-    display:flex;
-    min-height:100vh;
-    justify-content:center;
-    align-items:center;
+    display: flex;
+    min-height: 100vh;
+    justify-content: center;
+    align-items: center;
     /* z-index:100; */
   `;
 
@@ -100,8 +105,8 @@ function Nav({ isLogin }) {
     <>
       {isLogin ? (
         <>
-          <NavBtn>
-            <FontAwesomeIcon icon={faBars}/>
+          <NavBtn onClick={onClick}>
+            <FontAwesomeIcon icon={faBars} />
           </NavBtn>
           <NavWrap>
             <div>
@@ -111,9 +116,7 @@ function Nav({ isLogin }) {
               </ProfileWrap>
               <Button2>LOGOUT</Button2>
               <Button2>
-                <Link to="/mypage">
-                  MYPAGE
-                </Link>
+                <Link to="/mypage">MYPAGE</Link>
               </Button2>
             </div>
           </NavWrap>
