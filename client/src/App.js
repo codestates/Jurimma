@@ -31,8 +31,8 @@ function App() {
         </header>
 
         <Switch>
-          <div className="exNav">
-            <Route exact path="/mypage">
+          <>
+            <Route path="/mypage">
               <Mypage />
             </Route>
             <Route exact path="/">
@@ -43,7 +43,7 @@ function App() {
               )}
             </Route>
             <footer>copyright JURIMMA</footer>
-          </div>
+          </>
         </Switch>
       </div>
     </div>

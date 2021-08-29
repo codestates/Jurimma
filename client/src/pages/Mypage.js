@@ -3,13 +3,16 @@ import styled from "styled-components";
 
 const MypageWrap = styled.div`
     width:100%;
-    display:grid;
-    place-items:center;
+    min-height:55vh;
+    /* display:grid;
+    place-items:center; */
     font-size:max(16px, 0.8vw);
 `
 const MypageContent = styled.div`
     width:75%;
+    border:1px solid red;
     min-width:200px;
+    margin:0 auto;
     display:flex;
     flex-direction:column;  
     flex-wrap:wrap;
@@ -91,6 +94,55 @@ function Mypage(){
                             <p>추천 수</p>
                         </div>
                     </li>
+                    <li className="content">
+                        <input type="checkbox" />
+                        <div className="contentInfo">
+                            <p>단어</p>
+                            <p>단어 뜻</p>
+                            <p>추천 수</p>
+                        </div>
+                    </li>
+                    <li className="content">
+                        <input type="checkbox" />
+                        <div className="contentInfo">
+                            <p>단어</p>
+                            <p>단어 뜻</p>
+                            <p>추천 수</p>
+                        </div>
+                    </li>
+                    <li className="content">
+                        <input type="checkbox" />
+                        <div className="contentInfo">
+                            <p>단어</p>
+                            <p>단어 뜻</p>
+                            <p>추천 수</p>
+                        </div>
+                    </li>
+                    <li className="content">
+                        <input type="checkbox" />
+                        <div className="contentInfo">
+                            <p>단어</p>
+                            <p>단어 뜻</p>
+                            <p>추천 수</p>
+                        </div>
+                    </li>
+                    <li className="content">
+                        <input type="checkbox" />
+                        <div className="contentInfo">
+                            <p>단어</p>
+                            <p>단어 뜻</p>
+                            <p>추천 수</p>
+                        </div>
+                    </li>
+                    <li className="content">
+                        <input type="checkbox" />
+                        <div className="contentInfo">
+                            <p>단어</p>
+                            <p>단어 뜻</p>
+                            <p>추천 수</p>
+                        </div>
+                    </li>
+                    
                 </ContentList>
 
                 <ContentCheck>

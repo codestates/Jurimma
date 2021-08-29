@@ -6,13 +6,13 @@ import profile from "../none_profile.jpeg";
 function Nav({ isLogin }) {
   const NavWrap = styled.nav`
     background-color: #38372e;
-    /* background-color: black; */
-    position: sticky;
-    top: 0;
-    height: 100vh;
     flex: 1 1 auto;
-    display: grid;
-    place-items: center;
+    display:flex;
+    min-height:100vh;
+    justify-content:center;
+    align-items:center;
+    /* display: grid;
+    place-items: center; */
   `;
 
   const Button1 = styled.button`
