@@ -35,7 +35,6 @@ button {
   font-family: "Nanum Gothic", "Noto Sans", sans-serif;
   box-sizing: border-box;
 }
-/* HTML5 display-role reset for older browsers */
 
 body {
   line-height: 1;
@@ -88,10 +87,13 @@ h1 {
 
 #wrap {
   display: flex;
+  width:100%;
+  height:100%;
 }
 
 .exNav {
   flex: 5 1 auto;
+  min-height:100vh;
 }
 
 header {
@@ -99,18 +101,6 @@ header {
   min-height: 235px;
   display: grid;
   place-items: center;
-}
-
-nav {
-  background-color: #38372e;
-  /* background-color: blacks; */
-  height: 100vh;
-  flex: 1 1 auto;
-}
-
-section {
-  height: 60vh;
-  background-color: #ffe65b;
 }
 
 footer {
