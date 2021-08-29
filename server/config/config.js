@@ -2,24 +2,24 @@ require("dotenv").config();
 
 module.exports = {
   development: {
-    username: "root",
+    username: process.env.DATABASE_USERNAME,
     password: process.env.DATABASE_PASSWORD,
     database: "jurimma_development",
-    host: "localhost",
+    host: process.env.DATABASE_HOST,
     dialect: "mysql",
   },
   test: {
-    username: "root",
+    username: process.env.DATABASE_USERNAME,
     password: process.env.DATABASE_PASSWORD,
     database: "jurimma_test",
-    host: "localhost",
+    host: process.env.DATABASE_HOST,
     dialect: "mysql",
   },
   production: {
-    username: "root",
+    username: process.env.DATABASE_USERNAME,
     password: process.env.DATABASE_PASSWORD,
     database: "jurimma_production",
-    host: "localhost",
+    host: process.env.DATABASE_HOST,
     dialect: "mysql",
   },
 };
