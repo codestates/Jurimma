@@ -2,7 +2,7 @@ require("dotenv").config();
 
 module.exports = {
   development: {
-    username: process.env.DATABASE_USERNAME,
+    username: "root",
     password: process.env.DATABASE_PASSWORD,
     database: "jurimma_development",
     host: "ec2-3-36-56-37.ap-northeast-2.compute.amazonaws.com",
@@ -10,7 +10,7 @@ module.exports = {
     port: "13306",
   },
   test: {
-    username: process.env.DATABASE_USERNAME,
+    username: "root",
     password: process.env.DATABASE_PASSWORD,
     database: "jurimma_test",
     host: "ec2-3-36-56-37.ap-northeast-2.compute.amazonaws.com",
@@ -18,7 +18,7 @@ module.exports = {
     port: "13306",
   },
   production: {
-    username: process.env.DATABASE_USERNAME,
+    username: "root",
     password: process.env.DATABASE_PASSWORD,
     database: "jurimma_production",
     host: "ec2-3-36-56-37.ap-northeast-2.compute.amazonaws.com",
