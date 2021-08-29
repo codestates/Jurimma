@@ -20,6 +20,7 @@ function SearchResult({ data }) {
       height: 8vh;
       margin-top: 2vh;
       border: 2px solid #000;
+      box-sizing:border-box;
       border-radius: 40px;
       text-align: center;
       line-height: 8vh;
@@ -61,6 +62,7 @@ function SearchResult({ data }) {
     height: 5vh;
     border-radius: 5vh;
     border: 2px solid black;
+    box-sizing:border-box;
     background-color: black;
     color: white;
     font-size: max(11px, 0.8vw);

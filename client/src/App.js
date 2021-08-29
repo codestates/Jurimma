@@ -6,7 +6,8 @@ import { useState } from "react";
 import Nav from "./comp/Nav";
 import Modal from "./comp/Modal";
 import Mypage from "./pages/Mypage";
-import { BrowserRouter, Switch, Route, Link } from "react-router-dom";
+import MypageEdit from "./pages/MypageEdit";
+import {BrowserRouter, Switch, Route, Link} from "react-router-dom"
 import WriteModal from "./comp/WriteModal";
 
 function App() {
@@ -23,29 +24,24 @@ function App() {
         {writeModal ? <WriteModal /> : null}
         <Nav isLogin={isLogin} />
 
-        <div className="exNav">
-          <header>
-            <Link to="/">
-              <h1 id="jurimma"></h1>
-            </Link>
-          </header>
-
-          <Switch>
-            <>
-              <Route path="/mypage">
-                <Mypage />
-              </Route>
-              <Route exact path="/">
-                {isLogin === true && searched === true ? (
-                  <SearchMore data={dummyData.word} />
-                ) : (
-                  <Search data={dummyData.word} />
-                )}
-              </Route>
-              <footer>copyright JURIMMA</footer>
-            </>
-          </Switch>
-        </div>
+        <Switch>
+          <>
+            <Route path="/mypage">
+              <Mypage />
+            </Route>
+            <Route path="/mypageEdit">
+              <MypageEdit />
+            </Route>
+            <Route exact path="/">
+              {isLogin === true && searched === true ? (
+                <SearchMore data={dummyData.word} />
+              ) : (
+                <Search data={dummyData.word} />
+              )}
+            </Route>
+            <footer>copyright JURIMMA</footer>
+          </>
+        </Switch>
       </div>
     </BrowserRouter>
   );

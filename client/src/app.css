@@ -27,6 +27,8 @@ dd,
 ol,
 ul,
 li,
+select,
+input,
 button {
   padding: 0;
   margin: 0;
