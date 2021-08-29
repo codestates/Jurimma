@@ -2,19 +2,18 @@ import React from "react";
 import styled from "styled-components";
 
 const MypageWrap = styled.div`
-  width: 100%;
-  height: 55vh;
-  display: grid;
-  place-items: center;
-  font-size: max(16px, 0.8vw);
-`;
+    width:100%;
+    min-height:55vh;
+    font-size:max(16px, 0.8vw);
+`
 const MypageContent = styled.div`
-  width: 75%;
-  min-width: 200px;
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-`;
+    width:75%;
+    min-width:200px;
+    margin:0 auto;
+    display:flex;
+    flex-direction:column;  
+    flex-wrap:wrap;
+`
 const UserContent = styled.div`
   display: flex;
   justify-content: space-between;
@@ -71,7 +70,7 @@ function Mypage() {
             <option>작성 날짜 순</option>
           </select>
         </UserContent>
-
+        
         <ContentList>
           <li className="content">
             <input type="checkbox" />

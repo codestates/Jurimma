@@ -11,7 +11,7 @@ import WriteModal from "./comp/WriteModal";
 
 function App() {
   // console.log(dummyData);
-  const [isLogin, setisLogin] = useState(true);
+  const [isLogin, setisLogin] = useState(false);
   const [searched, setSearched] = useState(false);
   const [onModal, setOnModal] = useState(false);
   const [writeModal, setWriteModal] = useState(false);
@@ -32,19 +32,17 @@ function App() {
 
           <Switch>
             <>
-              <div className="exNav">
-                <Route exact path="/mypage">
-                  <Mypage />
-                </Route>
-                <Route exact path="/">
-                  {isLogin === true && searched === true ? (
-                    <SearchMore data={dummyData.word} />
-                  ) : (
-                    <Search data={dummyData.word} />
-                  )}
-                </Route>
-                <footer>copyright JURIMMA</footer>
-              </div>
+              <Route path="/mypage">
+                <Mypage />
+              </Route>
+              <Route exact path="/">
+                {isLogin === true && searched === true ? (
+                  <SearchMore data={dummyData.word} />
+                ) : (
+                  <Search data={dummyData.word} />
+                )}
+              </Route>
+              <footer>copyright JURIMMA</footer>
             </>
           </Switch>
         </div>
