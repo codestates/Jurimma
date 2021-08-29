@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { Redirect } from "react-router";
 
 const MypageWrap = styled.div`
     width:100%;
@@ -62,76 +63,57 @@ const ContentCheck = styled.div`
   }
 `;
 
-function Mypage() {
-  return (
-    <MypageWrap>
-       <MypageContent> 
-        <UserContent>
-            <p>작성하신 글은 0개 이며, 최대 추천수는 0개 입니다</p>
-            <select>
-                <option>추천수 순</option>
-                <option>작성 날짜 순</option>
-            </select>
-        </UserContent>
-         <ContentList>
-           <li className="content">
-             <input type="checkbox" />
-             <div className="contentInfo">
-               <p>단어</p>
-               <p>단어 뜻</p>
-               <p>추천 수</p>
-             </div>
-           </li>
-           <li className="content">
-             <input type="checkbox" />
-             <div className="contentInfo">
-               <p>단어</p>
-               <p>단어 뜻</p>
-               <p>추천 수</p>
-             </div>
-           </li>
-           <li className="content">
-             <input type="checkbox" />
-             <div className="contentInfo">
-               <p>단어</p>
-               <p>단어 뜻</p>
-               <p>추천 수</p>
-             </div>
-           </li>
-         </ContentList>
+function Mypage({isLogin}){
+  return(
+    <>
+      {isLogin?
+        <MypageWrap>
+        <MypageContent> 
+          <UserContent>
+              <p>작성하신 글은 0개 이며, 최대 추천수는 0개 입니다</p>
+              <select>
+                  <option>추천수 순</option>
+                  <option>작성 날짜 순</option>
+              </select>
+          </UserContent>
+          <ContentList>
+            <li className="content">
+              <input type="checkbox" />
+              <div className="contentInfo">
+                <p>단어</p>
+                <p>단어 뜻</p>
+                <p>추천 수</p>
+              </div>
+            </li>
+            <li className="content">
+              <input type="checkbox" />
+              <div className="contentInfo">
+                <p>단어</p>
+                <p>단어 뜻</p>
+                <p>추천 수</p>
+              </div>
+            </li>
+            <li className="content">
+              <input type="checkbox" />
+              <div className="contentInfo">
+                <p>단어</p>
+                <p>단어 뜻</p>
+                <p>추천 수</p>
+              </div>
+            </li>
+          </ContentList>
+  
+          <ContentCheck>
+            <button id="allCheck">전체 선택</button>
+            <button id="delete">삭제</button>
+          </ContentCheck>
+        </MypageContent>
+      </MypageWrap>
+      :
+        <Redirect to="/" />
+      }
+    </>
+  )
+}
 
-         <ContentCheck>
-           <button id="allCheck">전체 선택</button>
-           <button id="delete">삭제</button>
-         </ContentCheck>
-       </MypageContent>
-     </MypageWrap>
-    );
-  }
-/*
-<div>
-    <div id="userContent">
-        <p>작성한 글은 ~~개 이며, 최대 추천수는 ~개 입니다</p>
-        <select>
-            <option></option>
-            <option></option>
-        </select>
-    </div>
-    <ul id="contentList">
-        <li class="content">
-            <input type="checkbox">
-            <p>단어</p>
-            <p>단어 뜻</p>
-            <p>추천 수</p>
-        </li>
-        ...
-    </ul>
-    <div id="contentCheck">
-        <button id="allCheck">전체 선택</button>
-        <button id="delete">삭제</button>
-    </div>
-</div>
-
-
-*/
 export default Mypage;

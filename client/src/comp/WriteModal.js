@@ -100,12 +100,12 @@ const Addbutton = styled.button`
   }
 `;
 
-function WriteModal() {
+function WriteModal({setWriteModal}) {
   return (
     <>
       <ModalBack>
         <ModalBox>
-          <div>&times;</div>
+          <div onClick={()=>setWriteModal(false)}>&times;</div>
           <NewWord
             type="text"
             placeholder="새로 쓸 단어를 입력해주세요"
