@@ -1,33 +1,21 @@
 ---
 name: Issue Task Card
 about: Suggest an idea for this project
-title: ''
+title: 예시) 로그인 모달창 만들기
 labels: ''
 assignees: ''
 
 ---
 
 # ISSUE
-- Group: `client`, `server`, `sr`
-- Type: `bug`, `feature`, `delete`
-- Detail: fix actions from client redux
+- Group:  `server` `client` 중 택 1
+- Type:  `feature` , `bug`, `delete` 
+- Detail: 해야할 태스크의 추가적인 정보
 
 # TODO
-1. [ ] Job1
-2. [ ] Job2
-3. [ ] Job3
+1. [ ] 로그인 모달창 구현
+
 
 # Estimated time
-> Pick one
-## `0.5h`
-## `1h`
-## `1.5h`
-## `2h`
-## `2.5h`
-## `3h`
 
-# Labels
-- Estimated time: `E: 1h`
-- Group : `client`, `server`
-- Sprint: `Sprint__NUMBER__`
-- Urgency: `High`, `Middle`, `Low`
+## `3h`
