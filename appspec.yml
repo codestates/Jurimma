@@ -7,10 +7,10 @@ files:
 hooks:
   ApplicationStop:
     - location: scripts/stop.sh
-      runas: admin
+      runas: root
   AfterInstall:
     - location: scripts/initialize.sh
-      runas: admin
+      runas: root
   ApplicationStart:
     - location: scripts/start.sh
-      runas: admin
+      runas: root
