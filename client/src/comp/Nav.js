@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useState} from "react";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import { Link} from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
 import profile from "../none_profile.jpeg";
@@ -8,11 +8,15 @@ import profile from "../none_profile.jpeg";
 // 768px 이상에서는 nav가 보이고, 아이콘 안보임
 // 768px 이하는 nav 안보이고 아이콘 보임
 
-function Nav({ isLogin, setOnModal }) {
+function Nav({ isLogin, setOnModal, setisLogin }) {
   const [isShow, setIsShow] = useState("none");
   const showNavClick = () => {
     isShow === "none" ? setIsShow("flex") : setIsShow("none");
   };
+  const logout = () => {
+    setisLogin(false)
+
+  }
 
   const NavBtn = styled.button`
     display: none;
@@ -138,7 +142,7 @@ function Nav({ isLogin, setOnModal }) {
                   </Link>
                 </button>
               </ProfileWrap>
-              <Button2>LOGOUT</Button2>
+              <Button2 onClick={logout}>LOGOUT</Button2>
               <Button2>
                 <Link to="/mypage">MYPAGE</Link>
               </Button2>
@@ -153,7 +157,7 @@ function Nav({ isLogin, setOnModal }) {
           <NavWrap>
             <div>
               <Button1 onClick={() => setOnModal(true)}>LOGIN / SIGNUP</Button1>
-              <Button1>MYPAGE</Button1>
+              <Button1 onClick={() => setOnModal(true)}>MYPAGE</Button1>
             </div>
           </NavWrap>
         </>

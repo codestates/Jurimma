@@ -1,13 +1,14 @@
 import React from "react";
 import styled from "styled-components";
+import {Link, Redirect} from "react-router-dom"
 import empty from "../empty.png";
 
-function SearchResult({ data }) {
-  let result = data
-    .sort((a, b) => a.thumbsup - b.thumbsup)
-    .reverse()
-    .slice(0, 3);
-  //let result = [];
+function SearchResult({ data, isLogin, setWriteModal, setOnModal }) {
+  // let result = data
+  //   .sort((a, b) => a.thumbsup - b.thumbsup)
+  //   .reverse()
+  //   .slice(0, 3);
+  let result = [];
   const ResultList = styled.ul`
     margin-top: 20px;
     width: 65%;
@@ -20,7 +21,6 @@ function SearchResult({ data }) {
       height: 8vh;
       margin-top: 2vh;
       border: 2px solid #000;
-      box-sizing:border-box;
       border-radius: 40px;
       text-align: center;
       line-height: 8vh;
@@ -62,7 +62,6 @@ function SearchResult({ data }) {
     height: 5vh;
     border-radius: 5vh;
     border: 2px solid black;
-    box-sizing:border-box;
     background-color: black;
     color: white;
     font-size: max(11px, 0.8vw);
@@ -84,7 +83,7 @@ function SearchResult({ data }) {
           </EmptyResult>
 
           <BtnWrap>
-            <NewMoreBtn>새로 만들기</NewMoreBtn>
+            <NewMoreBtn onClick={isLogin? ()=>setWriteModal(true) : ()=>setOnModal(true)}>새로 만들기</NewMoreBtn>
             <NewMoreBtn>더보기</NewMoreBtn>
           </BtnWrap>
         </div>
@@ -103,8 +102,12 @@ function SearchResult({ data }) {
           </ResultList>
 
           <BtnWrap>
-            <NewMoreBtn>새로 만들기</NewMoreBtn>
-            <NewMoreBtn>더보기</NewMoreBtn>
+            <NewMoreBtn onClick={isLogin? ()=>setWriteModal(true) : ()=>setOnModal(true)}>새로 만들기</NewMoreBtn>
+            <NewMoreBtn>
+              <Link to="/searchMore">
+                더보기
+              </Link>
+            </NewMoreBtn>
           </BtnWrap>
         </div>
       )}
