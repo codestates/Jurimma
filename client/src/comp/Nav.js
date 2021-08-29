@@ -10,7 +10,7 @@ import profile from "../none_profile.jpeg";
 
 function Nav({ isLogin }) {
   const [isShow, setIsShow] = useState("none");
-  const onClick = () => {
+  const showNavClick = () => {
     isShow === "none" ? setIsShow("flex") : setIsShow("none");
   };
 
@@ -125,7 +125,7 @@ function Nav({ isLogin }) {
     <>
       {isLogin ? (
         <>
-          <NavBtn onClick={onClick}>
+          <NavBtn onClick={showNavClick}>
             <FontAwesomeIcon icon={faBars} />
           </NavBtn>
           <NavWrap>
@@ -143,7 +143,9 @@ function Nav({ isLogin }) {
         </>
       ) : (
         <>
-          <NavBtn>햄버거</NavBtn>
+          <NavBtn onClick={showNavClick}>
+            <FontAwesomeIcon icon={faBars} />
+          </NavBtn>
           <NavWrap>
             <div>
               <Button1>LOGIN / SIGNUP</Button1>
