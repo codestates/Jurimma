@@ -4,258 +4,378 @@ import logo from "../jurimma_logo.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronDown, faComment } from "@fortawesome/free-solid-svg-icons";
 
-const ModalBack = styled.div`
-  width: 100vw;
-  height: 100vh;
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.5);
-  display: grid;
-  place-items: center;
-  z-index: 100;
-`;
-
-const ModalBox = styled.div`
-  width: 30vw;
-  height: 80vh;
-  display: flex;
-  flex-direction: column;
-  background-color: white;
-  border-radius: 30px;
-  min-width: 300px;
-  min-height: 500px;
-  text-align: center;
-  position: relative;
-  justify-items: center;
-`;
-
-const WelcomeBox = styled.div`
-  flex: 0.5 1 auto;
-  > img {
-    width: 5vw;
-    height: 5vw;
-    min-width: 80px;
-    min-height: 80px;
-  }
-  > div {
-    font-size: max(30px, 2.8vw);
-    position: absolute;
-    top: 20px;
-    right: max(2.2vw, 20px);
-    cursor: pointer;
-    transition: 0.4s;
-  }
-  > div:hover {
-    transform: rotate(180deg);
-  }
-  > h2 {
-    // font-size 꼭 찾아보기
-    font-size: max(20px, 1.8vw);
-  }
-  > p {
-    font-size: max(12px, 0.8vw);
-    padding: 10px;
-  }
-`;
-
-const KakaoLogin = styled.button`
-  width: 80%;
-  height: 3vw;
-  min-height: 35px;
-  background-color: #fee500;
-  margin: 0 auto;
-  border-radius: 20px;
-  border: 2px solid black;
-  font-size: max(14px, 1vw);
-  text-align: center;
-  transition: 0.3s;
-  cursor: pointer;
-  > p {
-    display: inline-block;
-  }
-  > #socialLogin {
-    width: 1.2vw;
-    height: 1.2vw;
-    min-width: 18px;
-    min-height: 18px;
-    margin-right: 20px;
-  }
-  :hover {
-    background-color: black;
-    color: white;
-  }
-`;
-
-const TabMenu = styled.ul`
-  width: 100%;
-  height: 50px;
-  display: flex;
-  flex-direction: row;
-  justify-items: center;
-  align-items: center;
-  min-height: 40px;
-  > .submenu {
-    height: 100%;
-    line-height: 50px;
-    border-right: 1px solid orange;
-    font-size: max(12px, 0.9vw);
-    flex: 1 0 auto;
-    text-align: center;
-  }
-  > .submenu:nth-child(2) {
-    border-right: 0;
-  }
-`;
-
-const KakaoWrap = styled.div`
-  flex: 1 1 auto;
-`;
-
-const TabWrap = styled.div`
-  flex: 3 1 auto;
-  display: flex;
-  flex-direction: column;
-  border: 1px solid #000;
-`;
-
-const LoginBox = styled.div`
-  display: flex;
-  height: 100%;
-  align-items: center;
-  flex-direction: column;
-  > #a {
-    width: 80%;
-    flex: 2 1 auto;
-    border: 1px solid red;
-    box-sizing: border-box;
-    > label {
-      display: block;
-      text-align: left;
-      position: relative;
-    }
-    > input {
-      width: 100%;
-      height: 30px;
-      font-size: max(12px, 0.9vw);
-      background: transparent;
-      outline: none;
-      border: 0;
-      border-bottom: 2px solid black;
-      justify-content: center;
-    }
-    > button {
-      width: 200px;
-      height: 50px;
-      background-color: yellow;
-    }
-  }
-`;
-
-const SignupBox = styled.div`
-  display: flex;
-  height: 100%;
-  align-items: center;
-  flex-direction: column;
-  > #a {
-    width: 80%;
-    flex: 2 1 auto;
-    border: 1px solid red;
-    box-sizing: border-box;
-    > label {
-      font-size: max(13px, 0.8vw);
-      display: block;
-      text-align: left;
-      position: relative;
-    }
-    > input {
-      width: 100%;
-      height: 30px;
-      font-size: max(12px, 0.8vw);
-      background: transparent;
-      outline: none;
-      border: 0;
-      border-bottom: 2px solid black;
-      justify-content: center;
-    }
-    > button {
-      width: 100%;
-      height: 3vw;
-      min-height: 30px;
-      background-color: yellow;
-      margin-top: 3vw;
-      border: 2px solid black;
-      border-radius: 20px;
-    }
-  }
-`;
-
 function Modal() {
-  const [currentTab, setCurrentTab] = useState(1);
+  const [currentTab, setCurrentTab] = useState(0);
+
+  const ModalBack = styled.div`
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: grid;
+    place-items: center;
+    z-index: 100;
+  `;
+
+  const ModalBox = styled.div`
+    width: 30vw;
+    height: max(40vw, 600px);
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    border-radius: 30px;
+    min-width: 300px;
+    text-align: center;
+    position: relative;
+    justify-items: center;
+  `;
+
+  const BoxOne = styled.div`
+    width: 100%;
+    height: 35%;
+  `;
+
+  const BoxTwo = styled.div`
+    width: 100%;
+    height: 65%;
+  `;
+
+  const WelcomeBox = styled.div`
+    flex: 0.5 1 auto;
+    > img {
+      width: 5vw;
+      height: 5vw;
+      min-width: 80px;
+      min-height: 80px;
+    }
+    > div {
+      font-size: max(30px, 2.8vw);
+      position: absolute;
+      top: 20px;
+      right: max(2.2vw, 20px);
+      cursor: pointer;
+      transition: 0.4s;
+    }
+    > div:hover {
+      transform: rotate(180deg);
+    }
+    > h2 {
+      // font-size 꼭 찾아보기
+      font-size: max(20px, 1.8vw);
+    }
+    > p {
+      font-size: max(12px, 0.8vw);
+      padding: max(10px, 1.3vw);
+    }
+  `;
+
+  const KakaoLogin = styled.button`
+    width: 80%;
+    height: 2.5vw;
+    min-height: 35px;
+    background-color: #fee500;
+    margin: 0 auto;
+    border-radius: 20px;
+    border: 2px solid black;
+    font-size: max(14px, 1vw);
+    text-align: center;
+    transition: 0.3s;
+    cursor: pointer;
+    > p {
+      display: inline-block;
+    }
+    > #socialLogin {
+      width: 1.2vw;
+      height: 1.2vw;
+      min-width: 18px;
+      min-height: 18px;
+      margin-right: 20px;
+    }
+    :hover {
+      background-color: black;
+      color: white;
+    }
+  `;
+
+  const TabMenu = styled.ul`
+    width: 100%;
+    height: 50px;
+    display: flex;
+    flex-direction: row;
+    justify-items: center;
+    align-items: center;
+    min-height: 40px;
+    > .submenu {
+      height: 100%;
+      line-height: 50px;
+      font-size: max(12px, 0.9vw);
+      flex: 1 0 auto;
+      text-align: center;
+    }
+    > .submenu:nth-child(2) {
+      border-right: 0;
+    }
+    > li {
+      cursor: pointer;
+    }
+    > .focused {
+      color: black;
+      border-bottom: 2px solid black;
+    }
+  `;
+
+  const KakaoWrap = styled.div`
+    flex: 1 1 auto;
+  `;
+
+  const TabWrap = styled.div`
+    /* 없애면 안 됨 */
+  `;
+
+  const LoginBox = styled.div`
+    width: 100%;
+    height: 100%;
+    > button {
+      width: 60%;
+      height: max(3vw, 40px);
+      background-color: black;
+      color: white;
+      border: 2px solid black;
+      border-radius: 50px;
+      margin-top: 50px;
+      transition: 0.3s;
+    }
+    > button:hover {
+      cursor: pointer;
+      background-color: white;
+      border: 2px solid black;
+      color: black;
+    }
+    > #inputBox {
+      margin-top: max(4vw, 50px);
+      > .inputWrap {
+        width: 100%;
+        height: max(3.3vw, 45px);
+        margin-top: 20px;
+        > input {
+          width: 60%;
+          height: max(3vw, 40px);
+          outline: none;
+          border: none;
+          border-bottom: 2px solid black;
+          padding-left: max(3vw, 50px);
+          font-size: max(0.7vw, 12px);
+        }
+        > input:focus::-webkit-input-placeholder {
+          color: transparent;
+        }
+        > input:hover::-webkit-input-placeholder {
+          /* Chrome/Opera/Safari */
+          font-size: 15px;
+          transition: 0.3s;
+        }
+        > .email {
+          background-image: url("https://cdn.discordapp.com/attachments/878131777485565993/881472816908759090/6590522_email_envelope_letter_mail_message_icon.png");
+          background-size: max(1.5vw, 18px);
+          background-repeat: no-repeat;
+          background-position: 0.5vw;
+        }
+        > .password {
+          background-image: url("https://cdn.discordapp.com/attachments/878131777485565993/881480107225669642/4857866_key_lock_password_protection_secure_icon.png");
+          background-position: 0.3vw;
+          background-size: max(2vw, 22px);
+          background-repeat: no-repeat;
+        }
+      }
+    }
+  `;
+
+  const SignupBox = styled.div`
+    width: 100%;
+    height: 100%;
+    > button {
+      width: 60%;
+      height: max(3vw, 40px);
+      background-color: black;
+      color: white;
+      border: 2px solid black;
+      border-radius: 50px;
+      margin-top: 12px;
+      transition: 0.3s;
+    }
+    > button:hover {
+      cursor: pointer;
+      background-color: white;
+      border: 2px solid black;
+      color: black;
+    }
+    > #inputBox {
+      margin-top: max(1.5vw, 20px);
+      > .inputWrap {
+        width: 100%;
+        height: max(3.3vw, 45px);
+        margin-top: 2px;
+        > input {
+          width: 60%;
+          height: max(3vw, 40px);
+          outline: none;
+          border: none;
+          border-bottom: 2px solid black;
+          padding-left: max(3vw, 50px);
+          font-size: max(0.7vw, 12px);
+        }
+        > input:focus::-webkit-input-placeholder {
+          color: transparent;
+        }
+        > input:hover::-webkit-input-placeholder {
+          /* Chrome/Opera/Safari */
+          font-size: 15px;
+          transition: 0.3s;
+        }
+        > #user {
+          background-image: url("https://cdn.discordapp.com/attachments/878131777485565993/881472814257942528/2561496_user_icon.png");
+          background-size: max(1.5vw, 18px);
+          background-repeat: no-repeat;
+          background-position: 0.5vw;
+        }
+        > .email {
+          background-image: url("https://cdn.discordapp.com/attachments/878131777485565993/881472816908759090/6590522_email_envelope_letter_mail_message_icon.png");
+          background-size: max(1.5vw, 18px);
+          background-repeat: no-repeat;
+          background-position: 0.5vw;
+        }
+        > #phone {
+          background-image: url("https://cdn.discordapp.com/attachments/878131777485565993/881472810017513492/2561306_phone_call_icon.png");
+          background-size: max(1.5vw, 18px);
+          background-repeat: no-repeat;
+          background-position: 0.5vw;
+        }
+        > .password {
+          background-image: url("https://cdn.discordapp.com/attachments/878131777485565993/881480107225669642/4857866_key_lock_password_protection_secure_icon.png");
+          background-position: 0.3vw;
+          background-size: max(2vw, 22px);
+          background-repeat: no-repeat;
+        }
+      }
+    }
+  `;
 
   const selectMenuHandler = (index) => {
     setCurrentTab(index);
   };
+
   return (
     <>
       <ModalBack>
         <ModalBox>
-          <WelcomeBox>
-            <img src={logo} alt="logo" />
-            <div>&times;</div>
-            <h2>만.반.잘.부!</h2>
-            <p>만나서 반가워 잘 부탁해!</p>
-          </WelcomeBox>
+          <BoxOne>
+            <WelcomeBox>
+              <img src={logo} alt="logo" />
+              <div>&times;</div>
+              <h2>만.반.잘.부!</h2>
+              <p>만나서 반가워 잘 부탁해!</p>
+            </WelcomeBox>
 
-          <KakaoWrap>
-            <KakaoLogin>
-              <FontAwesomeIcon icon={faComment} id="socialLogin" />
-              <p>카카오 로그인</p>
-            </KakaoLogin>
-          </KakaoWrap>
+            <KakaoWrap>
+              <KakaoLogin>
+                <FontAwesomeIcon icon={faComment} id="socialLogin" />
+                <p>카카오 로그인</p>
+              </KakaoLogin>
+            </KakaoWrap>
+          </BoxOne>
 
-          <TabWrap>
-            <TabMenu>
-              <li className="submenu">로그인</li>
-              <li className="submenu">회원가입</li>
-            </TabMenu>
+          <BoxTwo>
+            <TabWrap>
+              <TabMenu>
+                <li
+                  className={currentTab === 0 ? "submenu focused" : "submenu"}
+                  onClick={() => selectMenuHandler(0)}
+                >
+                  로그인
+                </li>
+                <li
+                  className={currentTab === 1 ? "submenu focused" : "submenu"}
+                  onClick={() => selectMenuHandler(1)}
+                >
+                  회원가입
+                </li>
+              </TabMenu>
 
-            {currentTab === 0 ? (
-              <LoginBox>
-                <div id="a">
-                  <label htmlFor="email">Email</label>
-                  <input type="text" placeholder="이메일을 입력해주세요" />
-                  <label htmlFor="password">password</label>
-                  <input type="text" placeholder="비밀번호를 입력해주세요" />
-                  <button>Submit</button>
-                </div>
-              </LoginBox>
-            ) : (
-              <SignupBox>
-                <div id="a">
-                  <label htmlFor="email">UserName</label>
-                  <input type="text" placeholder="사용자 이름을 입력해주세요" />
-                  <label htmlFor="email">Email</label>
-                  <input type="text" placeholder="이메일을 입력해주세요" />
-                  <label htmlFor="email">Phone Number</label>
-                  <input
-                    type="text"
-                    placeholder="사용자 핸드폰 번호를 입력해주세요"
-                  />
-                  <label htmlFor="password">password</label>
-                  <input type="text" placeholder="비밀번호를 입력해주세요" />
-                  <label htmlFor="password">password</label>
-                  <input
-                    type="text"
-                    placeholder="비밀번호를 다시 입력해주세요"
-                  />
-                  <button>Submit</button>
-                </div>
-              </SignupBox>
-            )}
-          </TabWrap>
+              {currentTab === 0 ? (
+                <LoginBox>
+                  <div id="inputBox">
+                    <div className="inputWrap">
+                      {/* <label htmlFor="email">이메일</label> */}
+                      <input
+                        className="email"
+                        type="text"
+                        placeholder="이메일"
+                      />
+                    </div>
+                    <div className="inputWrap">
+                      {/* <label htmlFor="password">비밀번호</label> */}
+                      <input
+                        className="password"
+                        type="text"
+                        placeholder="비밀번호"
+                      />
+                    </div>
+                  </div>
+                  <button>로그인 하기</button>
+                </LoginBox>
+              ) : (
+                <SignupBox>
+                  <div id="inputBox">
+                    <div className="inputWrap">
+                      {/* <label htmlFor="user">사용자 이름</label> */}
+                      <input
+                        id="user"
+                        type="text"
+                        placeholder="사용자 이름 (한글과 영문만 가능)"
+                      />
+                    </div>
+                    <div className="inputWrap">
+                      {/* <label htmlFor="email">이메일</label> */}
+                      <input
+                        className="email"
+                        type="text"
+                        placeholder="이메일"
+                      />
+                    </div>
+                    <div className="inputWrap">
+                      {/* <label htmlFor="phone">핸드폰 번호</label> */}
+                      <input
+                        id="phone"
+                        type="text"
+                        placeholder="핸드폰 번호 (-)제외"
+                      />
+                    </div>
+                    <div className="inputWrap">
+                      {/* <label htmlFor="password">비밀번호</label> */}
+                      <input
+                        className="password"
+                        type="text"
+                        placeholder="비밀번호 (최소 8자이상, 대문자, 특수문자 포함)"
+                      />
+                    </div>
+                    <div className="inputWrap">
+                      {/* <label htmlFor="repassword">비밀번호 확인</label> */}
+                      <input
+                        className="password"
+                        type="text"
+                        placeholder="비밀번호 확인"
+                      />
+                    </div>
+                  </div>
+                  <button>가입하기</button>
+                </SignupBox>
+              )}
+            </TabWrap>
+          </BoxTwo>
         </ModalBox>
       </ModalBack>
     </>
