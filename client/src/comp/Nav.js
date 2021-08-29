@@ -15,20 +15,21 @@ function Nav({ isLogin }) {
   };
 
   const NavBtn = styled.button`
-    position: absolute;
-    top: 0px;
-    background-color: transparent;
-    width: max(3vw, 60px);
-    height: max(3vw, 60px);
-    font-size: max(3vw, 30px);
-    transition: all 0.3s;
-    cursor: pointer;
-    z-index: 100;
-    :hover {
-      color: #fff;
-    }
-    @media screen and (min-width: 768px) {
+    display:none;
+    @media screen and (max-width: 768px) {
       display: block;
+      position: absolute;
+      top: 0px;
+      background-color: transparent;
+      width: max(3vw, 60px);
+      height: max(3vw, 60px);
+      font-size: max(3vw, 30px);
+      transition: all 0.3s;
+      cursor: pointer;
+      z-index: 100;
+      :hover {
+        color: #fff;
+      }
     }
   `;
 
