@@ -46,6 +46,7 @@ function Nav({ isLogin }) {
     background-color: #38372e;
     flex: 1 1 auto;
     display: flex;
+    min-width:290px;
     min-height: 100vh;
     justify-content: center;
     align-items: center;
@@ -86,7 +87,6 @@ function Nav({ isLogin }) {
     > img {
       width: 22vh;
       height: 22vh;
-      background-color: Red;
       border-radius: 25vh;
       margin-bottom: 5vh;
     }
@@ -113,7 +113,11 @@ function Nav({ isLogin }) {
             <div>
               <ProfileWrap>
                 <img src={profile} alt="none" />
-                <button>EDIT PROFILE</button>
+                <button>
+                  <Link to="/mypageEdit">
+                    EDIT PROFILE
+                  </Link>
+                </button>
               </ProfileWrap>
               <Button2>LOGOUT</Button2>
               <Button2>
