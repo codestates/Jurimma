@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import {Link} from "react-router-dom"
+import { Link } from "react-router-dom";
 import profile from "../none_profile.jpeg";
 
 function Nav({ isLogin }) {
@@ -20,12 +20,22 @@ function Nav({ isLogin }) {
     height: 7vh;
     border: none;
     border-radius: 40px;
-    font-size: 0.98rem;
+    font-size: max(0.85vw, 12px);
     font-weight: 700;
     display: block;
     margin-top: 5vh;
+    cursor: pointer;
+    transition: 0.3s;
+    :hover {
+      background-color: black;
+      color: white;
+    }
     &:nth-child(1) {
       margin-top: 0;
+    }
+    :hover {
+      background-color: black;
+      color: white;
     }
   `;
 
@@ -34,18 +44,29 @@ function Nav({ isLogin }) {
     height: 7vh;
     border: none;
     border-radius: 40px;
-    font-size: 0.98rem;
+    font-size: max(0.85vw, 12px);
     font-weight: 700;
     display: block;
     margin: 5vh auto 0;
+    cursor: pointer;
+    transition: 0.3s;
+    :hover {
+      background-color: black;
+      color: white;
+    }
     &:nth-child(1) {
       margin-top: 0;
+    }
+    :hover {
+      background-color: black;
+      color: white;
     }
   `;
 
   const ProfileWrap = styled.div`
     width: 100%;
     text-align: center;
+    cursor: pointer;
     > img {
       width: 22vh;
       height: 22vh;
@@ -58,10 +79,16 @@ function Nav({ isLogin }) {
       height: 7vh;
       border: none;
       border-radius: 40px;
-      font-size: 0.98rem;
+      font-size: max(0.85vw, 12px);
       font-weight: 700;
       display: block;
       margin: 0 auto;
+      transition: 0.3s;
+    }
+    > button:hover {
+      background-color: black;
+      color: white;
+      cursor: pointer;
     }
   `;
 
@@ -76,9 +103,7 @@ function Nav({ isLogin }) {
             </ProfileWrap>
             <Button2>LOGOUT</Button2>
             <Button2>
-              <Link to="/mypage">
-                MYPAGE
-              </Link>
+              <Link to="/mypage">MYPAGE</Link>
             </Button2>
           </div>
         </NavWrap>
