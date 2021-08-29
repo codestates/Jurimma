@@ -4,7 +4,7 @@ import logo from "../jurimma_logo.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronDown, faComment } from "@fortawesome/free-solid-svg-icons";
 
-function Modal() {
+function Modal({ setOnModal }) {
   const [currentTab, setCurrentTab] = useState(0);
 
   const ModalBack = styled.div`
@@ -275,7 +275,7 @@ function Modal() {
           <BoxOne>
             <WelcomeBox>
               <img src={logo} alt="logo" />
-              <div>&times;</div>
+              <div onClick={() => setOnModal(false)}>&times;</div>
               <h2>만.반.잘.부!</h2>
               <p>만나서 반가워 잘 부탁해!</p>
             </WelcomeBox>

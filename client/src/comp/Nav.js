@@ -8,7 +8,7 @@ import profile from "../none_profile.jpeg";
 // 768px 이상에서는 nav가 보이고, 아이콘 안보임
 // 768px 이하는 nav 안보이고 아이콘 보임
 
-function Nav({ isLogin }) {
+function Nav({ isLogin, setOnModal }) {
   const [isShow, setIsShow] = useState("none");
   const showNavClick = () => {
     isShow === "none" ? setIsShow("flex") : setIsShow("none");
@@ -148,7 +148,7 @@ function Nav({ isLogin }) {
           </NavBtn>
           <NavWrap>
             <div>
-              <Button1>LOGIN / SIGNUP</Button1>
+              <Button1 onClick={() => setOnModal(true)}>LOGIN / SIGNUP</Button1>
               <Button1>MYPAGE</Button1>
             </div>
           </NavWrap>

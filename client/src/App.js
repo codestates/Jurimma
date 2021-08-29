@@ -13,15 +13,15 @@ function App() {
   // console.log(dummyData);
   const [isLogin, setisLogin] = useState(false);
   const [searched, setSearched] = useState(false);
-  const [onModal, setOnModal] = useState(true);
+  const [onModal, setOnModal] = useState(false);
   const [writeModal, setWriteModal] = useState(false);
 
   return (
     <BrowserRouter>
       <div id="wrap">
-        {onModal ? <Modal /> : null}
+        {onModal ? <Modal setOnModal={setOnModal} /> : null}
         {writeModal ? <WriteModal /> : null}
-        <Nav isLogin={isLogin} />
+        <Nav isLogin={isLogin} setOnModal={setOnModal} />
 
         <div className="exNav">
           <header>
