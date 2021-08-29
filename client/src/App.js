@@ -12,24 +12,17 @@ import WriteModal from "./comp/WriteModal";
 
 function App() {
   // console.log(dummyData);
-  const [isLogin, setisLogin] = useState(true);
+  const [isLogin, setisLogin] = useState(false);
   const [searched, setSearched] = useState(false);
-  const [onModal, setOnModal] = useState(false);
+  const [onModal, setOnModal] = useState(true);
   const [writeModal, setWriteModal] = useState(false);
-  
+
   return (
     <BrowserRouter>
       <div id="wrap">
         {onModal ? <Modal /> : null}
         {writeModal ? <WriteModal /> : null}
         <Nav isLogin={isLogin} />
-          
-      <div className="exNav">
-        <header>
-          <Link to="/">
-            <h1 id="jurimma"></h1>
-          </Link>
-        </header>
 
         <Switch>
           <>
@@ -50,10 +43,8 @@ function App() {
           </>
         </Switch>
       </div>
-    </div>
     </BrowserRouter>
   );
 }
 
 export default App;
-

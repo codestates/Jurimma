@@ -10,12 +10,12 @@ import profile from "../none_profile.jpeg";
 
 function Nav({ isLogin }) {
   const [isShow, setIsShow] = useState("none");
-  const onClick = () => {
+  const showNavClick = () => {
     isShow === "none" ? setIsShow("flex") : setIsShow("none");
   };
 
   const NavBtn = styled.button`
-    display:none;
+    display: none;
     @media screen and (max-width: 768px) {
       display: block;
       position: absolute;
@@ -62,6 +62,12 @@ function Nav({ isLogin }) {
     font-weight: 700;
     display: block;
     margin-top: 5vh;
+    transition: 0.3s;
+    cursor: pointer;
+    :hover {
+      background-color: black;
+      color: white;
+    }
     &:nth-child(1) {
       margin-top: 0;
     }
@@ -76,6 +82,12 @@ function Nav({ isLogin }) {
     font-weight: 700;
     display: block;
     margin: 5vh auto 0;
+    cursor: pointer;
+    transition: 0.3s;
+    :hover {
+      background-color: black;
+      color: white;
+    }
     &:nth-child(1) {
       margin-top: 0;
     }
@@ -84,6 +96,7 @@ function Nav({ isLogin }) {
   const ProfileWrap = styled.div`
     width: 100%;
     text-align: center;
+    cursor: pointer;
     > img {
       width: 22vh;
       height: 22vh;
@@ -99,6 +112,12 @@ function Nav({ isLogin }) {
       font-weight: 700;
       display: block;
       margin: 0 auto;
+      cursor: pointer;
+    }
+    > button:hover {
+      background-color: black;
+      color: white;
+      transition: 0.3s;
     }
   `;
 
@@ -106,7 +125,7 @@ function Nav({ isLogin }) {
     <>
       {isLogin ? (
         <>
-          <NavBtn onClick={onClick}>
+          <NavBtn onClick={showNavClick}>
             <FontAwesomeIcon icon={faBars} />
           </NavBtn>
           <NavWrap>
@@ -128,7 +147,9 @@ function Nav({ isLogin }) {
         </>
       ) : (
         <>
-          <NavBtn>햄버거</NavBtn>
+          <NavBtn onClick={showNavClick}>
+            <FontAwesomeIcon icon={faBars} />
+          </NavBtn>
           <NavWrap>
             <div>
               <Button1>LOGIN / SIGNUP</Button1>
