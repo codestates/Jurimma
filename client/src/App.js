@@ -10,6 +10,7 @@ import Mypage from "./pages/Mypage";
 import { BrowserRouter, Switch, Route, Link } from "react-router-dom";
 import WriteModal from "./comp/WriteModal";
 import MypageEdit from "./pages/MypageEdit";
+import SignoutModal from "./comp/SignoutModal";
 
 function App() {
   // console.log(dummyData);
@@ -18,17 +19,28 @@ function App() {
   const [onModal, setOnModal] = useState(false);
   const [writeModal, setWriteModal] = useState(false);
   const [closeLogoutModal, setCloseLogoutModal] = useState(false);
+  const [onSignoutModal, setOnSignoutModal] = useState(false);
 
   return (
     <BrowserRouter>
       <div id="wrap">
+        {/* 로그인 모달 */}
         {onModal ? <Modal setOnModal={setOnModal} /> : null}
+
+        {/* 새글쓰기 모달 */}
         {writeModal ? <WriteModal setWriteModal={setWriteModal} /> : null}
+
+        {/* 로그아웃 모달 */}
         {closeLogoutModal ? (
           <LogoutModal
             setCloseLogoutModal={setCloseLogoutModal}
             setisLogin={setisLogin}
           />
+        ) : null}
+
+        {/* 회원탈퇴 모달 */}
+        {onSignoutModal ? (
+          <SignoutModal setOnSignoutModal={setOnSignoutModal} />
         ) : null}
         <Nav
           isLogin={isLogin}
@@ -63,7 +75,10 @@ function App() {
                 <Mypage isLogin={isLogin} />
               </Route>
               <Route exact path="/mypageEdit">
-                <MypageEdit isLogin={isLogin} />
+                <MypageEdit
+                  isLogin={isLogin}
+                  setOnSignoutModal={setOnSignoutModal}
+                />
               </Route>
               <footer>copyright JURIMMA</footer>
             </>

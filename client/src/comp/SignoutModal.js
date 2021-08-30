@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import logo from "../jurimma_logo.png";
+import logo from "../signout-logo.png";
 
 const ModalBack = styled.div`
   width: 100vw;
@@ -29,7 +29,7 @@ const ModalBox = styled.div`
   justify-items: center;
 `;
 const ByeBox = styled.div`
-  margin-top: 50px;
+  margin-top: 30px;
   > img {
     width: max(10vw, 150px);
     height: max(10vw, 150px);
@@ -57,14 +57,43 @@ const ByeBox = styled.div`
   }
 `;
 
-const LogoutButton = styled.button`
-  width: 80%;
+const SignoutButton = styled.button`
+  width: 18%;
+  height: max(2vw, 20px);
+  background-color: black;
+  color: white;
+  margin: 0 auto;
+  margin-top: max(2vw, 18px);
+  border-radius: 20px;
+  font-size: max(0.8vw, 12px);
+  text-align: center;
+  transition: 0.3s;
+  cursor: pointer;
+  > p {
+    display: inline-block;
+  }
+  > #socialLogin {
+    width: 1.2vw;
+    height: 1.2vw;
+    min-width: 18px;
+    min-height: 18px;
+    margin-right: 20px;
+  }
+  :hover {
+    background-color: #ff2400;
+    border: none;
+  }
+`;
+
+const CancelButton = styled.button`
+  width: 40%;
   height: 2.5vw;
   min-height: 35px;
   background-color: black;
   color: white;
   margin: 0 auto;
   margin-top: 20px;
+  margin-left: 10px;
   border-radius: 20px;
   border: 2px solid black;
   font-size: max(14px, 1vw);
@@ -87,33 +116,34 @@ const LogoutButton = styled.button`
   }
 `;
 
-const LogoutWrap = styled.div``;
+const KakaoWrap = styled.div``;
 
-function LogoutModal({ setCloseLogoutModal, setisLogin }) {
-  const logoutBtn = () => {
-    setCloseLogoutModal(false);
-    setisLogin(false);
-  };
+function SignoutModal({ setOnSignoutModal }) {
   return (
     <>
       <ModalBack>
         <ModalBox>
           <ByeBox>
             <img src={logo} alt="logo" />
-            <div onClick={() => setCloseLogoutModal(false)}>&times;</div>
-            <h2>잘.반.또.만!</h2>
-            <p>잘 가 반가웠어 또 만나!</p>
+            <div onClick={() => setOnSignoutModal(false)}>&times;</div>
+            <p>진짜로 갈거에요...?</p>
           </ByeBox>
 
-          <LogoutWrap>
-            <LogoutButton onClick={logoutBtn}>
-              <p>로그아웃 하기</p>
-            </LogoutButton>
-          </LogoutWrap>
+          <KakaoWrap>
+            <CancelButton onClick={() => setOnSignoutModal(false)}>
+              <p>떠나지 않기</p>
+            </CancelButton>
+            <CancelButton onClick={() => setOnSignoutModal(false)}>
+              <p>떠나지 않기</p>
+            </CancelButton>
+            <SignoutButton>
+              <p>떠나기...</p>
+            </SignoutButton>
+          </KakaoWrap>
         </ModalBox>
       </ModalBack>
     </>
   );
 }
 
-export default LogoutModal;
+export default SignoutModal;

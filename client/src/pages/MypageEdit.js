@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import profile from "../none_profile.jpeg";
 import { Redirect } from "react-router";
+import { useState } from "react";
 
 const MyEditWrap = styled.div`
   width: 100%;
@@ -137,7 +138,7 @@ const MyEditExtra = styled.div`
   }
 `;
 
-function MypageEdit({ isLogin }) {
+function MypageEdit({ isLogin, setOnSignoutModal }) {
   return (
     <>
       {isLogin ? (
@@ -175,7 +176,9 @@ function MypageEdit({ isLogin }) {
               <MyEditExtra>
                 <img src={profile} alt="이용자 사진" />
                 <button id="editPic">사진 변경하기</button>
-                <button id="signOut">탈퇴하기</button>
+                <button id="signOut" onClick={() => setOnSignoutModal(true)}>
+                  탈퇴하기
+                </button>
               </MyEditExtra>
             </EditWrap>
           </EditCoverWrap>
