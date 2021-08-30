@@ -106,8 +106,8 @@ header {
 }
 
 footer {
-  height: 4.5vh;
-  line-height: 4.5vh;
+  height: 10vh;
+  line-height: 10vh;
   text-align: center;
   font-size: max(0.85vw, 11px);
 }

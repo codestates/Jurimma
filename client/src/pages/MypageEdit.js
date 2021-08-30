@@ -4,29 +4,31 @@ import { Redirect } from "react-router";
 
 const MyEditWrap = styled.div`
   width: 100%;
-  min-height: 55vh;
-  min-width: 320px;
-`;
-const EditCoverWrap = styled.div`
-  width: 75%;
-  margin: 0 auto;
+  height: 55vh;
+  @media screen and (max-width: 767px) {
+    height:auto;
+  }
 `;
 const EditWrap = styled.div`
   display: flex;
+  width: 75%;
+  max-width:1500px;
+  margin: 0 auto;
   flex-wrap: wrap;
+  max-height:55vh;
   @media screen and (max-width: 767px) {
     flex-wrap: nowrap;
     flex-direction: column;
+    max-height:none;
   }
 `;
 const MyEdit = styled.div`
   flex: 2 1 auto;
-  margin-bottom: 10vw;
   > form > input {
     display: block;
     width: 100%;
     height: max(40px, 3vw);
-    margin-bottom: 2vw;
+    margin-bottom: max(20px,1vw);
     background-color: transparent;
     border-bottom: 2px solid #000;
     transition: all 0.3s;
@@ -94,6 +96,10 @@ const MyEdit = styled.div`
       }
     }
   }
+  @media screen and (max-width: 767px) {
+    height:auto;
+    margin-bottom: 10vw;
+  }
 `;
 const MyEditExtra = styled.div`
   display: flex;
@@ -107,6 +113,7 @@ const MyEditExtra = styled.div`
     width: max(12vw, 120px);
     height: max(12vw, 120px);
     border-radius: 25vh;
+    border:3px solid #000;
     margin-bottom: 2vw;
   }
   > #editPic {
@@ -142,7 +149,6 @@ function MypageEdit({ isLogin }) {
     <>
       {isLogin ? (
         <MyEditWrap>
-          <EditCoverWrap>
             <EditWrap>
               <MyEdit>
                 <form>
@@ -178,7 +184,6 @@ function MypageEdit({ isLogin }) {
                 <button id="signOut">탈퇴하기</button>
               </MyEditExtra>
             </EditWrap>
-          </EditCoverWrap>
         </MyEditWrap>
       ) : (
         <Redirect to="/" />
