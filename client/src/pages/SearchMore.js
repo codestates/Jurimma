@@ -4,7 +4,7 @@ import empty from "../empty.png"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faChevronDown, faChevronUp } from '@fortawesome/free-solid-svg-icons'
 
-function SearchMore({data}){
+function SearchMore({data, setMoreClickModal}){
     let result = data.sort((a,b)=>a.thumbsup-b.thumbsup).reverse()
     // let result = []
 
@@ -56,6 +56,8 @@ function SearchMore({data}){
             text-align:center;
             line-height:8vh;
             background-color:#d2f8e0;
+            cursor:pointer;
+            transition: all 0.3s;
             p{
                 flex:1 1 auto;
                 font-size: max(14px, 1vw);
@@ -66,6 +68,10 @@ function SearchMore({data}){
         }
         li:nth-child(1){
             margin-top:0px;
+        }
+        li:hover{
+            background-color:#000;
+            color:#fff;
         }
     `
     const MoveDir = styled.div`
@@ -103,7 +109,7 @@ function SearchMore({data}){
                 <ResultList>
                     {result.map((ele,idx)=>{
                         return (
-                            <li key={idx}>
+                            <li key={idx} onClick={()=>setMoreClickModal(true)}>
                                 <p>{ele.wordName}</p>
                                 <p>{ele.wordMean}</p>
                                 <p>{ele.thumbsup}</p>
