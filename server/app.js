@@ -9,6 +9,8 @@ const searchRouter = require("./routes/search");
 const myContentsRouter = require("./routes/myContents");
 const contentsRouter = require("./routes/contents");
 
+require("dotenv").config();
+
 const { sequelize } = require("./models");
 
 const app = express();
