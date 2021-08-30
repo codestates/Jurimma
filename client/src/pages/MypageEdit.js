@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import profile from "../none_profile.jpeg";
+import { Redirect } from "react-router";
 
 const MyEditWrap = styled.div`
   width: 100%;
@@ -129,47 +130,53 @@ const MyEditExtra = styled.div`
   }
 `;
 
-function MypageEdit() {
+function MypageEdit({isLogin}) {
   return (
-    <MyEditWrap>
-      <EditCoverWrap>
-        <EditWrap>
-          <MyEdit>
-            <form>
-              <input
-                type="text"
-                id="username"
-                placeholder="사용자 이름"
-              ></input>
-              <input
-                type="password"
-                id="oldPassword"
-                placeholder="예전 비밀번호"
-              ></input>
-              <input
-                type="Password"
-                id="newPassword"
-                placeholder="새로운 비밀번호"
-              ></input>
-              <input
-                type="password"
-                id="newRePassword"
-                placeholder="새로운 비밀번호 재입력"
-              ></input>
-            </form>
-            <div id="submitBtns">
-              <button id="editSave">저장하기</button>
-              <button id="editCancel">되돌리기</button>
-            </div>
-          </MyEdit>
-          <MyEditExtra>
-            <img src={profile} alt="이용자 사진" />
-            <button id="editPic">사진 변경하기</button>
-            <button id="signOut">탈퇴하기</button>
-          </MyEditExtra>
-        </EditWrap>
-      </EditCoverWrap>
-    </MyEditWrap>
+    <>
+    {isLogin?
+      <MyEditWrap>
+        <EditCoverWrap>
+          <EditWrap>
+            <MyEdit>
+              <form>
+                <input
+                  type="text"
+                  id="username"
+                  placeholder="사용자 이름"
+                ></input>
+                <input
+                  type="password"
+                  id="oldPassword"
+                  placeholder="예전 비밀번호"
+                ></input>
+                <input
+                  type="Password"
+                  id="newPassword"
+                  placeholder="새로운 비밀번호"
+                ></input>
+                <input
+                  type="password"
+                  id="newRePassword"
+                  placeholder="새로운 비밀번호 재입력"
+                ></input>
+              </form>
+              <div id="submitBtns">
+                <button id="editSave">저장하기</button>
+                <button id="editCancel">되돌리기</button>
+              </div>
+            </MyEdit>
+            <MyEditExtra>
+              <img src={profile} alt="이용자 사진" />
+              <button id="editPic">사진 변경하기</button>
+              <button id="signOut">탈퇴하기</button>
+            </MyEditExtra>
+          </EditWrap>
+        </EditCoverWrap>
+      </MyEditWrap>
+    :
+      <Redirect to="/"/>
+    }
+    </>
   );
 }
 export default MypageEdit;

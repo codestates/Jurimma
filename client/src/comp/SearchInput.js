@@ -42,7 +42,7 @@ function SearchInput() {
   return (
     <>
       <SearchWrap className="searchWrap">
-        <input className="searchInput"></input>
+        <input className="searchInput" placeholder="궁금한걸 입력해보세요"></input>
         <button className="searchBtn">검색하기</button>
       </SearchWrap>
     </>
