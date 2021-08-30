@@ -4,7 +4,10 @@
 
 # 🏇 Project 1 : Jurimma 🏇
 
-![](https://media.discordapp.net/attachments/878131777485565993/880410029881180200/Jurimma-logo.png?width=250&height=250)
+<!--
+![](https://media.discordapp.net/attachments/878131777485565993/880410029881180200/Jurimma-logo.png?width=250&height=250) -->
+
+<img src="https://cdn.discordapp.com/attachments/878131777485565993/880129438510100510/jurimma_logo_sigcol.jpg" width=320 height=230>
 
 > **별다줄** : 별걸 다 줄인다. 의 줄임말입니다.
 
@@ -46,7 +49,6 @@
 
 <img src="https://img.shields.io/badge/React-0088CC?style=flat-square&logo=react&logoColor=white"/></a>
 <img src="https://img.shields.io/badge/React Router-CA4245?style=flat-square&logo=react router&logoColor=white"/></a>
-<img src="https://img.shields.io/badge/Redux-764ABC?style=flat-square&logo=redux&logoColor=white"/></a>
 <img src="https://img.shields.io/badge/Axios-0088CC?style=flat-square&logo=node.js&logoColor=white"/></a>
 
 ### 🙈 Back-End 🙈
@@ -59,6 +61,7 @@
 <img src="https://img.shields.io/badge/CookieParser-339999?style=flat-square&logo=node.js&logoColor=white"/></a>
 <img src="https://img.shields.io/badge/JWT-000000?style=flat-square&logo=json web tokens&logoColor=white"/></a>
 <img src="https://img.shields.io/badge/AWS-232F3E?style=flat-square&logo=Amazon AWS&logoColor=white"/></a>
+<img src="https://img.shields.io/badge/AES256-003A70?style=flat-square&logo=node.js&logoColor=white"/></a>
 
 # 📚 Wiki 📚
 

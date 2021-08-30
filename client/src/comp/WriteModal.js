@@ -54,10 +54,10 @@ const NewWord = styled.input`
   transition: 0.3s;
   padding-left: 10px;
   :focus {
-    border-bottom: 3px solid #ffe65b;
+    border-bottom: 3px solid #9ee6c5;
   }
   :hover {
-    border-bottom: 3px solid #ffe65b;
+    border-bottom: 3px solid #9ee6c5;
   }
   :focus::-webkit-input-placeholder {
     color: transparent;
@@ -94,18 +94,18 @@ const Addbutton = styled.button`
   cursor: pointer;
   transition: 0.3s;
   :hover {
-    background-color: #ffe65b;
+    background-color: white;
     color: black;
     border: 2px solid black;
   }
 `;
 
-function WriteModal() {
+function WriteModal({ setWriteModal }) {
   return (
     <>
       <ModalBack>
         <ModalBox>
-          <div>&times;</div>
+          <div onClick={() => setWriteModal(false)}>&times;</div>
           <NewWord
             type="text"
             placeholder="새로 쓸 단어를 입력해주세요"

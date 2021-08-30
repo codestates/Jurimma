@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/mniYUNSU/Jurimma#readme",
   "dependencies": {
+    "aes256": "^1.1.0",
     "cookie-parser": "^1.4.5",
     "cors": "^2.8.5",
     "dotenv": "^10.0.0",
@@ -28,6 +29,7 @@
     "sequelize": "^6.6.5"
   },
   "devDependencies": {
+    "crypto-js": "^4.1.1",
     "morgan": "^1.10.0",
     "sequelize-cli": "^6.2.0"
   }
