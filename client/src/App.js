@@ -68,7 +68,7 @@ function App() {
                 />
               </Route>
               <Route exact path="/searchMore">
-                <SearchMore />
+                <SearchMore data={dummyData.word} />
               </Route>
               <Route exact path="/mypage">
                 <Mypage isLogin={isLogin} />
