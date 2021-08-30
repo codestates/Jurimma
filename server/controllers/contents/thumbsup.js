@@ -28,7 +28,7 @@ module.exports = {
           user_Id: tokenCheck.id,
           content_Id: contentId,
         });
-        res.status(200).json({ accessToken, updatedContent });
+        res.status(201).json({ accessToken, updatedContent });
       } else {
         // 로그아웃하고 메인페이지로
         res.status(401).json({ message: "Send new Login Request" });
