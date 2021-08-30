@@ -181,7 +181,7 @@ function Nav({ isLogin, setOnModal, setisLogin, setCloseLogoutModal }) {
                 <Link to="/mypageEdit">EDIT PROFILE</Link>
               </button>
             </ProfileWrap>
-            <Button2 onClick={logout}>LOGOUT</Button2>
+            <Button2 onClick={logoutBtn}>LOGOUT</Button2>
             <Button2>
               <Link to="/mypage">MYPAGE</Link>
             </Button2>
