@@ -5,9 +5,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
 import profile from "../none_profile.jpeg";
 
-// 768px 이상에서는 nav가 보이고, 아이콘 안보임
-// 768px 이하는 nav 안보이고 아이콘 보임
-
 function Nav({ isLogin, setOnModal, setisLogin, setCloseLogoutModal }) {
   const [isShow, setIsShow] = useState("none");
   const showNavClick = () => {
@@ -21,7 +18,7 @@ function Nav({ isLogin, setOnModal, setisLogin, setCloseLogoutModal }) {
     display: none;
     @media screen and (max-width: 768px) {
       display: block;
-      position: absolute;
+      position: fixed;
       top: 0px;
       background-color: transparent;
       width: max(3vw, 60px);
@@ -31,35 +28,46 @@ function Nav({ isLogin, setOnModal, setisLogin, setCloseLogoutModal }) {
       cursor: pointer;
       z-index: 100;
       cursor: pointer;
-
       :hover {
         color: #fff;
       }
     }
   `;
 
-  const NavWrap = styled.nav`
+  // const NavWrap = styled.div`
+  //   flex: 1 1 auto;
+  //   background-color: #edfff7;
+  //   display:block;
+  //   @media screen and (max-width: 767px) {
+  //     display: block;
+  //   }
+  // `
+  const Nav = styled.nav`
     @media screen and (max-width: 767px) {
       flex: none;
-      position: absolute;
+      position: fixed;
       width: 100%;
-      height: 100vh;
+      height: 100%;
       display: ${isShow};
       justify-content: center;
       align-items: center;
+      overflow:hidden;
     }
     background-color: #edfff7;
+    position:sticky;
+    top:0;
     flex: 1 1 auto;
     display: flex;
     min-width: 290px;
-    min-height: 100vh;
+    height:100vh;
     justify-content: center;
     align-items: center;
-    /* z-index:100; */
+    z-index:50;
   `;
 
   const Button1 = styled.button`
-    width: 20vh;
+    width: 100%;
+    min-width:20vh;
     height: 7vh;
     border: none;
     border-radius: 40px;
@@ -72,6 +80,13 @@ function Nav({ isLogin, setOnModal, setisLogin, setCloseLogoutModal }) {
     background-color: white;
     border: 2px solid black;
     cursor: pointer;
+    > a{
+        display:block;
+        width:100%;
+        height:auto;
+        line-height:7vh;
+        box-sizing:border-box;
+      }
     :hover {
       background-color: black;
       color: white;
@@ -82,9 +97,9 @@ function Nav({ isLogin, setOnModal, setisLogin, setCloseLogoutModal }) {
   `;
 
   const Button2 = styled.button`
-    width: 20vh;
+    width: 100%;
+    min-width:20vh;
     height: 7vh;
-    border: none;
     border-radius: 40px;
     font-size: 0.98rem;
     font-weight: 700;
@@ -95,6 +110,13 @@ function Nav({ isLogin, setOnModal, setisLogin, setCloseLogoutModal }) {
     background-color: white;
     border: 2px solid black;
     cursor: pointer;
+    > a{
+        display:block;
+        width:100%;
+        height:auto;
+        line-height:7vh;
+        box-sizing:border-box;
+      }
     :hover {
       background-color: black;
       color: white;
@@ -116,7 +138,8 @@ function Nav({ isLogin, setOnModal, setisLogin, setCloseLogoutModal }) {
       margin-bottom: 5vh;
     }
     > button {
-      width: 20vh;
+      width: 100%;
+      min-width:20vh;
       height: 7vh;
       border: none;
       border-radius: 40px;
@@ -127,6 +150,14 @@ function Nav({ isLogin, setOnModal, setisLogin, setCloseLogoutModal }) {
       cursor: pointer;
       background-color: white;
       border: 2px solid black;
+      box-sizing:border-box;
+      > a{
+        display:block;
+        width:100%;
+        height:auto;
+        line-height:7vh;
+        box-sizing:border-box;
+      }
     }
     > button:hover {
       background-color: black;
@@ -139,35 +170,35 @@ function Nav({ isLogin, setOnModal, setisLogin, setCloseLogoutModal }) {
     <>
       {isLogin ? (
         <>
-          <NavBtn onClick={showNavClick}>
-            <FontAwesomeIcon icon={faBars} />
-          </NavBtn>
-          <NavWrap>
-            <div>
-              <ProfileWrap>
-                <img src={profile} alt="none" />
-                <button>
-                  <Link to="/mypageEdit">EDIT PROFILE</Link>
-                </button>
-              </ProfileWrap>
-              <Button2 onClick={logoutBtn}>LOGOUT</Button2>
-              <Button2>
-                <Link to="/mypage">MYPAGE</Link>
-              </Button2>
-            </div>
-          </NavWrap>
-        </>
+        <NavBtn onClick={showNavClick}>
+          <FontAwesomeIcon icon={faBars} />
+        </NavBtn>
+        <Nav>
+          <div id="justifyPos">
+            <ProfileWrap>
+              <img src={profile} alt="none" />
+              <button>
+                <Link to="/mypageEdit">EDIT PROFILE</Link>
+              </button>
+            </ProfileWrap>
+            <Button2 onClick={logout}>LOGOUT</Button2>
+            <Button2>
+              <Link to="/mypage">MYPAGE</Link>
+            </Button2>
+          </div>
+        </Nav>
+      </>
       ) : (
         <>
-          <NavBtn onClick={showNavClick}>
-            <FontAwesomeIcon icon={faBars} />
-          </NavBtn>
-          <NavWrap>
-            <div>
-              <Button1 onClick={() => setOnModal(true)}>LOGIN / SIGNUP</Button1>
-              <Button1 onClick={() => setOnModal(true)}>MYPAGE</Button1>
-            </div>
-          </NavWrap>
+            <NavBtn onClick={showNavClick}>
+              <FontAwesomeIcon icon={faBars} />
+            </NavBtn>
+            <Nav>
+              <div>
+                <Button1 onClick={() => setOnModal(true)}>LOGIN / SIGNUP</Button1>
+                <Button1 onClick={() => setOnModal(true)}>MYPAGE</Button1>
+              </div>
+            </Nav>
         </>
       )}
     </>

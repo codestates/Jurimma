@@ -14,7 +14,7 @@ import MypageEdit from "./pages/MypageEdit";
 function App() {
   // console.log(dummyData);
   const [isLogin, setisLogin] = useState(true);
-  const [searched, setSearched] = useState(false);
+  const [searched, setSearched] = useState(true);
   const [onModal, setOnModal] = useState(false);
   const [writeModal, setWriteModal] = useState(false);
   const [closeLogoutModal, setCloseLogoutModal] = useState(false);
@@ -42,7 +42,6 @@ function App() {
             <Link to="/">
               <h1 id="jurimma"></h1>
             </Link>
-            <Link to="/searchMore"></Link>
           </header>
 
           <Switch>
