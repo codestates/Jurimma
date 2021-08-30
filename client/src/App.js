@@ -29,6 +29,7 @@ function App() {
             <Link to="/">
               <h1 id="jurimma"></h1>
             </Link>
+            <Link to="/searchMore"></Link>
           </header>
 
           <Switch>
@@ -43,7 +44,7 @@ function App() {
                 <Mypage isLogin={isLogin}/>
               </Route>
               <Route exact path="/mypageEdit">
-                <MypageEdit />
+                <MypageEdit isLogin={isLogin}/>
               </Route>
               <footer>copyright JURIMMA</footer>
             </>

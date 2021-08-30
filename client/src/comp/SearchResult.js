@@ -75,7 +75,7 @@ function SearchResult({ data, isLogin, setWriteModal, setOnModal }) {
 
   return (
     <>
-      {result.length === 0 ? (
+      {result.length === 0? (
         <div>
           <EmptyResult>
             <img src={empty} alt="empty" />
