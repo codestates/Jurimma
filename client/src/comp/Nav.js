@@ -5,13 +5,13 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
 import profile from "../none_profile.jpeg";
 
-function Nav({ isLogin, setOnModal, setisLogin }) {
+function Nav({ isLogin, setOnModal, setisLogin, setCloseLogoutModal }) {
   const [isShow, setIsShow] = useState("none");
   const showNavClick = () => {
     isShow === "none" ? setIsShow("flex") : setIsShow("none");
   };
-  const logout = () => {
-    setisLogin(false);
+  const logoutBtn = () => {
+    setCloseLogoutModal(true);
   };
 
   const NavBtn = styled.button`
