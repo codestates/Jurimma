@@ -55,9 +55,10 @@ function SearchMore({data}){
             border-radius:40px;
             text-align:center;
             line-height:8vh;
-            background-color:#ffff8d;
+            background-color:#d2f8e0;
             p{
-                flex:1 1 auto
+                flex:1 1 auto;
+                font-size: max(14px, 1vw);
             }
             p:nth-child(2){
                 flex: 3 1 auto

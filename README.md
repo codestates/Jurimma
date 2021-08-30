@@ -4,7 +4,10 @@
 
 # 🏇 Project 1 : Jurimma 🏇
 
-![](https://media.discordapp.net/attachments/878131777485565993/880410029881180200/Jurimma-logo.png?width=250&height=250)
+<!--
+![](https://media.discordapp.net/attachments/878131777485565993/880410029881180200/Jurimma-logo.png?width=250&height=250) -->
+
+<img src="https://cdn.discordapp.com/attachments/878131777485565993/880129438510100510/jurimma_logo_sigcol.jpg" width=320 height=230>
 
 > **별다줄** : 별걸 다 줄인다. 의 줄임말입니다.
 

@@ -1,4 +1,5 @@
 const { user } = require("../../models");
+const { encryptPwd } = require("../hashing/hashingPwd");
 
 module.exports = {
   post: async (req, res) => {
@@ -8,17 +9,19 @@ module.exports = {
       const isValid = await user.findAll({
         where: { email: newUserData.email },
       });
-      const { email, phone, password, userName } = newUserData;
-      if (!email || !phone || !password || !userName) {
+      const { email, phone, password, username } = newUserData;
+      if (!email || !phone || !password || !username) {
         res.status(422).json({ message: "Wrong Info" });
       } else if (isValid[0]) {
         res.status(409).json({ message: "Already Existed" });
       } else {
-        const signUpUser = await user.create({
+        const encrypted = encryptPwd(password);
+        console.log("en : ", encrypted);
+        await user.create({
           email,
           phone,
-          password,
-          username: userName,
+          password: encrypted,
+          username: username,
         });
         res.status(200).json({ message: "ok" });
       }
