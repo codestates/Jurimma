@@ -68,8 +68,8 @@ function Mypage({isLogin}){
     <>
       {isLogin?
         <MypageWrap>
-        <MypageContent> 
-          <UserContent>
+        <MypageContent> {/* 내가 쓴 글 목록 */}
+          <UserContent> 
               <p>작성하신 글은 0개 이며, 최대 추천수는 0개 입니다</p>
               <select>
                   <option>추천수 순</option>

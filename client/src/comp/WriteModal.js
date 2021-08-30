@@ -103,7 +103,7 @@ const Addbutton = styled.button`
 function WriteModal({ setWriteModal }) {
   return (
     <>
-      <ModalBack>
+      <ModalBack> {/* 새로운 글 전송 */}
         <ModalBox>
           <div onClick={() => setWriteModal(false)}>&times;</div>
           <NewWord

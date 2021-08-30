@@ -97,7 +97,7 @@ function SearchResult({ data, isLogin, setWriteModal, setOnModal, setSeeMore, se
         </div>
       ) : (
         <div>
-          <ResultList>
+          <ResultList> {/* 검색하자마자 3개 */}
             {result.map((ele, idx) => {
               return (
                 <li key={idx} onClick={()=>setMoreClickModal(true)}>

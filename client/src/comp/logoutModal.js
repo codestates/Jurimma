@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import logo from "../jurimma_logo.png";
+import axios from "axios";
+axios.defaults.withCredentials = true;
 
 const ModalBack = styled.div`
   width: 100vw;
@@ -89,9 +91,19 @@ const LogoutButton = styled.button`
 
 const LogoutWrap = styled.div``;
 
-function LogoutModal({ setCloseLogoutModal, setisLogin }) {
-  const logoutBtn = () => {
+function LogoutModal({
+  setCloseLogoutModal,
+  setisLogin,
+  accToken,
+  setAccToken,
+}) {
+  const url = process.env.REACT_APP_API_URL || `http://localhost:4000`;
+  const logoutBtn = async () => {
+    await axios.post(`${url}/user/logout`, null, {
+      headers: { authorization: `Bearer ${accToken}` },
+    });
     setCloseLogoutModal(false);
+    setAccToken(null);
     setisLogin(false);
   };
   return (
