@@ -2,6 +2,7 @@ const express = require("express");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
+require("dotenv").config();
 
 const userRouter = require("./routes/user");
 const searchRouter = require("./routes/search");
@@ -11,7 +12,7 @@ const contentsRouter = require("./routes/contents");
 const { sequelize } = require("./models");
 
 const app = express();
-const port = 4000;
+const port = process.env.DATABASE_SERVER_PORT || 4000;
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
