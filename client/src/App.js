@@ -6,7 +6,7 @@ import { useState } from "react";
 import Nav from "./comp/Nav";
 import Modal from "./comp/Modal";
 import Mypage from "./pages/Mypage";
-import { BrowserRouter, Switch, Route, Link} from "react-router-dom";
+import { BrowserRouter, Switch, Route, Link } from "react-router-dom";
 import WriteModal from "./comp/WriteModal";
 import MypageEdit from "./pages/MypageEdit";
 
@@ -22,7 +22,11 @@ function App() {
       <div id="wrap">
         {onModal ? <Modal setOnModal={setOnModal} /> : null}
         {writeModal ? <WriteModal setWriteModal={setWriteModal} /> : null}
-        <Nav isLogin={isLogin} setOnModal={setOnModal} setisLogin={setisLogin}/>
+        <Nav
+          isLogin={isLogin}
+          setOnModal={setOnModal}
+          setisLogin={setisLogin}
+        />
 
         <div className="exNav">
           <header>
@@ -35,16 +39,22 @@ function App() {
           <Switch>
             <>
               <Route exact path="/">
-                <Search setOnModal={setOnModal} isLogin={isLogin} data={dummyData.word} setWriteModal={setWriteModal}/>
+                <Search
+                  setOnModal={setOnModal}
+                  isLogin={isLogin}
+                  data={dummyData.word}
+                  setWriteModal={setWriteModal}
+                  searched={searched}
+                />
               </Route>
               <Route exact path="/searchMore">
                 <SearchMore />
               </Route>
               <Route exact path="/mypage">
-                <Mypage isLogin={isLogin}/>
+                <Mypage isLogin={isLogin} />
               </Route>
               <Route exact path="/mypageEdit">
-                <MypageEdit isLogin={isLogin}/>
+                <MypageEdit isLogin={isLogin} />
               </Route>
               <footer>copyright JURIMMA</footer>
             </>
