@@ -8,13 +8,13 @@ import profile from "../none_profile.jpeg";
 // 768px 이상에서는 nav가 보이고, 아이콘 안보임
 // 768px 이하는 nav 안보이고 아이콘 보임
 
-function Nav({ isLogin, setOnModal, setisLogin }) {
+function Nav({ isLogin, setOnModal, setisLogin, setCloseLogoutModal }) {
   const [isShow, setIsShow] = useState("none");
   const showNavClick = () => {
     isShow === "none" ? setIsShow("flex") : setIsShow("none");
   };
-  const logout = () => {
-    setisLogin(false);
+  const logoutBtn = () => {
+    setCloseLogoutModal(true);
   };
 
   const NavBtn = styled.button`
@@ -150,7 +150,7 @@ function Nav({ isLogin, setOnModal, setisLogin }) {
                   <Link to="/mypageEdit">EDIT PROFILE</Link>
                 </button>
               </ProfileWrap>
-              <Button2 onClick={logout}>LOGOUT</Button2>
+              <Button2 onClick={logoutBtn}>LOGOUT</Button2>
               <Button2>
                 <Link to="/mypage">MYPAGE</Link>
               </Button2>

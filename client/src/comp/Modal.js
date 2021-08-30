@@ -22,7 +22,7 @@ function Modal({ setOnModal }) {
   `;
 
   const ModalBox = styled.div`
-    width: 30vw;
+    width: max(30vw, 350px);
     height: max(40vw, 600px);
     display: flex;
     flex-direction: column;
