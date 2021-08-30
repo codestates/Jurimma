@@ -13,7 +13,7 @@ const SearchSection = styled.section`
   }
 `;
 
-function Search({ data, isLogin, setWriteModal, setOnModal, searched }) {
+function Search({ data, isLogin, setWriteModal, setOnModal, searched, setMoreClickModal }) {
   return (
     <SearchSection>
       <SearchInput />
@@ -23,6 +23,7 @@ function Search({ data, isLogin, setWriteModal, setOnModal, searched }) {
           isLogin={isLogin}
           setWriteModal={setWriteModal}
           setOnModal={setOnModal}
+          setMoreClickModal={setMoreClickModal}
         />
       ) : (
         <div id="hi">하이~ 에이치아이~</div>
