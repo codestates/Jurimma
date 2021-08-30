@@ -11,24 +11,24 @@ module.exports = {
     try {
       const { email, password } = req.body;
       if (!email || !password) {
-        res.status(401).json({ message: "Invalid User" });
+        res.status(400).json({ message: "Invalid User" });
       }
       const findData = await user.findOne({
         where: { email: email },
       });
       if (!findData) {
-        res.status(401).json({ message: "Wrong Email" });
+        res.status(400).json({ message: "Wrong Email" });
       } else {
         const DBPwd = decryptPwd(findData.dataValues.password);
         console.log("복호화 된 암호 : ", DBPwd);
         if (DBPwd !== password) {
-          res.status(401).json({ message: "Wrong Password" });
+          res.status(400).json({ message: "Wrong Password" });
         } else {
           delete findData.dataValues.password;
           const accessToken = generateAccessToken(findData.dataValues);
           const refreshToken = generateRefreshToken(findData.dataValues);
           sendRefreshToken(res, refreshToken);
-          res.status(200).json({
+          res.status(201).json({
             accessToken: accessToken,
             userInfo: findData.dataValues,
             message: "ok",
