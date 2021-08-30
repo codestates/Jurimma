@@ -15,7 +15,7 @@ const SearchWrap = styled.div`
     border-radius: 30px;
     margin-right: 10px;
     outline: none;
-    padding-left: max;
+    padding-left: 20px;
   }
   > .searchBtn {
     width: 6vw;
@@ -42,7 +42,10 @@ function SearchInput() {
   return (
     <>
       <SearchWrap className="searchWrap">
-        <input className="searchInput" placeholder="궁금한걸 입력해보세요"></input>
+        <input
+          className="searchInput"
+          placeholder="궁금한걸 입력해보세요"
+        ></input>
         <button className="searchBtn">검색하기</button>
       </SearchWrap>
     </>

@@ -45,6 +45,11 @@ const MyEdit = styled.div`
       width: 90%;
     }
   }
+  > form > input:hover::-webkit-input-placeholder {
+    /* Chrome/Opera/Safari */
+    font-size: 20px;
+    transition: 0.3s;
+  }
   > form > #username {
     background-image: url("https://cdn.discordapp.com/attachments/878131777485565993/881472814257942528/2561496_user_icon.png");
     background-size: max(1.5vw, 18px);
@@ -77,9 +82,10 @@ const MyEdit = styled.div`
       margin: 0 auto;
       width: max(90px, 10vw);
       height: max(40px, 3vw);
-      border-radius: 20px;
+      border-radius: 40px;
       background-color: #fff;
       color: #000;
+      border: 2px solid black;
       cursor: pointer;
       transition: all 0.3s;
       :hover {
@@ -107,9 +113,10 @@ const MyEditExtra = styled.div`
     margin: 0 auto;
     width: max(100px, 10vw);
     height: max(40px, 3vw);
-    border-radius: 20px;
+    border-radius: 40px;
     background-color: #fff;
     color: #000;
+    border: 2px solid black;
     cursor: pointer;
     transition: all 0.3s;
     margin-bottom: 1vw;
@@ -122,7 +129,7 @@ const MyEditExtra = styled.div`
     margin: 0 auto;
     width: max(60px, 6vw);
     height: max(30px, 3vw);
-    border-radius: 20px;
+    border-radius: 40px;
     background-color: #ff2400;
     color: #fff;
     cursor: pointer;
@@ -130,52 +137,52 @@ const MyEditExtra = styled.div`
   }
 `;
 
-function MypageEdit({isLogin}) {
+function MypageEdit({ isLogin }) {
   return (
     <>
-    {isLogin?
-      <MyEditWrap>
-        <EditCoverWrap>
-          <EditWrap>
-            <MyEdit>
-              <form>
-                <input
-                  type="text"
-                  id="username"
-                  placeholder="사용자 이름"
-                ></input>
-                <input
-                  type="password"
-                  id="oldPassword"
-                  placeholder="예전 비밀번호"
-                ></input>
-                <input
-                  type="Password"
-                  id="newPassword"
-                  placeholder="새로운 비밀번호"
-                ></input>
-                <input
-                  type="password"
-                  id="newRePassword"
-                  placeholder="새로운 비밀번호 재입력"
-                ></input>
-              </form>
-              <div id="submitBtns">
-                <button id="editSave">저장하기</button>
-                <button id="editCancel">되돌리기</button>
-              </div>
-            </MyEdit>
-            <MyEditExtra>
-              <img src={profile} alt="이용자 사진" />
-              <button id="editPic">사진 변경하기</button>
-              <button id="signOut">탈퇴하기</button>
-            </MyEditExtra>
-          </EditWrap>
-        </EditCoverWrap>
-      </MyEditWrap>
-    :
-      <Redirect to="/"/>
-    }
+      {isLogin ? (
+        <MyEditWrap>
+          <EditCoverWrap>
+            <EditWrap>
+              <MyEdit>
+                <form>
+                  <input
+                    type="text"
+                    id="username"
+                    placeholder="사용자 이름"
+                  ></input>
+                  <input
+                    type="password"
+                    id="oldPassword"
+                    placeholder="예전 비밀번호"
+                  ></input>
+                  <input
+                    type="Password"
+                    id="newPassword"
+                    placeholder="새로운 비밀번호"
+                  ></input>
+                  <input
+                    type="password"
+                    id="newRePassword"
+                    placeholder="새로운 비밀번호 재입력"
+                  ></input>
+                </form>
+                <div id="submitBtns">
+                  <button id="editSave">저장하기</button>
+                  <button id="editCancel">되돌리기</button>
+                </div>
+              </MyEdit>
+              <MyEditExtra>
+                <img src={profile} alt="이용자 사진" />
+                <button id="editPic">사진 변경하기</button>
+                <button id="signOut">탈퇴하기</button>
+              </MyEditExtra>
+            </EditWrap>
+          </EditCoverWrap>
+        </MyEditWrap>
+      ) : (
+        <Redirect to="/" />
+      )}
     </>
   );
 }
