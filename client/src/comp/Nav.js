@@ -1,6 +1,6 @@
-import React, { useState} from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
-import { Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
 import profile from "../none_profile.jpeg";
@@ -14,9 +14,8 @@ function Nav({ isLogin, setOnModal, setisLogin }) {
     isShow === "none" ? setIsShow("flex") : setIsShow("none");
   };
   const logout = () => {
-    setisLogin(false)
-
-  }
+    setisLogin(false);
+  };
 
   const NavBtn = styled.button`
     display: none;
@@ -31,6 +30,8 @@ function Nav({ isLogin, setOnModal, setisLogin }) {
       transition: all 0.3s;
       cursor: pointer;
       z-index: 100;
+      cursor: pointer;
+
       :hover {
         color: #fff;
       }
@@ -47,10 +48,10 @@ function Nav({ isLogin, setOnModal, setisLogin }) {
       justify-content: center;
       align-items: center;
     }
-    background-color: #38372e;
+    background-color: #edfff7;
     flex: 1 1 auto;
     display: flex;
-    min-width:290px;
+    min-width: 290px;
     min-height: 100vh;
     justify-content: center;
     align-items: center;
@@ -67,6 +68,9 @@ function Nav({ isLogin, setOnModal, setisLogin }) {
     display: block;
     margin-top: 5vh;
     transition: 0.3s;
+    cursor: pointer;
+    background-color: white;
+    border: 2px solid black;
     cursor: pointer;
     :hover {
       background-color: black;
@@ -88,6 +92,9 @@ function Nav({ isLogin, setOnModal, setisLogin }) {
     margin: 5vh auto 0;
     cursor: pointer;
     transition: 0.3s;
+    background-color: white;
+    border: 2px solid black;
+    cursor: pointer;
     :hover {
       background-color: black;
       color: white;
@@ -105,6 +112,7 @@ function Nav({ isLogin, setOnModal, setisLogin }) {
       width: 22vh;
       height: 22vh;
       border-radius: 25vh;
+      border: 3px solid black;
       margin-bottom: 5vh;
     }
     > button {
@@ -117,6 +125,8 @@ function Nav({ isLogin, setOnModal, setisLogin }) {
       display: block;
       margin: 0 auto;
       cursor: pointer;
+      background-color: white;
+      border: 2px solid black;
     }
     > button:hover {
       background-color: black;
@@ -137,9 +147,7 @@ function Nav({ isLogin, setOnModal, setisLogin }) {
               <ProfileWrap>
                 <img src={profile} alt="none" />
                 <button>
-                  <Link to="/mypageEdit">
-                    EDIT PROFILE
-                  </Link>
+                  <Link to="/mypageEdit">EDIT PROFILE</Link>
                 </button>
               </ProfileWrap>
               <Button2 onClick={logout}>LOGOUT</Button2>
