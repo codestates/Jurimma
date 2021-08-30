@@ -15,6 +15,7 @@ module.exports = {
         // accToken과 객체 같이 내보냄
         const token = req.cookies.refreshToken;
         const tokenCheck = verify(token, process.env.REFRESH_SECRET);
+        delete tokenCheck.exp;
         const accessToken = generateAccessToken(tokenCheck);
         const dbContent = await content.findOne({
           where: { id: contentId },

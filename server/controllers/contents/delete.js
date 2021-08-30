@@ -30,6 +30,7 @@ module.exports = {
       if (refreshAuthorized(req)) {
         const token = req.cookies.refreshToken;
         const tokenCheck = verify(token, process.env.REFRESH_SECRET);
+        delete tokenCheck.exp;
         const accessToken = generateAccessToken(tokenCheck);
 
         const { contentId } = req.body; // 배열

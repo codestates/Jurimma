@@ -31,6 +31,7 @@ module.exports = {
       if (refreshAuthorized(req)) {
         const token = req.cookies.refreshToken;
         const tokenCheck = verify(token, process.env.REFRESH_SECRET);
+        delete tokenCheck.exp;
         const accessToken = generateAccessToken(tokenCheck);
 
         const { userId, wordName, wordMean } = req.body;
@@ -64,6 +65,7 @@ module.exports = {
       if (refreshAuthorized(req)) {
         const token = req.cookies.refreshToken;
         const tokenCheck = verify(token, process.env.REFRESH_SECRET);
+        delete tokenCheck.exp;
         const accessToken = generateAccessToken(tokenCheck);
         const oldContent = await content.findOne({
           where: { id: contentId },
