@@ -8,7 +8,7 @@ module.exports = {
       // console.log(req.headers);
       const accTokenData = await isAuthorized(req);
       if (!accTokenData) {
-        res.status(400).json({ message: "Invalid access token" });
+        res.status(401).json({ message: "Invalid access token" });
       } else {
         console.log(accTokenData);
         const token = req.headers.authorization;

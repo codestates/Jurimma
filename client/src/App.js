@@ -11,6 +11,7 @@ import { BrowserRouter, Switch, Route, Link } from "react-router-dom";
 import WriteModal from "./comp/WriteModal";
 import MypageEdit from "./pages/MypageEdit";
 import SignoutModal from "./comp/SignoutModal";
+import MoreClickModal from "./comp/MoreClickModal";
 
 function App() {
   // console.log(dummyData);
@@ -20,6 +21,7 @@ function App() {
   const [writeModal, setWriteModal] = useState(false);
   const [closeLogoutModal, setCloseLogoutModal] = useState(false);
   const [onSignoutModal, setOnSignoutModal] = useState(false);
+  const [moreClickModal, setMoreClickModal] = useState(false)
 
   return (
     <BrowserRouter>
@@ -42,6 +44,12 @@ function App() {
         {onSignoutModal ? (
           <SignoutModal setOnSignoutModal={setOnSignoutModal} />
         ) : null}
+
+        {/* 단어 뜻 모달 */}
+        {moreClickModal? 
+          <MoreClickModal setMoreClickModal={setMoreClickModal} /> 
+        : null}
+
         <Nav
           isLogin={isLogin}
           setOnModal={setOnModal}
@@ -65,10 +73,11 @@ function App() {
                   data={dummyData.word}
                   setWriteModal={setWriteModal}
                   searched={searched}
+                  setMoreClickModal={setMoreClickModal}
                 />
               </Route>
               <Route exact path="/searchMore">
-                <SearchMore data={dummyData.word} />
+                <SearchMore data={dummyData.word} setMoreClickModal={setMoreClickModal} />
               </Route>
               <Route exact path="/mypage">
                 <Mypage isLogin={isLogin} />

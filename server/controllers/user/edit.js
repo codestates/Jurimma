@@ -28,7 +28,7 @@ module.exports = {
           userInfo.username = username;
           userInfo.password = encryptPwd(newPassword);
           await userInfo.save();
-          res.status(200).json({ accessToken, message: "ok" });
+          res.status(201).json({ accessToken, message: "ok" });
         }
       } else {
         // 로그아웃하고 메인페이지로

@@ -3,7 +3,7 @@ import styled from "styled-components";
 import {Link, Redirect} from "react-router-dom"
 import empty from "../empty.png";
 
-function SearchResult({ data, isLogin, setWriteModal, setOnModal, setSeeMore }) {
+function SearchResult({ data, isLogin, setWriteModal, setOnModal, setSeeMore, setMoreClickModal }) {
   let result = data
     .sort((a, b) => a.thumbsup - b.thumbsup)
     .reverse()
@@ -25,6 +25,8 @@ function SearchResult({ data, isLogin, setWriteModal, setOnModal, setSeeMore }) 
       text-align: center;
       line-height: 8vh;
       background-color: #d2f8e0;
+      cursor:pointer;
+      transition: all 0.3s;
       p {
         padding: 0 5px;
         font-size: max(14px, 1vw);
@@ -39,6 +41,10 @@ function SearchResult({ data, isLogin, setWriteModal, setOnModal, setSeeMore }) 
     }
     li:nth-child(1) {
       margin-top: 0px;
+    }
+    li:hover{
+      background-color:#000;
+      color:#fff;
     }
   `;
   const EmptyResult = styled.div`
@@ -85,9 +91,7 @@ function SearchResult({ data, isLogin, setWriteModal, setOnModal, setSeeMore }) 
           <BtnWrap>
             <NewMoreBtn onClick={isLogin? ()=>setWriteModal(true) : ()=>setOnModal(true)}>새로 만들기</NewMoreBtn>
             <NewMoreBtn>
-              <Link to="/searchMore">
-                더보기
-              </Link>
+              더보기
             </NewMoreBtn>
           </BtnWrap>
         </div>
@@ -96,7 +100,7 @@ function SearchResult({ data, isLogin, setWriteModal, setOnModal, setSeeMore }) 
           <ResultList>
             {result.map((ele, idx) => {
               return (
-                <li key={idx}>
+                <li key={idx} onClick={()=>setMoreClickModal(true)}>
                   <p>{ele.wordName}</p>
                   <p>{ele.wordMean}</p>
                   <p>{ele.thumbsup}</p>
