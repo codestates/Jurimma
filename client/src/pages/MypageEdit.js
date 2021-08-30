@@ -151,7 +151,7 @@ function MypageEdit({ isLogin, setOnSignoutModal }) {
       {isLogin ? (
         <MyEditWrap>
             <EditWrap>
-              <MyEdit>
+              <MyEdit> {/* 회원정보 수정창 */}
                 <form>
                   <input
                     type="text"

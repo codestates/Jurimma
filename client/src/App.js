@@ -15,19 +15,34 @@ import MoreClickModal from "./comp/MoreClickModal";
 
 function App() {
   // console.log(dummyData);
-  const [isLogin, setisLogin] = useState(true);
-  const [searched, setSearched] = useState(true);
-  const [onModal, setOnModal] = useState(false);
+  const [isLogin, setisLogin] = useState(false); // 로그인 여부
+  const [userInfo, setUserInfo] = useState({
+    id: "",
+    username: "",
+    email: "",
+    userPic: "",
+  });
+  const [accToken, setAccToken] = useState("");
+  const [searched, setSearched] = useState(true); // 검색한 적이 있는지 여부
+  const [onModal, setOnModal] = useState(false); // 로그인, 회원가입 모달 열 여부
   const [writeModal, setWriteModal] = useState(false);
   const [closeLogoutModal, setCloseLogoutModal] = useState(false);
   const [onSignoutModal, setOnSignoutModal] = useState(false);
-  const [moreClickModal, setMoreClickModal] = useState(false)
+  const [moreClickModal, setMoreClickModal] = useState(false);
 
+  console.log(userInfo);
   return (
     <BrowserRouter>
       <div id="wrap">
         {/* 로그인 모달 */}
-        {onModal ? <Modal setOnModal={setOnModal} /> : null}
+        {onModal ? (
+          <Modal
+            setOnModal={setOnModal}
+            setisLogin={setisLogin}
+            setUserInfo={setUserInfo}
+            setAccToken={setAccToken}
+          />
+        ) : null}
 
         {/* 새글쓰기 모달 */}
         {writeModal ? <WriteModal setWriteModal={setWriteModal} /> : null}
@@ -37,6 +52,8 @@ function App() {
           <LogoutModal
             setCloseLogoutModal={setCloseLogoutModal}
             setisLogin={setisLogin}
+            accToken={accToken}
+            setAccToken={setAccToken}
           />
         ) : null}
 
@@ -46,15 +63,16 @@ function App() {
         ) : null}
 
         {/* 단어 뜻 모달 */}
-        {moreClickModal? 
-          <MoreClickModal setMoreClickModal={setMoreClickModal} /> 
-        : null}
+        {moreClickModal ? (
+          <MoreClickModal setMoreClickModal={setMoreClickModal} />
+        ) : null}
 
         <Nav
           isLogin={isLogin}
           setOnModal={setOnModal}
           setisLogin={setisLogin}
           setCloseLogoutModal={setCloseLogoutModal}
+          userInfo={userInfo}
         />
 
         <div className="exNav">
@@ -77,7 +95,10 @@ function App() {
                 />
               </Route>
               <Route exact path="/searchMore">
-                <SearchMore data={dummyData.word} setMoreClickModal={setMoreClickModal} />
+                <SearchMore
+                  data={dummyData.word}
+                  setMoreClickModal={setMoreClickModal}
+                />
               </Route>
               <Route exact path="/mypage">
                 <Mypage isLogin={isLogin} />
