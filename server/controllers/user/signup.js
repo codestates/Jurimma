@@ -1,5 +1,11 @@
 const { user } = require("../../models");
 const { encryptPwd } = require("../hashing/hashingPwd");
+const { defaultImgs } = require("../user/imgResource");
+
+const getRandomImg = (defaultImgs) => {
+  const randomImgIdx = Math.floor(Math.random() * 5);
+  return defaultImgs[randomImgIdx];
+};
 
 module.exports = {
   post: async (req, res) => {
@@ -22,6 +28,7 @@ module.exports = {
           phone,
           password: encrypted,
           username: username,
+          userPic: getRandomImg(defaultImgs),
         });
         res.status(200).json({ message: "ok" });
       }
