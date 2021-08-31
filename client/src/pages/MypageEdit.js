@@ -1,7 +1,10 @@
 import styled from "styled-components";
 import profile from "../none_profile.jpeg";
-import { Redirect } from "react-router";
+import { Redirect, useHistory } from "react-router";
 import { useState } from "react";
+import axios from "axios";
+axios.defaults.withCredentials = true;
+const checkModule = require("../checkModule");
 
 const MyEditWrap = styled.div`
   width: 100%;
@@ -145,7 +148,81 @@ const MyEditExtra = styled.div`
   }
 `;
 
-function MypageEdit({ isLogin, setOnSignoutModal }) {
+function MypageEdit({
+  isLogin,
+  setOnSignoutModal,
+  userInfo,
+  setCloseLogoutModal,
+  accToken,
+  setAccToken,
+  setisLogin,
+}) {
+  const url = process.env.REACT_APP_API_URL || `http://localhost:4000`;
+  const history = useHistory();
+
+  const [editUser, setEditUser] = useState({
+    username: "",
+    oldPassword: "",
+    newPassword: "",
+    newPasswordRe: "",
+  });
+  const handleEditInputValue = (key) => (e) => {
+    setEditUser({ ...editUser, [key]: e.target.value });
+  };
+
+  const handleEdit = async () => {
+    try {
+      if (
+        !editUser.username ||
+        !editUser.oldPassword ||
+        !editUser.newPassword ||
+        !editUser.newPasswordRe
+      ) {
+        alert("정보를 모두 입력해주세요.");
+      } else if (checkModule.OnlyKorEng(editUser.username) === false) {
+        alert("유효하지 않은 이름입니다.");
+      } else if (
+        checkModule.IsValidatePassword(editUser.newPassword) === false
+      ) {
+        alert("유효하지 않은 비밀번호 입니다.");
+      } else if (editUser.newPassword !== editUser.newPasswordRe) {
+        alert("비밀번호를 확인해주세요.");
+      } else {
+        delete editUser.newPasswordRe;
+        const editRes = await axios({
+          url: `${url}/user/edit`,
+          method: "patch",
+          headers: { authorization: `Bearer ${accToken}` },
+          data: editUser,
+        });
+        if (editRes.data.accessToken) {
+          setAccToken(editRes.data.accessToken);
+        }
+        alert("정보가 업데이트 되었습니다. 다시 로그인해 주세요.");
+        await axios.post(`${url}/user/logout`, null, {
+          headers: { authorization: `Bearer ${accToken}` },
+        });
+        setCloseLogoutModal(false);
+        setAccToken(null);
+        setisLogin(false);
+        localStorage.clear();
+        history.push("/");
+      }
+    } catch (error) {
+      console.log(error);
+      alert("다시 입력해 주세요.");
+    }
+  };
+
+  const handleCancel = async () => {
+    setEditUser({
+      username: "",
+      oldPassword: "",
+      newPassword: "",
+      newPasswordRe: "",
+    });
+  };
+
   return (
     <>
       {isLogin ? (
@@ -159,30 +236,42 @@ function MypageEdit({ isLogin, setOnSignoutModal }) {
                   type="text"
                   id="username"
                   placeholder="사용자 이름"
+                  onChange={handleEditInputValue("username")}
+                  value={editUser.username}
                 ></input>
                 <input
                   type="password"
                   id="oldPassword"
                   placeholder="예전 비밀번호"
+                  onChange={handleEditInputValue("oldPassword")}
+                  value={editUser.oldPassword}
                 ></input>
                 <input
                   type="Password"
                   id="newPassword"
                   placeholder="새로운 비밀번호"
+                  onChange={handleEditInputValue("newPassword")}
+                  value={editUser.newPassword}
                 ></input>
                 <input
                   type="password"
                   id="newRePassword"
                   placeholder="새로운 비밀번호 재입력"
+                  onChange={handleEditInputValue("newPasswordRe")}
+                  value={editUser.newPasswordRe}
                 ></input>
               </form>
               <div id="submitBtns">
-                <button id="editSave">저장하기</button>
-                <button id="editCancel">되돌리기</button>
+                <button id="editSave" onClick={handleEdit}>
+                  저장하기
+                </button>
+                <button id="editCancel" onClick={handleCancel}>
+                  되돌리기
+                </button>
               </div>
             </MyEdit>
             <MyEditExtra>
-              <img src={profile} alt="이용자 사진" />
+              <img src={userInfo.userPic} alt="이용자 사진" />
               <button id="editPic">사진 변경하기</button>
               <button id="signOut" onClick={() => setOnSignoutModal(true)}>
                 탈퇴하기

@@ -135,6 +135,12 @@ function App() {
                 <MypageEdit
                   isLogin={isLogin}
                   setOnSignoutModal={setOnSignoutModal}
+                  setUserInfo={setUserInfo}
+                  userInfo={userInfo}
+                  accToken={accToken}
+                  setAccToken={setAccToken}
+                  setCloseLogoutModal={setCloseLogoutModal}
+                  setisLogin={setisLogin}
                 />
               </Route>
               <footer>copyright JURIMMA</footer>
