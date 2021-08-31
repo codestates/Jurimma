@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { useHistory } from "react-router";
 import axios from "axios";
+
 axios.defaults.withCredentials = true;
 const { WordNameLength, WordMeanLength } = require("../checkModule");
 
@@ -118,6 +119,13 @@ function WriteModal({
     userId: userInfo.id,
     wordMean: "",
   });
+
+  const handleKeyPressWrite = (e) => {
+    if (e.type === "keypress" && e.code === "Enter") {
+      handleWrite();
+    }
+  };
+
   const handleWriteInputValue = (key) => (e) => {
     setNewWord({ ...newWord, [key]: e.target.value });
   };
@@ -163,10 +171,12 @@ function WriteModal({
             placeholder="새로 쓸 단어를 입력해주세요"
             onChange={handleWriteInputValue("wordName")}
             value={newWord.wordName}
+            onKeyPress={handleKeyPressWrite}
           ></NewWord>
           <WordMean
             onChange={handleWriteInputValue("wordMean")}
             value={newWord.wordMean}
+            onKeyPress={handleKeyPressWrite}
           />
           <Addbutton onClick={handleWrite}>추가하기</Addbutton>
         </ModalBox>
