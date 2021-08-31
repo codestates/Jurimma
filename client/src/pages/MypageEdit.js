@@ -7,20 +7,20 @@ const MyEditWrap = styled.div`
   width: 100%;
   height: 55vh;
   @media screen and (max-width: 767px) {
-    height:auto;
+    height: auto;
   }
 `;
 const EditWrap = styled.div`
   display: flex;
   width: 75%;
-  max-width:1500px;
+  max-width: 1500px;
   margin: 0 auto;
   flex-wrap: wrap;
-  max-height:55vh;
+  max-height: 55vh;
   @media screen and (max-width: 767px) {
     flex-wrap: nowrap;
     flex-direction: column;
-    max-height:none;
+    max-height: none;
   }
 `;
 const MyEdit = styled.div`
@@ -29,7 +29,7 @@ const MyEdit = styled.div`
     display: block;
     width: 100%;
     height: max(40px, 3vw);
-    margin-bottom: max(20px,1vw);
+    margin-bottom: max(20px, 1vw);
     background-color: transparent;
     border-bottom: 2px solid #000;
     transition: all 0.3s;
@@ -98,7 +98,7 @@ const MyEdit = styled.div`
     }
   }
   @media screen and (max-width: 767px) {
-    height:auto;
+    height: auto;
     margin-bottom: 10vw;
   }
 `;
@@ -114,7 +114,7 @@ const MyEditExtra = styled.div`
     width: max(12vw, 120px);
     height: max(12vw, 120px);
     border-radius: 25vh;
-    border:3px solid #000;
+    border: 3px solid #000;
     margin-bottom: 2vw;
   }
   > #editPic {
@@ -150,43 +150,45 @@ function MypageEdit({ isLogin, setOnSignoutModal }) {
     <>
       {isLogin ? (
         <MyEditWrap>
-            <EditWrap>
-              <MyEdit> {/* 회원정보 수정창 */}
-                <form>
-                  <input
-                    type="text"
-                    id="username"
-                    placeholder="사용자 이름"
-                  ></input>
-                  <input
-                    type="password"
-                    id="oldPassword"
-                    placeholder="예전 비밀번호"
-                  ></input>
-                  <input
-                    type="Password"
-                    id="newPassword"
-                    placeholder="새로운 비밀번호"
-                  ></input>
-                  <input
-                    type="password"
-                    id="newRePassword"
-                    placeholder="새로운 비밀번호 재입력"
-                  ></input>
-                </form>
-                <div id="submitBtns">
-                  <button id="editSave">저장하기</button>
-                  <button id="editCancel">되돌리기</button>
-                </div>
-              </MyEdit>
-              <MyEditExtra>
-                <img src={profile} alt="이용자 사진" />
-                <button id="editPic">사진 변경하기</button>
-                <button id="signOut" onClick={() => setOnSignoutModal(true)}>
-                  탈퇴하기
-                </button>
-              </MyEditExtra>
-            </EditWrap>
+          <EditWrap>
+            <MyEdit>
+              {" "}
+              {/* 회원정보 수정창 */}
+              <form>
+                <input
+                  type="text"
+                  id="username"
+                  placeholder="사용자 이름"
+                ></input>
+                <input
+                  type="password"
+                  id="oldPassword"
+                  placeholder="예전 비밀번호"
+                ></input>
+                <input
+                  type="Password"
+                  id="newPassword"
+                  placeholder="새로운 비밀번호"
+                ></input>
+                <input
+                  type="password"
+                  id="newRePassword"
+                  placeholder="새로운 비밀번호 재입력"
+                ></input>
+              </form>
+              <div id="submitBtns">
+                <button id="editSave">저장하기</button>
+                <button id="editCancel">되돌리기</button>
+              </div>
+            </MyEdit>
+            <MyEditExtra>
+              <img src={profile} alt="이용자 사진" />
+              <button id="editPic">사진 변경하기</button>
+              <button id="signOut" onClick={() => setOnSignoutModal(true)}>
+                탈퇴하기
+              </button>
+            </MyEditExtra>
+          </EditWrap>
         </MyEditWrap>
       ) : (
         <Redirect to="/" />

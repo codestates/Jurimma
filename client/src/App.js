@@ -115,13 +115,10 @@ function App() {
                   setMoreClickModal={setMoreClickModal}
                   searchValue={searchValue}
                   setSearchValue={setSearchValue}
-
                   accToken={accToken}
                   setAccToken={setAccToken}
-
                   result={result}
                   setResult={setResult}
-
                 />
               </Route>
               <Route exact path="/searchMore">
