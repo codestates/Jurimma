@@ -113,7 +113,7 @@ function App() {
                 />
               </Route>
               <Route exact path="/mypage">
-                <Mypage isLogin={isLogin} />
+                <Mypage isLogin={isLogin} accToken={accToken} />
               </Route>
               <Route exact path="/mypageEdit">
                 <MypageEdit
