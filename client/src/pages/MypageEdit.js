@@ -166,6 +166,13 @@ function MypageEdit({
     newPassword: "",
     newPasswordRe: "",
   });
+
+  const handleKeyPressEdit = (e) => {
+    if (e.type === "keypress" && e.code === "Enter") {
+      handleEdit();
+    }
+  };
+
   const handleEditInputValue = (key) => (e) => {
     setEditUser({ ...editUser, [key]: e.target.value });
   };
@@ -237,6 +244,7 @@ function MypageEdit({
                   id="username"
                   placeholder="사용자 이름"
                   onChange={handleEditInputValue("username")}
+                  onKeyPress={handleKeyPressEdit}
                   value={editUser.username}
                 ></input>
                 <input
@@ -244,6 +252,7 @@ function MypageEdit({
                   id="oldPassword"
                   placeholder="예전 비밀번호"
                   onChange={handleEditInputValue("oldPassword")}
+                  onKeyPress={handleKeyPressEdit}
                   value={editUser.oldPassword}
                 ></input>
                 <input
@@ -251,6 +260,7 @@ function MypageEdit({
                   id="newPassword"
                   placeholder="새로운 비밀번호"
                   onChange={handleEditInputValue("newPassword")}
+                  onKeyPress={handleKeyPressEdit}
                   value={editUser.newPassword}
                 ></input>
                 <input
@@ -258,6 +268,7 @@ function MypageEdit({
                   id="newRePassword"
                   placeholder="새로운 비밀번호 재입력"
                   onChange={handleEditInputValue("newPasswordRe")}
+                  onKeyPress={handleKeyPressEdit}
                   value={editUser.newPasswordRe}
                 ></input>
               </form>
