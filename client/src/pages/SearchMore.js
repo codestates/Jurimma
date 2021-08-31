@@ -126,7 +126,7 @@ function SearchMore({ data, setMoreClickModal, setWriteModal }) {
                   <p>{ele.wordName}</p>
                   <p>{ele.wordMean}</p>
                   <p>
-                    <span class="imgWrap">
+                    <span className="imgWrap">
                       <img src={thumbs_up_icon} alt="thumbsup" />
                     </span>
                     <span>{ele.thumbsup}</span>

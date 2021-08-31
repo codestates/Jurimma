@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import { useHistory } from "react-router";
 import logo from "../jurimma_logo.png";
 import axios from "axios";
 axios.defaults.withCredentials = true;
@@ -98,6 +99,7 @@ function LogoutModal({
   setAccToken,
 }) {
   const url = process.env.REACT_APP_API_URL || `http://localhost:4000`;
+  const history = useHistory();
   const logoutBtn = async () => {
     await axios.post(`${url}/user/logout`, null, {
       headers: { authorization: `Bearer ${accToken}` },
@@ -105,6 +107,7 @@ function LogoutModal({
     setCloseLogoutModal(false);
     setAccToken(null);
     setisLogin(false);
+    history.push("/");
   };
   return (
     <>

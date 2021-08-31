@@ -7,7 +7,7 @@ import Nav from "./comp/Nav";
 import Modal from "./comp/Modal";
 import LogoutModal from "./comp/logoutModal";
 import Mypage from "./pages/Mypage";
-import { BrowserRouter, Switch, Route, Link } from "react-router-dom";
+import { BrowserRouter, Switch, Route, Link, Redirect } from "react-router-dom";
 import WriteModal from "./comp/WriteModal";
 import MypageEdit from "./pages/MypageEdit";
 import SignoutModal from "./comp/SignoutModal";

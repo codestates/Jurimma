@@ -138,9 +138,13 @@ function SearchResult({
             >
               새로 만들기
             </NewMoreBtn>
-            <NewMoreBtn>
-              <Link to="/searchMore">더보기</Link>
-            </NewMoreBtn>
+            {isLogin ? (
+              <NewMoreBtn>
+                <Link to="/searchMore">더보기</Link>
+              </NewMoreBtn>
+            ) : (
+              <NewMoreBtn onClick={() => setOnModal(true)}>더보기</NewMoreBtn>
+            )}
           </BtnWrap>
         </div>
       )}

@@ -323,7 +323,7 @@ function Modal({ setOnModal, setisLogin, setUserInfo, setAccToken }) {
           userPic: loginResult.data.userInfo.userPic,
         });
         await setAccToken(loginResult.data.accessToken);
-        history.push("/");
+        // history.push("/");
         setisLogin(true);
         setOnModal(false);
       }
