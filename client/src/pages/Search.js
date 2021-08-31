@@ -24,9 +24,10 @@ function Search({
   setSearchValue,
   accToken,
   setAccToken,
+  result,
+  setResult,
+  
 }) {
-  const [result, setResult] = useState([]); // search 결과값
-
   return (
     <SearchSection>
       <SearchInput

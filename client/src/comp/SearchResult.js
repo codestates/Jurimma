@@ -113,7 +113,6 @@ function SearchResult({
             >
               새로 만들기
             </NewMoreBtn>
-            <NewMoreBtn>더보기</NewMoreBtn>
           </BtnWrap>
         </div>
       ) : (
