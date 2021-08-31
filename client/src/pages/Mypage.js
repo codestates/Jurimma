@@ -76,11 +76,18 @@ const ContentCheck = styled.div`
   }
 `;
 
-function Mypage({ isLogin, accToken, setMoreClickModal, setCurrResult }) {
+function Mypage({
+  userContent,
+  setUserContent,
+  searchUserWord,
+  isLogin,
+  accToken,
+  setMoreClickModal,
+  setCurrResult,
+  setEditResult,
+  setEditContentModal,
+}) {
   const url = process.env.REACT_APP_API_URL || `http://localhost:4000`;
-  const [userContent, setUserContent] = useState({
-    data: [],
-  });
   const [gotDeleted, setGotDeleted] = useState(false); // 데이터 삭제하는거 확인하는 state
   const [orderBy, setOrderBy] = useState("byDates"); // 정리할 기준 지정
   const [checkedItems, setCheckedItems] = useState(
@@ -88,7 +95,7 @@ function Mypage({ isLogin, accToken, setMoreClickModal, setCurrResult }) {
   );
 
   useEffect(() => {
-    getUserContent();
+    searchUserWord();
   }, [gotDeleted]); // 삭제시 다시 데이터 받아옴
 
   const ordering = (value) => {
@@ -112,16 +119,10 @@ function Mypage({ isLogin, accToken, setMoreClickModal, setCurrResult }) {
     setMoreClickModal(true);
   }; // 세부 정보 확인 모달로 이동
 
-  const getUserContent = async () => {
-    let userContent = await axios.get(`${url}/myContents`, {
-      header: { authorization: `Bearer ${accToken}` },
-    });
-    setUserContent({
-      data: userContent.data.data.sort(
-        (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
-      ),
-    });
-  }; // 유저가 쓴 글 가져오기
+  const editResult = (ele) => {
+    setEditResult({ data: ele });
+    setEditContentModal(true);
+  }; // 정보 수정 모달로 이동
 
   const handleCheckChange = (checked, id) => {
     if (checked) {
@@ -192,13 +193,11 @@ function Mypage({ isLogin, accToken, setMoreClickModal, setCurrResult }) {
                         handleCheckChange(e.target.checked, ele.id)
                       }
                     />
-                    <div
-                      className="contentInfo"
-                      onClick={() => readResult(ele)}
-                    >
-                      <p>{ele.wordName}</p>
+                    <div className="contentInfo">
+                      <p onClick={() => readResult(ele)}>{ele.wordName}</p>
                       <p>{ele.wordMean}</p>
                       <p>{ele.thumbsup}</p>
+                      <p onClick={() => editResult(ele)}>수정하기</p>
                     </div>
                   </li>
                 );
