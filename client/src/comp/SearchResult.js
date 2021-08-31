@@ -4,17 +4,17 @@ import { Link, Redirect } from "react-router-dom";
 import empty from "../empty.png";
 
 function SearchResult({
-  data,
+  result,
   isLogin,
   setWriteModal,
   setOnModal,
   setSeeMore,
   setMoreClickModal,
 }) {
-  let result = data
-    .sort((a, b) => a.thumbsup - b.thumbsup)
-    .reverse()
+  let modifiedResult = result
+    .sort((a, b) => b.thumbsup - a.thumbsup)
     .slice(0, 3);
+  console.log(modifiedResult);
   // let result = [];
   const ResultList = styled.ul`
     margin-top: 20px;
@@ -119,7 +119,7 @@ function SearchResult({
           <ResultList>
             {" "}
             {/* 검색하자마자 3개 */}
-            {result.map((ele, idx) => {
+            {modifiedResult.map((ele, idx) => {
               return (
                 <li key={idx} onClick={() => setMoreClickModal(true)}>
                   <p>{ele.wordName}</p>
