@@ -13,6 +13,7 @@ import MypageEdit from "./pages/MypageEdit";
 import SignoutModal from "./comp/SignoutModal";
 import MoreClickModal from "./comp/MoreClickModal";
 import axios from "axios";
+import EditContentModal from "./comp/EditContentModal";
 
 function App() {
   // console.log(dummyData);
@@ -29,12 +30,19 @@ function App() {
   const [currResult, setCurrResult] = useState({
     data: "",
   }); // 눌러서 볼 search값
+  const [editResult, setEditResult] = useState({
+    data: "",
+  }); // 변경 필요한 값
+  const [userContent, setUserContent] = useState({
+    data: [],
+  }); // 개인이 작성한 글 결과값
   const [needUpdate, setNeedUpdate] = useState(false); // 리렌더링 필요한지
 
   const [writeModal, setWriteModal] = useState(false);
   const [closeLogoutModal, setCloseLogoutModal] = useState(false);
   const [onSignoutModal, setOnSignoutModal] = useState(false);
   const [moreClickModal, setMoreClickModal] = useState(false);
+  const [editContentModal, setEditContentModal] = useState(false);
 
   useEffect(() => {
     setSearched(false);
@@ -48,8 +56,9 @@ function App() {
     }
   }, [accToken]);
 
-  useEffect(() => {
-    searchWord(searchValue);
+  useEffect(async () => {
+    await searchWord(searchValue);
+    await searchUserWord();
   }, [needUpdate]);
 
   const searchWord = async (searchValue) => {
@@ -59,6 +68,17 @@ function App() {
     setResult(searchRes.data.data); // 결과값 업데이트
     setSearched(true);
   };
+
+  const searchUserWord = async () => {
+    let userContent = await axios.get(`${url}/myContents`, {
+      header: { authorization: `Bearer ${accToken}` },
+    });
+    setUserContent({
+      data: userContent.data.data.sort(
+        (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+      ),
+    });
+  }; // 유저가 쓴 글 가져오기
 
   return (
     <BrowserRouter>
@@ -119,6 +139,17 @@ function App() {
           />
         ) : null}
 
+        {/*단어 뜻 수정 모달 */}
+        {editContentModal ? (
+          <EditContentModal
+            setAccToken={setAccToken}
+            accToken={accToken}
+            setEditContentModal={setEditContentModal}
+            editResult={editResult}
+            needUpdate={needUpdate}
+            setNeedUpdate={setNeedUpdate}
+          />
+        ) : null}
         <Nav
           isLogin={isLogin}
           setOnModal={setOnModal}
@@ -166,10 +197,14 @@ function App() {
               </Route>
               <Route exact path="/mypage">
                 <Mypage
+                  userContent={userContent}
+                  searchUserWord={searchUserWord}
                   isLogin={isLogin}
                   accToken={accToken}
                   setMoreClickModal={setMoreClickModal}
                   setCurrResult={setCurrResult}
+                  setEditContentModal={setEditContentModal}
+                  setEditResult={setEditResult}
                 />
               </Route>
               <Route exact path="/mypageEdit">
