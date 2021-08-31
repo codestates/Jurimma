@@ -265,7 +265,7 @@ const SignupBox = styled.div`
   }
 `;
 
-function Modal({ setOnModal, setisLogin, setUserInfo, setAccToken }) {
+function Modal({ setOnModal, setisLogin, setUserInfo, setAccToken, accToken }) {
   const url = process.env.REACT_APP_API_URL || `http://localhost:4000`;
   const history = useHistory();
   const [currentTab, setCurrentTab] = useState(0);
@@ -323,6 +323,16 @@ function Modal({ setOnModal, setisLogin, setUserInfo, setAccToken }) {
           userPic: loginResult.data.userInfo.userPic,
         });
         await setAccToken(loginResult.data.accessToken);
+        localStorage.setItem("accessToken", loginResult.data.accessToken);
+        localStorage.setItem(
+          "userInfo",
+          JSON.stringify({
+            id: loginResult.data.userInfo.id,
+            username: loginResult.data.userInfo.username,
+            email: loginResult.data.userInfo.email,
+            userPic: loginResult.data.userInfo.userPic,
+          })
+        );
         // history.push("/");
         setisLogin(true);
         setOnModal(false);

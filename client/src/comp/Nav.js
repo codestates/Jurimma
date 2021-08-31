@@ -183,7 +183,7 @@ function Nav({
             <div id="justifyPos">
               <ProfileWrap>
                 <img
-                  src={userInfo.userPic !== "" ? userInfo.userPic : profile}
+                  src={userInfo !== null ? userInfo.userPic : profile}
                   alt="none"
                 />
                 <button>
