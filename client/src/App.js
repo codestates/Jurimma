@@ -98,6 +98,7 @@ function App() {
                 <SearchMore
                   data={dummyData.word}
                   setMoreClickModal={setMoreClickModal}
+                  setWriteModal={setWriteModal}
                 />
               </Route>
               <Route exact path="/mypage">
