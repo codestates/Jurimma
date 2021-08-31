@@ -50,7 +50,15 @@ function App() {
         ) : null}
 
         {/* 새글쓰기 모달 */}
-        {writeModal ? <WriteModal setWriteModal={setWriteModal} /> : null}
+        {writeModal ? (
+          <WriteModal
+            setWriteModal={setWriteModal}
+            accToken={accToken}
+            setAccToken={setAccToken}
+            userInfo={userInfo}
+            isLogin={isLogin}
+          />
+        ) : null}
 
         {/* 로그아웃 모달 */}
         {closeLogoutModal ? (
@@ -100,6 +108,8 @@ function App() {
                   setMoreClickModal={setMoreClickModal}
                   searchValue={searchValue}
                   setSearchValue={setSearchValue}
+                  accToken={accToken}
+                  setAccToken={setAccToken}
                 />
               </Route>
               <Route exact path="/searchMore">

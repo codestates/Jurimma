@@ -3,7 +3,7 @@ const { sign, verify } = require("jsonwebtoken");
 
 module.exports = {
   generateRefreshToken: (data) => {
-    return sign(data, process.env.REFRESH_SECRET, { expiresIn: "30d" });
+    return sign(data, process.env.REFRESH_SECRET, { expiresIn: "3s" });
   },
   sendRefreshToken: (res, refreshToken) => {
     // TODO: JWT 토큰을 쿠키로 전달합니다.

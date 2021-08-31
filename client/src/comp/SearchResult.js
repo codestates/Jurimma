@@ -10,6 +10,8 @@ function SearchResult({
   setOnModal,
   setSeeMore,
   setMoreClickModal,
+  accToken,
+  setAccToken,
 }) {
   let modifiedResult = result
     .sort((a, b) => b.thumbsup - a.thumbsup)

@@ -22,6 +22,8 @@ function Search({
   setMoreClickModal,
   searchValue,
   setSearchValue,
+  accToken,
+  setAccToken,
 }) {
   const [result, setResult] = useState([]); // search 결과값
 
@@ -41,6 +43,8 @@ function Search({
           setOnModal={setOnModal}
           setMoreClickModal={setMoreClickModal}
           searchValue={searchValue}
+          accToken={accToken}
+          setAccToken={setAccToken}
         />
       ) : (
         <div id="hi">하이~ 에이치아이~</div>

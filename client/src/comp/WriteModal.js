@@ -1,5 +1,9 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import { useHistory } from "react-router";
+import axios from "axios";
+axios.defaults.withCredentials = true;
+const { WordNameLength, WordMeanLength } = require("../checkModule");
 
 const ModalBack = styled.div`
   width: 100vw;
@@ -100,18 +104,71 @@ const Addbutton = styled.button`
   }
 `;
 
-function WriteModal({ setWriteModal }) {
+function WriteModal({
+  setWriteModal,
+  accToken,
+  setAccToken,
+  userInfo,
+  setisLogin,
+}) {
+  const url = process.env.REACT_APP_API_URL || `http://localhost:4000`;
+  const history = useHistory();
+  const [newWord, setNewWord] = useState({
+    wordName: "",
+    userId: userInfo.id,
+    wordMean: "",
+  });
+  const handleWriteInputValue = (key) => (e) => {
+    setNewWord({ ...newWord, [key]: e.target.value });
+  };
+
+  const handleWrite = async () => {
+    try {
+      if (!newWord.wordName) {
+        alert("줄임말 이름을 입력해주세요.");
+      } else if (!newWord.wordMean) {
+        alert("줄임말 뜻을 입력해주세요.");
+      } else if (!WordNameLength(newWord.wordName)) {
+        alert("20자 미만으로 입력해주세요.");
+      } else if (!WordMeanLength(newWord.wordMean)) {
+        alert("200자 미만으로 입력해주세요.");
+      } else {
+        let writeRes = await axios({
+          url: `${url}/contents`,
+          method: "post",
+          headers: { authorization: `Bearer ${accToken}` },
+          data: newWord,
+        });
+        if (writeRes.data.accessToken) {
+          setAccToken(writeRes.data.accessToken);
+        }
+        alert("새로운 줄임말이 등록되었습니다.");
+        setWriteModal(false);
+      }
+    } catch (error) {
+      alert("다시 로그인해주세요.");
+      setWriteModal(false);
+    }
+  };
+
   return (
     <>
-      <ModalBack> {/* 새로운 글 전송 */}
+      <ModalBack>
+        {" "}
+        {/* 새로운 글 전송 */}
         <ModalBox>
           <div onClick={() => setWriteModal(false)}>&times;</div>
           <NewWord
             type="text"
             placeholder="새로 쓸 단어를 입력해주세요"
+            onChange={handleWriteInputValue("wordName")}
+            value={newWord.wordName}
           ></NewWord>
-          <WordMean />
-          <Addbutton>추가하기</Addbutton>
+          <WordMean
+            onChange={handleWriteInputValue("wordMean")}
+            value={newWord.wordMean}
+          />
+          <Addbutton onClick={handleWrite}>추가하기</Addbutton>
         </ModalBox>
       </ModalBack>
     </>
