@@ -22,8 +22,11 @@ function Search({
   setMoreClickModal,
   searchValue,
   setSearchValue,
+  accToken,
+  setAccToken,
   result,
   setResult,
+  
 }) {
   return (
     <SearchSection>
@@ -41,6 +44,8 @@ function Search({
           setOnModal={setOnModal}
           setMoreClickModal={setMoreClickModal}
           searchValue={searchValue}
+          accToken={accToken}
+          setAccToken={setAccToken}
         />
       ) : (
         <div id="hi">하이~ 에이치아이~</div>

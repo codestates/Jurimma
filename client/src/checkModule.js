@@ -16,6 +16,14 @@ module.exports = {
   OnlyNumber: (str) => {
     return /^[0-9]+$/.test(str);
   },
+
+  WordNameLength: (str) => {
+    return /^.{1,20}$/.test(str);
+  },
+
+  WordMeanLength: (str) => {
+    return /^.{1,200}$/.test(str);
+  },
 };
 /*
 function isMoreThan4Length(value) {
