@@ -24,7 +24,10 @@ function App() {
   const [onModal, setOnModal] = useState(false); // 로그인, 회원가입 모달 열 여부
   const [searchValue, setSearchValue] = useState(""); // search input에 검색하려는 값
   const [result, setResult] = useState([]); // search 결과값
-
+  const [currResult, setCurrResult] = useState({
+    data: "",
+  }); // 눌러서 볼 search값
+  console.log(currResult);
   const [writeModal, setWriteModal] = useState(false);
   const [closeLogoutModal, setCloseLogoutModal] = useState(false);
   const [onSignoutModal, setOnSignoutModal] = useState(false);
@@ -84,7 +87,10 @@ function App() {
 
         {/* 단어 뜻 모달 */}
         {moreClickModal ? (
-          <MoreClickModal setMoreClickModal={setMoreClickModal} />
+          <MoreClickModal
+            setMoreClickModal={setMoreClickModal}
+            currResult={currResult}
+          />
         ) : null}
 
         <Nav
@@ -129,7 +135,12 @@ function App() {
                 />
               </Route>
               <Route exact path="/mypage">
-                <Mypage isLogin={isLogin} accToken={accToken} />
+                <Mypage
+                  isLogin={isLogin}
+                  accToken={accToken}
+                  setMoreClickModal={setMoreClickModal}
+                  setCurrResult={setCurrResult}
+                />
               </Route>
               <Route exact path="/mypageEdit">
                 <MypageEdit

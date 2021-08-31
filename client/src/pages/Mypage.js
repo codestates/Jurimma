@@ -35,6 +35,7 @@ const ContentList = styled.ul`
     /* justify-content: space-between; */
     padding: 1vw 0;
     border-bottom: 3px solid #000;
+    cursor: pointer;
     > input {
       /* flex: 1 1 auto; */
     }
@@ -75,13 +76,18 @@ const ContentCheck = styled.div`
   }
 `;
 
-function Mypage({ isLogin, accToken }) {
+function Mypage({ isLogin, accToken, setMoreClickModal, setCurrResult }) {
   const url = process.env.REACT_APP_API_URL || `http://localhost:4000`;
   const [userContent, setUserContent] = useState({
     data: [],
   });
   const [isOn, setIsOn] = useState(false);
   const [checkedItems, setCheckedItems] = useState([]);
+
+  const readResult = (ele) => {
+    setCurrResult({ data: ele });
+    setMoreClickModal(true);
+  };
 
   const getUserContent = async () => {
     let userContent = await axios.get(`${url}/myContents`, {
@@ -90,22 +96,24 @@ function Mypage({ isLogin, accToken }) {
     setUserContent({ data: userContent.data.data });
   };
 
-  // const contentCount = userContent.data.length;
-  // const contentThumbsupCount = userContent;
-  // console.log(contentThumbsupCount);
-
-  const contentCount = userContent.data.length; // 전체 글 수
-  const contentThumbsupCount = userContent.data.reduce((acc, cur) => {
-    if (acc < cur.thumbsup) return cur.thumbsup;
-    else return acc;
-  }, 0); // 최고 추천수
-
-  const handleCheck = (id) => {
-    setCheckedItems([...checkedItems, id]);
+  const handleSingleCheck = (checked, id) => {
+    console.log(checked, id);
+    if (checked === true) {
+      setCheckedItems([...checkedItems, id]);
+    } else {
+      setCheckedItems([checkedItems.filter((ele) => ele.id !== id)]);
+    }
+    console.log(checkedItems.length, userContent.data.map.length);
+    if (checkedItems.length === userContent.data.map.length) {
+      setIsOn(true);
+    } else {
+      setIsOn(false);
+    }
   }; // checkbox 하나씩 선택하기
-  const handleClick = (checked) => {
+
+  const handleAllClick = (checked) => {
     if (checked) {
-      // 전체 선택
+      // 전체 선택, true일때
       setCheckedItems([...userContent.data.map((ele) => ele.id)]);
       setIsOn(true);
     } else {
@@ -114,10 +122,25 @@ function Mypage({ isLogin, accToken }) {
       setIsOn(false);
     }
   };
-  console.log(checkedItems);
-  const deleteContent = () => {
-    //
+
+  const deleteContent = async () => {
+    await axios.post(
+      `${url}/contents/delete`,
+      {
+        contentId: checkedItems,
+      },
+      {
+        headers: { authorization: `Bearer ${accToken}` },
+      }
+    );
+    alert("글이 삭제되었습니다.");
   }; // 만든 글 삭제하기
+
+  const contentCount = userContent.data.length; // 전체 글 수
+  const contentThumbsupCount = userContent.data.reduce((acc, cur) => {
+    if (acc < cur.thumbsup) return cur.thumbsup;
+    else return acc;
+  }, 0); // 최고 추천수
 
   useEffect(() => {
     getUserContent();
@@ -143,15 +166,17 @@ function Mypage({ isLogin, accToken }) {
             <ContentList>
               {userContent.data.map((ele, idx) => {
                 return (
-                  <li className="content" key={idx}>
+                  <li
+                    className="content"
+                    key={idx}
+                    onClick={() => readResult(ele)}
+                  >
                     <input
                       type="checkbox"
-                      checked={
-                        checkedItems.length === userContent.data.length
-                          ? true
-                          : false
+                      checked={checkedItems.includes(ele.id) ? true : false}
+                      onChange={(e) =>
+                        handleSingleCheck(e.target.checked, ele.id)
                       }
-                      onChange={() => handleCheck(ele.id)}
                     />
                     <div className="contentInfo">
                       <p>{ele.wordName}</p>
@@ -166,12 +191,16 @@ function Mypage({ isLogin, accToken }) {
               <button
                 id="allCheck"
                 onClick={
-                  isOn ? () => handleClick(false) : () => handleClick(true)
+                  isOn /*false라면 전체 선택 하도록, true라면 전체 선택 해제하도록 */
+                    ? () => handleAllClick(false)
+                    : () => handleAllClick(true)
                 }
               >
                 전체 선택
               </button>
-              <button id="delete">삭제</button>
+              <button id="delete" onClick={() => deleteContent()}>
+                삭제
+              </button>
             </ContentCheck>
           </MypageContent>
         </MypageWrap>
