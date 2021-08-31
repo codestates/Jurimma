@@ -90,7 +90,7 @@ const Word = styled.div`
   }
 `;
 
-function MoreClickModal({ setMoreClickModal }) {
+function MoreClickModal({ setMoreClickModal, currResult }) {
   return (
     <>
       <ModalBack>
@@ -99,19 +99,14 @@ function MoreClickModal({ setMoreClickModal }) {
             &times;
           </div>
           <Word>
-            <h2>{/*단어*/}자만추</h2>
+            <h2>{currResult.data.wordName}</h2>
             <div id="wordMean">
-              <p>
-                {/*단어 뜻*/}자연스러운 만남 추구 자연스러운 만남 추구
-                자연스러운 만남 추구 자연스러운 만남 추구 자연스러운 만남 추구
-                자연스러운 만남 추구 자연스러운 만남 추구 자연스러운 만남 추구
-                자연스러운 만남 추구 자연스러운 만남 추구
-              </p>
+              <p>{currResult.data.wordMean}</p>
             </div>
             <button>
               {/*추천 수, 추천하기 버튼*/}
               <img src={thumbs_up_icon} alt="thumbs up" />
-              <p>20</p>
+              <p>{currResult.data.thumbsup}</p>
             </button>
           </Word>
         </ModalBox>
