@@ -33,7 +33,8 @@ const MyEdit = styled.div`
     width: 100%;
     height: max(40px, 3vw);
     margin-bottom: max(20px, 1vw);
-    background-color: transparent;
+    background-color: rgba(210, 248, 224, 0.9);
+    border-radius: 0px;
     border-bottom: 2px solid #000;
     transition: all 0.3s;
     line-height: max(50px, 3vw);
@@ -53,7 +54,7 @@ const MyEdit = styled.div`
   }
   > form > input:hover::-webkit-input-placeholder {
     /* Chrome/Opera/Safari */
-    font-size: 20px;
+    font-size: max(18px, 0.8vw);
     transition: 0.3s;
   }
   > form > #username {
@@ -89,14 +90,19 @@ const MyEdit = styled.div`
       width: max(90px, 10vw);
       height: max(40px, 3vw);
       border-radius: 40px;
-      background-color: #fff;
-      color: #000;
+      background-color: #000;
+      color: #fff;
       border: 2px solid black;
       cursor: pointer;
+      font-size: max(13px, 0.8vw);
       transition: all 0.3s;
       :hover {
-        background-color: #000;
-        color: #fff;
+        background-color: #fff;
+        color: #000;
+        background-color: rgba(255, 255, 255, 0.5);
+        color: black;
+        font-weight: bold;
+        border: 2px solid black;
       }
     }
   }
@@ -118,6 +124,7 @@ const MyEditExtra = styled.div`
     height: max(12vw, 120px);
     border-radius: 25vh;
     border: 3px solid #000;
+    box-shadow: 0px 7px 10px rgba(0, 0, 0, 0.8);
     margin-bottom: 2vw;
   }
   > #editPic {
@@ -125,15 +132,18 @@ const MyEditExtra = styled.div`
     width: max(100px, 10vw);
     height: max(40px, 3vw);
     border-radius: 40px;
-    background-color: #fff;
-    color: #000;
+    background-color: #000;
+    color: #fff;
     border: 2px solid black;
     cursor: pointer;
     transition: all 0.3s;
     margin-bottom: 1vw;
+    font-size: max(13px, 0.8vw);
     :hover {
-      background-color: #000;
-      color: #fff;
+      color: #000;
+      background-color: rgba(255, 255, 255, 0.5);
+      font-weight: bold;
+      border: 2px solid black;
     }
   }
   > #signOut {
@@ -144,7 +154,15 @@ const MyEditExtra = styled.div`
     background-color: #ff2400;
     color: #fff;
     cursor: pointer;
-    font-size: max(12px, 0.5vw);
+    border: 2px solid #ff2400;
+    font-size: max(11px, 0.8vw);
+    transition: all 0.3s;
+    :hover {
+      color: rgba(255, 255, 255, 1);
+      background-color: rgba(100, 0, 0);
+      font-weight: bold;
+      border: 2px solid rgba(100, 0, 0);
+    }
   }
 `;
 

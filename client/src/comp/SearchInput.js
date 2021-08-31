@@ -10,13 +10,15 @@ const SearchWrap = styled.div`
   box-sizing: border-box;
   > .searchInput {
     width: 58%;
-    height: 3.2vw;
+    height: 4vw;
     min-height: 35px;
     border: 2px solid #000;
+    background-color: rgba(255, 255, 255, 0.7);
     border-radius: 30px;
     margin-right: 10px;
     outline: none;
     padding-left: 20px;
+    font-size: max(14px, 1vw);
   }
   > .searchBtn {
     width: 6vw;
@@ -34,8 +36,9 @@ const SearchWrap = styled.div`
     transition: 0.3s;
   }
   > .searchBtn:hover {
-    background-color: white;
+    background-color: rgba(255, 255, 255, 0.5);
     color: black;
+    font-weight: bold;
     border: 2px solid black;
   }
 `;

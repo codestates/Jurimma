@@ -35,11 +35,15 @@ function SearchMore({ result, setMoreClickModal, setWriteModal }) {
     margin: 0 auto 2vw;
     font-size: max(12px, 0.8vw);
     color: #fff;
-    transition: all 0.3s;
+    transition: 0.3s;
     cursor: pointer;
     :hover {
       background-color: #fff;
       color: #000;
+      background-color: rgba(255, 255, 255, 0.5);
+      color: black;
+      font-weight: bold;
+      border: 2px solid black;
     }
   `;
   const ResultList = styled.ul`
@@ -55,9 +59,13 @@ function SearchMore({ result, setMoreClickModal, setWriteModal }) {
       border-radius: 40px;
       text-align: center;
       line-height: 8vh;
-      background-color: #d2f8e0;
+      background-color: rgba(210, 248, 224, 0.9);
       cursor: pointer;
-      transition: all 0.3s;
+      transition: 0.3s;
+      p:first-child {
+        font-weight: bold;
+        font-size: max(16px, 1vw);
+      }
       p {
         flex: 1 1 auto;
         font-size: max(14px, 1vw);
@@ -68,6 +76,9 @@ function SearchMore({ result, setMoreClickModal, setWriteModal }) {
       .imgWrap {
         position: relative;
         right: 0.5vw;
+        padding: 0.35vw;
+        background-color: rgba(210, 248, 224, 0.9);
+        border-radius: 50px;
       }
       .imgWrap img {
         position: relative;
@@ -80,8 +91,11 @@ function SearchMore({ result, setMoreClickModal, setWriteModal }) {
       margin-top: 0px;
     }
     li:hover {
-      background-color: white;
-      color: black;
+      background-color: rgba(0, 0, 0, 0.8);
+      color: #fff;
+      p {
+        font-weight: bold;
+      }
     }
   `;
   const MoveDir = styled.div`
