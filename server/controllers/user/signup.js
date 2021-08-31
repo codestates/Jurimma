@@ -11,7 +11,7 @@ module.exports = {
   post: async (req, res) => {
     try {
       const newUserData = await req.body;
-      //   console.log(newUserData);
+      // console.log(newUserData);
       const isValid = await user.findAll({
         where: { email: newUserData.email },
       });
