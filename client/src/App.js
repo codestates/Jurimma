@@ -115,13 +115,10 @@ function App() {
                   setMoreClickModal={setMoreClickModal}
                   searchValue={searchValue}
                   setSearchValue={setSearchValue}
-
                   accToken={accToken}
                   setAccToken={setAccToken}
-
                   result={result}
                   setResult={setResult}
-
                 />
               </Route>
               <Route exact path="/searchMore">
@@ -138,6 +135,12 @@ function App() {
                 <MypageEdit
                   isLogin={isLogin}
                   setOnSignoutModal={setOnSignoutModal}
+                  setUserInfo={setUserInfo}
+                  userInfo={userInfo}
+                  accToken={accToken}
+                  setAccToken={setAccToken}
+                  setCloseLogoutModal={setCloseLogoutModal}
+                  setisLogin={setisLogin}
                 />
               </Route>
               <footer>copyright JURIMMA</footer>
