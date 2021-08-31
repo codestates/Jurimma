@@ -12,9 +12,11 @@ import WriteModal from "./comp/WriteModal";
 import MypageEdit from "./pages/MypageEdit";
 import SignoutModal from "./comp/SignoutModal";
 import MoreClickModal from "./comp/MoreClickModal";
+import axios from "axios";
 
 function App() {
   // console.log(dummyData);
+  const url = process.env.REACT_APP_API_URL || `http://localhost:4000`;
   const [isLogin, setisLogin] = useState(false); // 로그인 여부
   const [userInfo, setUserInfo] = useState(
     JSON.parse(localStorage.getItem("userInfo"))
@@ -27,7 +29,8 @@ function App() {
   const [currResult, setCurrResult] = useState({
     data: "",
   }); // 눌러서 볼 search값
-  console.log(currResult);
+  const [needUpdate, setNeedUpdate] = useState(false); // 리렌더링 필요한지
+
   const [writeModal, setWriteModal] = useState(false);
   const [closeLogoutModal, setCloseLogoutModal] = useState(false);
   const [onSignoutModal, setOnSignoutModal] = useState(false);
@@ -44,6 +47,18 @@ function App() {
       setisLogin(true);
     }
   }, [accToken]);
+
+  useEffect(() => {
+    searchWord(searchValue);
+  }, [needUpdate]);
+
+  const searchWord = async (searchValue) => {
+    let searchRes = await axios.post(`${url}/search`, {
+      wordName: searchValue,
+    });
+    setResult(searchRes.data.data); // 결과값 업데이트
+    setSearched(true);
+  };
 
   return (
     <BrowserRouter>
@@ -67,6 +82,8 @@ function App() {
             setAccToken={setAccToken}
             userInfo={userInfo}
             isLogin={isLogin}
+            setNeedUpdate={setNeedUpdate}
+            needUpdate={needUpdate}
           />
         ) : null}
 
@@ -95,6 +112,10 @@ function App() {
           <MoreClickModal
             setMoreClickModal={setMoreClickModal}
             currResult={currResult}
+            setAccToken={setAccToken}
+            accToken={accToken}
+            setNeedUpdate={setNeedUpdate}
+            needUpdate={needUpdate}
           />
         ) : null}
 
@@ -119,7 +140,6 @@ function App() {
                 <Search
                   setOnModal={setOnModal}
                   isLogin={isLogin}
-                  data={dummyData.word}
                   setWriteModal={setWriteModal}
                   searched={searched}
                   setSearched={setSearched}
@@ -130,6 +150,9 @@ function App() {
                   setAccToken={setAccToken}
                   result={result}
                   setResult={setResult}
+                  setCurrResult={setCurrResult}
+                  setNeedUpdate={setNeedUpdate}
+                  searchWord={searchWord}
                 />
               </Route>
               <Route exact path="/searchMore">
@@ -137,6 +160,8 @@ function App() {
                   result={result}
                   setMoreClickModal={setMoreClickModal}
                   setWriteModal={setWriteModal}
+                  setCurrResult={setCurrResult}
+                  setResult={setResult}
                 />
               </Route>
               <Route exact path="/mypage">

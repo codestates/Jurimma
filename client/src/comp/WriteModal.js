@@ -110,7 +110,8 @@ function WriteModal({
   accToken,
   setAccToken,
   userInfo,
-  setisLogin,
+  setNeedUpdate,
+  needUpdate,
 }) {
   const url = process.env.REACT_APP_API_URL || `http://localhost:4000`;
   const history = useHistory();
@@ -151,6 +152,7 @@ function WriteModal({
           setAccToken(writeRes.data.accessToken);
         }
         alert("새로운 줄임말이 등록되었습니다.");
+        setNeedUpdate(!needUpdate);
         setWriteModal(false);
       }
     } catch (error) {
