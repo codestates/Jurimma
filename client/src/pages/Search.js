@@ -13,17 +13,34 @@ const SearchSection = styled.section`
   }
 `;
 
-function Search({ data, isLogin, setWriteModal, setOnModal, searched, setMoreClickModal }) {
+function Search({
+  isLogin,
+  setWriteModal,
+  setOnModal,
+  searched,
+  setSearched,
+  setMoreClickModal,
+  searchValue,
+  setSearchValue,
+}) {
+  const [result, setResult] = useState([]); // search 결과값
+
   return (
     <SearchSection>
-      <SearchInput />
-      {searched? (
+      <SearchInput
+        searchValue={searchValue}
+        setSearchValue={setSearchValue}
+        setSearched={setSearched}
+        setResult={setResult}
+      />
+      {searched ? (
         <SearchResult
-          data={data}
+          result={result}
           isLogin={isLogin}
           setWriteModal={setWriteModal}
           setOnModal={setOnModal}
           setMoreClickModal={setMoreClickModal}
+          searchValue={searchValue}
         />
       ) : (
         <div id="hi">하이~ 에이치아이~</div>

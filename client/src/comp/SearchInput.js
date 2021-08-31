@@ -1,4 +1,5 @@
 import React from "react";
+import axios from "axios";
 import styled from "styled-components";
 
 const SearchWrap = styled.div`
@@ -38,15 +39,39 @@ const SearchWrap = styled.div`
     border: 2px solid black;
   }
 `;
-function SearchInput() {
+function SearchInput({ searchValue, setSearchValue, setResult, setSearched }) {
+  const url = process.env.REACT_APP_API_URL || `http://localhost:4000`;
+
+  const handleSearchInputValue = (e) => {
+    setSearchValue(e.target.value);
+  };
+  const handleKeyPressSearch = async (searchValue) => {
+    if (searchValue === "") {
+      alert("검색어를 입력해주세요.");
+    } else {
+      let searchRes = await axios.post(`${url}/search`, {
+        wordName: searchValue,
+      });
+      setResult(searchRes.data.data); // 결과값 업데이트
+      setSearched(true);
+    }
+  };
+
   return (
     <>
       <SearchWrap className="searchWrap">
         <input
           className="searchInput"
           placeholder="궁금한걸 입력해보세요"
+          value={searchValue}
+          onChange={handleSearchInputValue}
         ></input>
-        <button className="searchBtn">검색하기</button>
+        <button
+          className="searchBtn"
+          onClick={() => handleKeyPressSearch(searchValue)}
+        >
+          검색하기
+        </button>
       </SearchWrap>
     </>
   );

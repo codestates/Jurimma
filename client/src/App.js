@@ -2,7 +2,7 @@ import "./app.css";
 import dummyData from "./dummy/dummyData";
 import Search from "./pages/Search";
 import SearchMore from "./pages/SearchMore";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Nav from "./comp/Nav";
 import Modal from "./comp/Modal";
 import LogoutModal from "./comp/logoutModal";
@@ -23,14 +23,19 @@ function App() {
     userPic: "",
   });
   const [accToken, setAccToken] = useState("");
-  const [searched, setSearched] = useState(true); // 검색한 적이 있는지 여부
+  const [searched, setSearched] = useState(false); // 검색한 적이 있는지 여부
   const [onModal, setOnModal] = useState(false); // 로그인, 회원가입 모달 열 여부
+  const [searchValue, setSearchValue] = useState(""); // search input에 검색하려는 값
+
   const [writeModal, setWriteModal] = useState(false);
   const [closeLogoutModal, setCloseLogoutModal] = useState(false);
   const [onSignoutModal, setOnSignoutModal] = useState(false);
   const [moreClickModal, setMoreClickModal] = useState(false);
 
-  console.log(userInfo);
+  useEffect(() => {
+    setSearched(false);
+  }, []);
+
   return (
     <BrowserRouter>
       <div id="wrap">
@@ -91,7 +96,10 @@ function App() {
                   data={dummyData.word}
                   setWriteModal={setWriteModal}
                   searched={searched}
+                  setSearched={setSearched}
                   setMoreClickModal={setMoreClickModal}
+                  searchValue={searchValue}
+                  setSearchValue={setSearchValue}
                 />
               </Route>
               <Route exact path="/searchMore">
