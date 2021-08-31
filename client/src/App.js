@@ -16,13 +16,10 @@ import MoreClickModal from "./comp/MoreClickModal";
 function App() {
   // console.log(dummyData);
   const [isLogin, setisLogin] = useState(false); // 로그인 여부
-  const [userInfo, setUserInfo] = useState({
-    id: "",
-    username: "",
-    email: "",
-    userPic: "",
-  });
-  const [accToken, setAccToken] = useState("");
+  const [userInfo, setUserInfo] = useState(
+    JSON.parse(localStorage.getItem("userInfo"))
+  );
+  const [accToken, setAccToken] = useState(localStorage.getItem("accessToken"));
   const [searched, setSearched] = useState(false); // 검색한 적이 있는지 여부
   const [onModal, setOnModal] = useState(false); // 로그인, 회원가입 모달 열 여부
   const [searchValue, setSearchValue] = useState(""); // search input에 검색하려는 값
@@ -37,6 +34,14 @@ function App() {
     setSearched(false);
   }, []);
 
+  useEffect(() => {
+    if (!accToken) {
+      setisLogin(false);
+    } else {
+      setisLogin(true);
+    }
+  }, [accToken]);
+
   return (
     <BrowserRouter>
       <div id="wrap">
@@ -47,6 +52,7 @@ function App() {
             setisLogin={setisLogin}
             setUserInfo={setUserInfo}
             setAccToken={setAccToken}
+            accToken={accToken}
           />
         ) : null}
 
@@ -113,7 +119,7 @@ function App() {
                 />
               </Route>
               <Route exact path="/mypage">
-                <Mypage isLogin={isLogin} />
+                <Mypage isLogin={isLogin} accToken={accToken} />
               </Route>
               <Route exact path="/mypageEdit">
                 <MypageEdit

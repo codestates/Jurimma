@@ -107,6 +107,7 @@ function LogoutModal({
     setCloseLogoutModal(false);
     setAccToken(null);
     setisLogin(false);
+    localStorage.clear();
     history.push("/");
   };
   return (
