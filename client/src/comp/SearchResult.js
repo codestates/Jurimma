@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import { Link, Redirect } from "react-router-dom";
 import empty from "../empty.png";
@@ -12,12 +12,18 @@ function SearchResult({
   setMoreClickModal,
   accToken,
   setAccToken,
+  setCurrResult,
+  setResult,
 }) {
   let modifiedResult = result
     .sort((a, b) => b.thumbsup - a.thumbsup)
     .slice(0, 3);
 
-  // let result = [];
+  const showMore = (info) => {
+    setCurrResult({ data: info });
+    setMoreClickModal(true);
+  };
+
   const ResultList = styled.ul`
     margin-top: 20px;
     width: 65%;
@@ -122,7 +128,7 @@ function SearchResult({
             {/* 검색하자마자 3개 */}
             {modifiedResult.map((ele, idx) => {
               return (
-                <li key={idx} onClick={() => setMoreClickModal(true)}>
+                <li key={idx} onClick={() => showMore(ele)}>
                   <p>{ele.wordName}</p>
                   <p>{ele.wordMean}</p>
                   <p>{ele.thumbsup}</p>

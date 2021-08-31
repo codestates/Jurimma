@@ -144,6 +144,7 @@ function WriteModal({
         }
         alert("새로운 줄임말이 등록되었습니다.");
         setWriteModal(false);
+        history.push("/mypage");
       }
     } catch (error) {
       alert("다시 로그인해주세요.");

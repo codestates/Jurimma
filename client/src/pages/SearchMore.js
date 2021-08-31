@@ -1,12 +1,22 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import empty from "../empty.png";
 import thumbs_up_icon from "../thumbs_up_icon.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronDown, faChevronUp } from "@fortawesome/free-solid-svg-icons";
 
-function SearchMore({ result, setMoreClickModal, setWriteModal }) {
+function SearchMore({
+  result,
+  setMoreClickModal,
+  setWriteModal,
+  setCurrResult,
+  setResult,
+}) {
   let moreResult = result.sort((a, b) => b.thumbsup - a.thumbsup);
+  const showSearchMore = (info) => {
+    setCurrResult({ data: info });
+    setMoreClickModal(true);
+  };
 
   const EmptyResult = styled.div`
     text-align: center;
@@ -123,7 +133,7 @@ function SearchMore({ result, setMoreClickModal, setWriteModal }) {
           <ResultList>
             {moreResult.map((ele, idx) => {
               return (
-                <li key={idx} onClick={() => setMoreClickModal(true)}>
+                <li key={idx} onClick={() => showSearchMore(ele)}>
                   <p>{ele.wordName}</p>
                   <p>{ele.wordMean}</p>
                   <p>

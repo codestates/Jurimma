@@ -27,7 +27,7 @@ function App() {
   const [currResult, setCurrResult] = useState({
     data: "",
   }); // 눌러서 볼 search값
-  console.log(currResult);
+
   const [writeModal, setWriteModal] = useState(false);
   const [closeLogoutModal, setCloseLogoutModal] = useState(false);
   const [onSignoutModal, setOnSignoutModal] = useState(false);
@@ -44,6 +44,11 @@ function App() {
       setisLogin(true);
     }
   }, [accToken]);
+
+  const [needUpdate, setNeedUpdate] = useState(false); // 리렌더링 필요한지
+  useEffect(() => {
+    setResult([...result]);
+  }, [needUpdate]);
 
   return (
     <BrowserRouter>
@@ -67,6 +72,8 @@ function App() {
             setAccToken={setAccToken}
             userInfo={userInfo}
             isLogin={isLogin}
+            needUpdate={needUpdate}
+            setNeedUpdate={setNeedUpdate}
           />
         ) : null}
 
@@ -90,6 +97,8 @@ function App() {
           <MoreClickModal
             setMoreClickModal={setMoreClickModal}
             currResult={currResult}
+            setAccToken={setAccToken}
+            accToken={accToken}
           />
         ) : null}
 
@@ -114,7 +123,6 @@ function App() {
                 <Search
                   setOnModal={setOnModal}
                   isLogin={isLogin}
-                  data={dummyData.word}
                   setWriteModal={setWriteModal}
                   searched={searched}
                   setSearched={setSearched}
@@ -125,6 +133,8 @@ function App() {
                   setAccToken={setAccToken}
                   result={result}
                   setResult={setResult}
+                  setCurrResult={setCurrResult}
+                  setNeedUpdate={setNeedUpdate}
                 />
               </Route>
               <Route exact path="/searchMore">
@@ -132,6 +142,8 @@ function App() {
                   result={result}
                   setMoreClickModal={setMoreClickModal}
                   setWriteModal={setWriteModal}
+                  setCurrResult={setCurrResult}
+                  setResult={setResult}
                 />
               </Route>
               <Route exact path="/mypage">

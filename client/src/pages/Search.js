@@ -26,7 +26,7 @@ function Search({
   setAccToken,
   result,
   setResult,
-  
+  setCurrResult,
 }) {
   return (
     <SearchSection>
@@ -39,6 +39,7 @@ function Search({
       {searched ? (
         <SearchResult
           result={result}
+          setResult={setResult}
           isLogin={isLogin}
           setWriteModal={setWriteModal}
           setOnModal={setOnModal}
@@ -46,6 +47,7 @@ function Search({
           searchValue={searchValue}
           accToken={accToken}
           setAccToken={setAccToken}
+          setCurrResult={setCurrResult}
         />
       ) : (
         <div id="hi">하이~ 에이치아이~</div>

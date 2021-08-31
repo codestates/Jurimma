@@ -81,33 +81,66 @@ function Mypage({ isLogin, accToken, setMoreClickModal, setCurrResult }) {
   const [userContent, setUserContent] = useState({
     data: [],
   });
+  const [gotDeleted, setGotDeleted] = useState(false); // 데이터 삭제하는거 확인하는 state
+  const [orderBy, setOrderBy] = useState("byDates"); // 정리할 기준 지정
   const [isOn, setIsOn] = useState(false);
   const [checkedItems, setCheckedItems] = useState([]);
+
+  useEffect(() => {
+    getUserContent();
+  }, [gotDeleted]); // 삭제시 다시 데이터 받아옴
+
+  const ordering = (value) => {
+    if (value === "byThumbsup") {
+      setOrderBy("byThumbsup");
+      setUserContent({
+        data: userContent.data.sort((a, b) => b.thumbsup - a.thumbsup),
+      });
+    } else if (value === "byDates") {
+      setOrderBy("byDates");
+      setUserContent({
+        data: userContent.data.sort(
+          (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+        ),
+      });
+    }
+  };
 
   const readResult = (ele) => {
     setCurrResult({ data: ele });
     setMoreClickModal(true);
-  };
+  }; // 세부 정보 확인 모달로 이동
 
   const getUserContent = async () => {
     let userContent = await axios.get(`${url}/myContents`, {
       header: { authorization: `Bearer ${accToken}` },
     });
-    setUserContent({ data: userContent.data.data });
-  };
+    setUserContent({
+      data: userContent.data.data.sort(
+        (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+      ),
+    });
+  }; // 유저가 쓴 글 가져오기
 
-  const handleSingleCheck = (checked, id) => {
-    console.log(checked, id);
+  const handleSingleCheck = async (checked, id) => {
     if (checked === true) {
-      setCheckedItems([...checkedItems, id]);
+      console.log("checked: " + checked);
+      await setCheckedItems([...checkedItems, id]);
+      console.log("isOn: " + isOn);
+      if (checkedItems.length === userContent.data.map.length - 1) {
+        setIsOn(true);
+      } else {
+        setIsOn(false);
+      }
     } else {
-      setCheckedItems([checkedItems.filter((ele) => ele.id !== id)]);
-    }
-    console.log(checkedItems.length, userContent.data.map.length);
-    if (checkedItems.length === userContent.data.map.length) {
-      setIsOn(true);
-    } else {
-      setIsOn(false);
+      console.log("checked: " + checked);
+      await setCheckedItems([checkedItems.filter((ele) => ele.id !== id)]);
+      console.log("isOn: " + isOn);
+      if (checkedItems.length === userContent.data.map.length - 1) {
+        setIsOn(true);
+      } else {
+        setIsOn(false);
+      }
     }
   }; // checkbox 하나씩 선택하기
 
@@ -134,6 +167,7 @@ function Mypage({ isLogin, accToken, setMoreClickModal, setCurrResult }) {
       }
     );
     alert("글이 삭제되었습니다.");
+    setGotDeleted(!gotDeleted);
   }; // 만든 글 삭제하기
 
   const contentCount = userContent.data.length; // 전체 글 수
@@ -141,10 +175,6 @@ function Mypage({ isLogin, accToken, setMoreClickModal, setCurrResult }) {
     if (acc < cur.thumbsup) return cur.thumbsup;
     else return acc;
   }, 0); // 최고 추천수
-
-  useEffect(() => {
-    getUserContent();
-  }, []);
 
   return (
     <>
@@ -158,19 +188,20 @@ function Mypage({ isLogin, accToken, setMoreClickModal, setCurrResult }) {
                 작성하신 글은 {contentCount}개 이며, 최대 추천수는{" "}
                 {contentThumbsupCount}개 입니다
               </p>
-              <select>
-                <option>추천수 순</option>
-                <option>작성 날짜 순</option>
+              <select
+                value={orderBy}
+                onChange={(e) => ordering(e.target.value)}
+              >
+                <option value="byThumbsup">추천수 순</option>
+                <option defaultValue value="byDates">
+                  최신순
+                </option>
               </select>
             </UserContent>
             <ContentList>
               {userContent.data.map((ele, idx) => {
                 return (
-                  <li
-                    className="content"
-                    key={idx}
-                    onClick={() => readResult(ele)}
-                  >
+                  <li className="content" key={idx}>
                     <input
                       type="checkbox"
                       checked={checkedItems.includes(ele.id) ? true : false}
@@ -178,7 +209,10 @@ function Mypage({ isLogin, accToken, setMoreClickModal, setCurrResult }) {
                         handleSingleCheck(e.target.checked, ele.id)
                       }
                     />
-                    <div className="contentInfo">
+                    <div
+                      className="contentInfo"
+                      onClick={() => readResult(ele)}
+                    >
                       <p>{ele.wordName}</p>
                       <p>{ele.wordMean}</p>
                       <p>{ele.thumbsup}</p>
