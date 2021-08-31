@@ -14,7 +14,7 @@ function SearchResult({
   let modifiedResult = result
     .sort((a, b) => b.thumbsup - a.thumbsup)
     .slice(0, 3);
-  console.log(modifiedResult);
+
   // let result = [];
   const ResultList = styled.ul`
     margin-top: 20px;
