@@ -205,7 +205,7 @@ function MypageEdit({
         if (editRes.data.accessToken) {
           setAccToken(editRes.data.accessToken);
         }
-        alert("정보가 업데이트 되었습니다. 다시 로그인해 주세요.");
+        alert("정보가 업데이트 되었습니다. 다시 로그인해주세요.");
         await axios.post(`${url}/user/logout`, null, {
           headers: { authorization: `Bearer ${accToken}` },
         });
@@ -217,7 +217,7 @@ function MypageEdit({
       }
     } catch (error) {
       console.log(error);
-      alert("다시 입력해 주세요.");
+      alert("다시 입력해주세요.");
     }
   };
 
@@ -228,6 +228,32 @@ function MypageEdit({
       newPassword: "",
       newPasswordRe: "",
     });
+  };
+
+  const handleUserPic = async () => {
+    try {
+      const userPicEdit = await axios({
+        url: `${url}/user/userPicEdit`,
+        method: "patch",
+        headers: { authorization: `Bearer ${accToken}` },
+        data: { userPic: userInfo.userPic },
+      });
+      if (userPicEdit.data.accessToken) {
+        setAccToken(userPicEdit.data.accessToken);
+      }
+      alert("사진이 변경되었습니다. 다시 로그인해주세요.");
+      await axios.post(`${url}/user/logout`, null, {
+        headers: { authorization: `Bearer ${accToken}` },
+      });
+      setCloseLogoutModal(false);
+      setAccToken(null);
+      setisLogin(false);
+      localStorage.clear();
+      history.push("/");
+    } catch (error) {
+      console.log(error);
+      alert("다시 시도해주세요.");
+    }
   };
 
   return (
@@ -283,7 +309,9 @@ function MypageEdit({
             </MyEdit>
             <MyEditExtra>
               <img src={userInfo.userPic} alt="이용자 사진" />
-              <button id="editPic">사진 변경하기</button>
+              <button id="editPic" onClick={handleUserPic}>
+                사진 변경하기
+              </button>
               <button id="signOut" onClick={() => setOnSignoutModal(true)}>
                 탈퇴하기
               </button>
