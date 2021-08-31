@@ -22,9 +22,9 @@ function Search({
   setMoreClickModal,
   searchValue,
   setSearchValue,
+  result,
+  setResult,
 }) {
-  const [result, setResult] = useState([]); // search 결과값
-
   return (
     <SearchSection>
       <SearchInput

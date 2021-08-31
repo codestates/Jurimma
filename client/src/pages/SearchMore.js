@@ -5,9 +5,8 @@ import thumbs_up_icon from "../thumbs_up_icon.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronDown, faChevronUp } from "@fortawesome/free-solid-svg-icons";
 
-function SearchMore({ data, setMoreClickModal, setWriteModal }) {
-  let result = data.sort((a, b) => a.thumbsup - b.thumbsup).reverse();
-  // let result = []
+function SearchMore({ result, setMoreClickModal, setWriteModal }) {
+  let moreResult = result.sort((a, b) => b.thumbsup - a.thumbsup);
 
   const EmptyResult = styled.div`
     text-align: center;
@@ -108,19 +107,21 @@ function SearchMore({ data, setMoreClickModal, setWriteModal }) {
   `;
   return (
     <>
-      {result.length === 0 ? (
+      {moreResult.length === 0 ? (
         <EmptyResult>
           <img src={empty} alt="empty" />
           <p>검색 결과가 없습니다.</p>
         </EmptyResult>
       ) : (
         <Result>
-          <ResultName>"{result[0].wordName}"의 검색 결과 입니다.</ResultName>
+          <ResultName>
+            "{moreResult[0].wordName}"의 검색 결과 입니다.
+          </ResultName>
           <Morebutton onClick={() => setWriteModal(true)}>
             뜻 추가하기
           </Morebutton>
           <ResultList>
-            {result.map((ele, idx) => {
+            {moreResult.map((ele, idx) => {
               return (
                 <li key={idx} onClick={() => setMoreClickModal(true)}>
                   <p>{ele.wordName}</p>

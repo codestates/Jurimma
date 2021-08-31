@@ -26,6 +26,7 @@ function App() {
   const [searched, setSearched] = useState(false); // 검색한 적이 있는지 여부
   const [onModal, setOnModal] = useState(false); // 로그인, 회원가입 모달 열 여부
   const [searchValue, setSearchValue] = useState(""); // search input에 검색하려는 값
+  const [result, setResult] = useState([]); // search 결과값
 
   const [writeModal, setWriteModal] = useState(false);
   const [closeLogoutModal, setCloseLogoutModal] = useState(false);
@@ -100,11 +101,13 @@ function App() {
                   setMoreClickModal={setMoreClickModal}
                   searchValue={searchValue}
                   setSearchValue={setSearchValue}
+                  result={result}
+                  setResult={setResult}
                 />
               </Route>
               <Route exact path="/searchMore">
                 <SearchMore
-                  data={dummyData.word}
+                  result={result}
                   setMoreClickModal={setMoreClickModal}
                   setWriteModal={setWriteModal}
                 />
