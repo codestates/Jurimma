@@ -124,6 +124,12 @@ const ProfileWrap = styled.div`
     color: white;
     transition: 0.3s;
   }
+  > p {
+    margin-top: -3.3vh;
+    font-size: 1.1rem;
+    margin-bottom: 1.5vh;
+    font-weight: 700;
+  }
 `;
 
 function Nav({
@@ -186,6 +192,10 @@ function Nav({
                   src={userInfo !== null ? userInfo.userPic : profile}
                   alt="none"
                 />
+                <p>
+                  {userInfo.username.slice(0, 1)}하! ({userInfo.username} 하이
+                  라는 뜻😁)
+                </p>
                 <button>
                   <Link to="/mypageEdit">EDIT PROFILE</Link>
                 </button>
