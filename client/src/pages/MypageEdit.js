@@ -221,7 +221,7 @@ function MypageEdit({
     }
   };
 
-  const handleCancel = async () => {
+  const handleCancel = () => {
     setEditUser({
       username: "",
       oldPassword: "",

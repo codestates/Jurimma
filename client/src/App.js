@@ -82,7 +82,12 @@ function App() {
 
         {/* 회원탈퇴 모달 */}
         {onSignoutModal ? (
-          <SignoutModal setOnSignoutModal={setOnSignoutModal} />
+          <SignoutModal
+            setOnSignoutModal={setOnSignoutModal}
+            setAccToken={setAccToken}
+            setisLogin={setisLogin}
+            accToken={accToken}
+          />
         ) : null}
 
         {/* 단어 뜻 모달 */}
