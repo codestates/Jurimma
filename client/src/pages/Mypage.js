@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import styled from "styled-components";
 import axios from "axios";
 import { Redirect } from "react-router";
+import { faExternalLinkAlt } from "@fortawesome/free-solid-svg-icons";
 
 const MypageWrap = styled.div`
   width: 100%;
@@ -79,12 +80,44 @@ function Mypage({ isLogin, accToken }) {
   const [userContent, setUserContent] = useState({
     data: [],
   });
+  const [isOn, setIsOn] = useState(false);
+  const [checkedItems, setCheckedItems] = useState([]);
+
   const getUserContent = async () => {
     let userContent = await axios.get(`${url}/myContents`, {
       header: { authorization: `Bearer ${accToken}` },
     });
     setUserContent({ data: userContent.data.data });
   };
+
+  // const contentCount = userContent.data.length;
+  // const contentThumbsupCount = userContent;
+  // console.log(contentThumbsupCount);
+
+  const contentCount = userContent.data.length; // 전체 글 수
+  const contentThumbsupCount = userContent.data.reduce((acc, cur) => {
+    if (acc < cur.thumbsup) return cur.thumbsup;
+    else return acc;
+  }, 0); // 최고 추천수
+
+  const handleCheck = (id) => {
+    setCheckedItems([...checkedItems, id]);
+  }; // checkbox 하나씩 선택하기
+  const handleClick = (checked) => {
+    if (checked) {
+      // 전체 선택
+      setCheckedItems([...userContent.data.map((ele) => ele.id)]);
+      setIsOn(true);
+    } else {
+      // 전체 해제
+      setCheckedItems([]);
+      setIsOn(false);
+    }
+  };
+  console.log(checkedItems);
+  const deleteContent = () => {
+    //
+  }; // 만든 글 삭제하기
 
   useEffect(() => {
     getUserContent();
@@ -98,7 +131,10 @@ function Mypage({ isLogin, accToken }) {
             {" "}
             {/* 내가 쓴 글 목록 */}
             <UserContent>
-              <p>작성하신 글은 0개 이며, 최대 추천수는 0개 입니다</p>
+              <p>
+                작성하신 글은 {contentCount}개 이며, 최대 추천수는{" "}
+                {contentThumbsupCount}개 입니다
+              </p>
               <select>
                 <option>추천수 순</option>
                 <option>작성 날짜 순</option>
@@ -108,7 +144,15 @@ function Mypage({ isLogin, accToken }) {
               {userContent.data.map((ele, idx) => {
                 return (
                   <li className="content" key={idx}>
-                    <input type="checkbox" />
+                    <input
+                      type="checkbox"
+                      checked={
+                        checkedItems.length === userContent.data.length
+                          ? true
+                          : false
+                      }
+                      onChange={() => handleCheck(ele.id)}
+                    />
                     <div className="contentInfo">
                       <p>{ele.wordName}</p>
                       <p>{ele.wordMean}</p>
@@ -119,7 +163,14 @@ function Mypage({ isLogin, accToken }) {
               })}
             </ContentList>
             <ContentCheck>
-              <button id="allCheck">전체 선택</button>
+              <button
+                id="allCheck"
+                onClick={
+                  isOn ? () => handleClick(false) : () => handleClick(true)
+                }
+              >
+                전체 선택
+              </button>
               <button id="delete">삭제</button>
             </ContentCheck>
           </MypageContent>
