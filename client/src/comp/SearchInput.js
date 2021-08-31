@@ -45,7 +45,8 @@ function SearchInput({ searchValue, setSearchValue, setResult, setSearched }) {
   const handleSearchInputValue = (e) => {
     setSearchValue(e.target.value);
   };
-  const handleKeyPressSearch = async (searchValue) => {
+
+  const searchWord = async (searchValue) => {
     if (searchValue === "") {
       alert("검색어를 입력해주세요.");
     } else {
@@ -57,6 +58,12 @@ function SearchInput({ searchValue, setSearchValue, setResult, setSearched }) {
     }
   };
 
+  const handleKeyPressSearch = (e) => {
+    if (e.type === "keypress" && e.code === "Enter") {
+      searchWord(e.target.value);
+    }
+  };
+
   return (
     <>
       <SearchWrap className="searchWrap">
@@ -65,11 +72,9 @@ function SearchInput({ searchValue, setSearchValue, setResult, setSearched }) {
           placeholder="궁금한걸 입력해보세요"
           value={searchValue}
           onChange={handleSearchInputValue}
+          onKeyPress={handleKeyPressSearch}
         ></input>
-        <button
-          className="searchBtn"
-          onClick={() => handleKeyPressSearch(searchValue)}
-        >
+        <button className="searchBtn" onClick={() => searchWord(searchValue)}>
           검색하기
         </button>
       </SearchWrap>
