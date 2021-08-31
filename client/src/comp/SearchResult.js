@@ -1,9 +1,16 @@
 import React from "react";
 import styled from "styled-components";
-import {Link, Redirect} from "react-router-dom"
+import { Link, Redirect } from "react-router-dom";
 import empty from "../empty.png";
 
-function SearchResult({ data, isLogin, setWriteModal, setOnModal, setSeeMore, setMoreClickModal }) {
+function SearchResult({
+  data,
+  isLogin,
+  setWriteModal,
+  setOnModal,
+  setSeeMore,
+  setMoreClickModal,
+}) {
   let result = data
     .sort((a, b) => a.thumbsup - b.thumbsup)
     .reverse()
@@ -25,7 +32,7 @@ function SearchResult({ data, isLogin, setWriteModal, setOnModal, setSeeMore, se
       text-align: center;
       line-height: 8vh;
       background-color: #d2f8e0;
-      cursor:pointer;
+      cursor: pointer;
       transition: all 0.3s;
       p {
         padding: 0 5px;
@@ -42,9 +49,9 @@ function SearchResult({ data, isLogin, setWriteModal, setOnModal, setSeeMore, se
     li:nth-child(1) {
       margin-top: 0px;
     }
-    li:hover{
-      background-color:#000;
-      color:#fff;
+    li:hover {
+      background-color: #000;
+      color: #fff;
     }
   `;
   const EmptyResult = styled.div`
@@ -77,11 +84,19 @@ function SearchResult({ data, isLogin, setWriteModal, setOnModal, setSeeMore, se
       color: black;
       cursor: pointer;
     }
+    > a {
+      display: block;
+      width: 100%;
+      height: 5vh;
+      border-radius: 5vh;
+      line-height: 5vh;
+      box-sizing: border-box;
+    }
   `;
 
   return (
     <>
-      {result.length === 0? (
+      {result.length === 0 ? (
         <div>
           <EmptyResult>
             <img src={empty} alt="empty" />
@@ -89,18 +104,24 @@ function SearchResult({ data, isLogin, setWriteModal, setOnModal, setSeeMore, se
           </EmptyResult>
 
           <BtnWrap>
-            <NewMoreBtn onClick={isLogin? ()=>setWriteModal(true) : ()=>setOnModal(true)}>새로 만들기</NewMoreBtn>
-            <NewMoreBtn>
-              더보기
+            <NewMoreBtn
+              onClick={
+                isLogin ? () => setWriteModal(true) : () => setOnModal(true)
+              }
+            >
+              새로 만들기
             </NewMoreBtn>
+            <NewMoreBtn>더보기</NewMoreBtn>
           </BtnWrap>
         </div>
       ) : (
         <div>
-          <ResultList> {/* 검색하자마자 3개 */}
+          <ResultList>
+            {" "}
+            {/* 검색하자마자 3개 */}
             {result.map((ele, idx) => {
               return (
-                <li key={idx} onClick={()=>setMoreClickModal(true)}>
+                <li key={idx} onClick={() => setMoreClickModal(true)}>
                   <p>{ele.wordName}</p>
                   <p>{ele.wordMean}</p>
                   <p>{ele.thumbsup}</p>
@@ -110,11 +131,15 @@ function SearchResult({ data, isLogin, setWriteModal, setOnModal, setSeeMore, se
           </ResultList>
 
           <BtnWrap>
-            <NewMoreBtn onClick={isLogin? ()=>setWriteModal(true) : ()=>setOnModal(true)}>새로 만들기</NewMoreBtn>
+            <NewMoreBtn
+              onClick={
+                isLogin ? () => setWriteModal(true) : () => setOnModal(true)
+              }
+            >
+              새로 만들기
+            </NewMoreBtn>
             <NewMoreBtn>
-              <Link to="/searchMore">
-                더보기
-              </Link>
+              <Link to="/searchMore">더보기</Link>
             </NewMoreBtn>
           </BtnWrap>
         </div>
