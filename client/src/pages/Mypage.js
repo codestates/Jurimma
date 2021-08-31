@@ -83,8 +83,9 @@ function Mypage({ isLogin, accToken, setMoreClickModal, setCurrResult }) {
   });
   const [gotDeleted, setGotDeleted] = useState(false); // 데이터 삭제하는거 확인하는 state
   const [orderBy, setOrderBy] = useState("byDates"); // 정리할 기준 지정
-  const [isOn, setIsOn] = useState(false);
-  const [checkedItems, setCheckedItems] = useState([]);
+  const [checkedItems, setCheckedItems] = useState(
+    userContent.data.map((el) => el.id)
+  );
 
   useEffect(() => {
     getUserContent();
@@ -122,37 +123,19 @@ function Mypage({ isLogin, accToken, setMoreClickModal, setCurrResult }) {
     });
   }; // 유저가 쓴 글 가져오기
 
-  const handleSingleCheck = async (checked, id) => {
-    if (checked === true) {
-      console.log("checked: " + checked);
-      await setCheckedItems([...checkedItems, id]);
-      console.log("isOn: " + isOn);
-      if (checkedItems.length === userContent.data.map.length - 1) {
-        setIsOn(true);
-      } else {
-        setIsOn(false);
-      }
-    } else {
-      console.log("checked: " + checked);
-      await setCheckedItems([checkedItems.filter((ele) => ele.id !== id)]);
-      console.log("isOn: " + isOn);
-      if (checkedItems.length === userContent.data.map.length - 1) {
-        setIsOn(true);
-      } else {
-        setIsOn(false);
-      }
-    }
-  }; // checkbox 하나씩 선택하기
-
-  const handleAllClick = (checked) => {
+  const handleCheckChange = (checked, id) => {
     if (checked) {
-      // 전체 선택, true일때
-      setCheckedItems([...userContent.data.map((ele) => ele.id)]);
-      setIsOn(true);
+      setCheckedItems([...checkedItems, id]);
     } else {
-      // 전체 해제
+      setCheckedItems(checkedItems.filter((el) => el !== id));
+    }
+  };
+
+  const handleAllCheck = (checked) => {
+    if (checked) {
+      setCheckedItems(userContent.data.map((el) => el.id));
+    } else {
       setCheckedItems([]);
-      setIsOn(false);
     }
   };
 
@@ -206,7 +189,7 @@ function Mypage({ isLogin, accToken, setMoreClickModal, setCurrResult }) {
                       type="checkbox"
                       checked={checkedItems.includes(ele.id) ? true : false}
                       onChange={(e) =>
-                        handleSingleCheck(e.target.checked, ele.id)
+                        handleCheckChange(e.target.checked, ele.id)
                       }
                     />
                     <div
@@ -222,16 +205,18 @@ function Mypage({ isLogin, accToken, setMoreClickModal, setCurrResult }) {
               })}
             </ContentList>
             <ContentCheck>
-              <button
-                id="allCheck"
-                onClick={
-                  isOn /*false라면 전체 선택 하도록, true라면 전체 선택 해제하도록 */
-                    ? () => handleAllClick(false)
-                    : () => handleAllClick(true)
-                }
-              >
+              <div id="allCheck">
+                <input
+                  type="checkbox"
+                  checked={
+                    checkedItems.length === userContent.data.length
+                      ? true
+                      : false
+                  }
+                  onChange={(e) => handleAllCheck(e.target.checked)}
+                />
                 전체 선택
-              </button>
+              </div>
               <button id="delete" onClick={() => deleteContent()}>
                 삭제
               </button>
