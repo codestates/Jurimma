@@ -2,7 +2,6 @@ import { useState } from "react";
 import styled from "styled-components";
 import SearchInput from "../comp/SearchInput";
 import SearchResult from "../comp/SearchResult";
-import SearchMore from "./SearchMore";
 
 const SearchSection = styled.section`
   min-height: 55vh;
@@ -27,6 +26,7 @@ function Search({
   result,
   setResult,
   setCurrResult,
+  searchWord,
 }) {
   return (
     <SearchSection>
@@ -35,6 +35,7 @@ function Search({
         setSearchValue={setSearchValue}
         setSearched={setSearched}
         setResult={setResult}
+        searchWord={searchWord}
       />
       {searched ? (
         <SearchResult

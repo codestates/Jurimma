@@ -96,6 +96,8 @@ function MoreClickModal({
   currResult,
   setAccToken,
   accToken,
+  setNeedUpdate,
+  needUpdate,
 }) {
   const url = process.env.REACT_APP_API_URL || `http://localhost:4000`;
   const thumbsUpIncrease = async (eleId) => {
@@ -112,6 +114,7 @@ function MoreClickModal({
       setAccToken(thumbsupClicked.data.accessToken);
     }
     alert("좋아요 버튼을 눌렀습니다.");
+    setNeedUpdate(!needUpdate);
     setMoreClickModal(false);
   };
   return (

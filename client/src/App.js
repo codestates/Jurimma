@@ -12,9 +12,11 @@ import WriteModal from "./comp/WriteModal";
 import MypageEdit from "./pages/MypageEdit";
 import SignoutModal from "./comp/SignoutModal";
 import MoreClickModal from "./comp/MoreClickModal";
+import axios from "axios";
 
 function App() {
   // console.log(dummyData);
+  const url = process.env.REACT_APP_API_URL || `http://localhost:4000`;
   const [isLogin, setisLogin] = useState(false); // 로그인 여부
   const [userInfo, setUserInfo] = useState(
     JSON.parse(localStorage.getItem("userInfo"))
@@ -27,6 +29,7 @@ function App() {
   const [currResult, setCurrResult] = useState({
     data: "",
   }); // 눌러서 볼 search값
+  const [needUpdate, setNeedUpdate] = useState(false); // 리렌더링 필요한지
 
   const [writeModal, setWriteModal] = useState(false);
   const [closeLogoutModal, setCloseLogoutModal] = useState(false);
@@ -45,10 +48,17 @@ function App() {
     }
   }, [accToken]);
 
-  const [needUpdate, setNeedUpdate] = useState(false); // 리렌더링 필요한지
   useEffect(() => {
-    setResult([...result]);
+    searchWord(searchValue);
   }, [needUpdate]);
+
+  const searchWord = async (searchValue) => {
+    let searchRes = await axios.post(`${url}/search`, {
+      wordName: searchValue,
+    });
+    setResult(searchRes.data.data); // 결과값 업데이트
+    setSearched(true);
+  };
 
   return (
     <BrowserRouter>
@@ -72,8 +82,8 @@ function App() {
             setAccToken={setAccToken}
             userInfo={userInfo}
             isLogin={isLogin}
-            needUpdate={needUpdate}
             setNeedUpdate={setNeedUpdate}
+            needUpdate={needUpdate}
           />
         ) : null}
 
@@ -99,6 +109,8 @@ function App() {
             currResult={currResult}
             setAccToken={setAccToken}
             accToken={accToken}
+            setNeedUpdate={setNeedUpdate}
+            needUpdate={needUpdate}
           />
         ) : null}
 
@@ -135,6 +147,7 @@ function App() {
                   setResult={setResult}
                   setCurrResult={setCurrResult}
                   setNeedUpdate={setNeedUpdate}
+                  searchWord={searchWord}
                 />
               </Route>
               <Route exact path="/searchMore">
