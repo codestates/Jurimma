@@ -267,8 +267,7 @@ const SignupBox = styled.div`
 `;
 
 function Modal({ setOnModal, setisLogin, setUserInfo, setAccToken, accToken }) {
-  const url = `https://dqo3bexldgjkb.cloudfront.net/`;
-  // const url = `https://dqo3bexldgjkb.cloudfront.net/` || `http://localhost:4000`;
+  const url = process.env.REACT_APP_API_URL || `http://localhost:4000`;
   const history = useHistory();
   const [currentTab, setCurrentTab] = useState(0);
   const [loginInfo, setLoginInfo] = useState({
