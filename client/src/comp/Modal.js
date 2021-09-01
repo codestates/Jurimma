@@ -482,21 +482,10 @@ function Modal({ setOnModal, setisLogin, setUserInfo, setAccToken, accToken }) {
             </WelcomeBox>
 
             <KakaoWrap>
-              <KaKaoLogin
-                jsKey="1e2b4e1cf49e438a572407555898e7b1"
-                onSuccess={(res) => kakaoLoginHandler(res)}
-                onFailure={(res) => console.log(res)}
-                getProfile={true}
-                onLogout={console.info}
-                style={{
-                  width: "100%",
-                }}
-              >
-                <KakaoLogin>
-                  <FontAwesomeIcon icon={faComment} id="socialLogin" />
-                  <p>카카오 로그인</p>
-                </KakaoLogin>
-              </KaKaoLogin>
+              <KakaoLogin>
+                <FontAwesomeIcon icon={faComment} id="socialLogin" />
+                <p>카카오 로그인</p>
+              </KakaoLogin>
             </KakaoWrap>
           </BoxOne>
 
