@@ -10,7 +10,7 @@ module.exports = {
     res.cookie("refreshToken", refreshToken, {
       httpOnly: true,
       // secure: true,
-      sameSite: "strict",
+      sameSite: "none",
     });
   },
   refreshAuthorized: (req) => {
