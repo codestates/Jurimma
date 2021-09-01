@@ -85,8 +85,10 @@ const LogoutButton = styled.button`
     margin-right: 20px;
   }
   :hover {
-    background-color: #9ee6c5;
+    background-color: rgba(158, 230, 197, 0.8);
     color: black;
+    font-weight: bold;
+    border: 2px solid black;
   }
 `;
 
@@ -96,6 +98,7 @@ function LogoutModal({
   setCloseLogoutModal,
   setisLogin,
   accToken,
+  setSearched,
   setAccToken,
 }) {
   const url = process.env.REACT_APP_API_URL || `http://localhost:4000`;
@@ -107,6 +110,7 @@ function LogoutModal({
     setCloseLogoutModal(false);
     setAccToken(null);
     setisLogin(false);
+    setSearched(false);
     localStorage.clear();
     history.push("/");
   };

@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
+import thumbs_up_icon from "../thumbs_up_icon.png";
 import { Link, Redirect } from "react-router-dom";
 import empty from "../empty.png";
 
@@ -12,12 +13,18 @@ function SearchResult({
   setMoreClickModal,
   accToken,
   setAccToken,
+  setCurrResult,
+  setResult,
 }) {
   let modifiedResult = result
     .sort((a, b) => b.thumbsup - a.thumbsup)
     .slice(0, 3);
 
-  // let result = [];
+  const showMore = (info) => {
+    setCurrResult({ data: info });
+    setMoreClickModal(true);
+  };
+
   const ResultList = styled.ul`
     margin-top: 20px;
     width: 65%;
@@ -33,26 +40,50 @@ function SearchResult({
       border-radius: 40px;
       text-align: center;
       line-height: 8vh;
-      background-color: #d2f8e0;
+      background-color: rgba(210, 248, 224, 0.9);
       cursor: pointer;
-      transition: all 0.3s;
+      color: #000;
+      transition: ease-in-out 0.2s;
+      p:first-child {
+        font-weight: bold;
+        font-size: max(16px, 1vw);
+      }
       p {
-        padding: 0 5px;
+        flex: 1 1 auto;
         font-size: max(14px, 1vw);
-        flex: 1 0 auto;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
       }
       p:nth-child(2) {
         flex: 3 1 auto;
+      }
+      .imgWrap {
+        position: relative;
+        right: 0.5vw;
+      }
+      .imgWrap img {
+        position: relative;
+        top: 0.2vw;
+        width: max(1.1vw, 18px);
+        height: max(1.1vw, 18px);
       }
     }
     li:nth-child(1) {
       margin-top: 0px;
     }
+    .imgWrap {
+      position: relative;
+      right: 0.5vw;
+      padding: 0.35vw;
+      background-color: rgba(210, 248, 224, 0.9);
+      border-radius: 50px;
+    }
+    .imgWrap img {
+      position: relative;
+      top: 0.2vw;
+      width: max(1.1vw, 18px);
+      height: max(1.1vw, 18px);
+    }
     li:hover {
-      background-color: #000;
+      background-color: rgba(0, 0, 0, 0.8);
       color: #fff;
     }
   `;
@@ -82,8 +113,10 @@ function SearchResult({
     font-size: max(11px, 0.8vw);
     transition: 0.2s;
     :hover {
-      background-color: white;
+      background-color: rgba(255, 255, 255, 0.5);
       color: black;
+      font-weight: bold;
+      border: 2px solid black;
       cursor: pointer;
     }
     > a {
@@ -122,10 +155,15 @@ function SearchResult({
             {/* 검색하자마자 3개 */}
             {modifiedResult.map((ele, idx) => {
               return (
-                <li key={idx} onClick={() => setMoreClickModal(true)}>
-                  <p>{ele.wordName}</p>
+                <li key={idx} onClick={() => showMore(ele)}>
+                  <p id="wordName">{ele.wordName}</p>
                   <p>{ele.wordMean}</p>
-                  <p>{ele.thumbsup}</p>
+                  <p>
+                    <span className="imgWrap">
+                      <img src={thumbs_up_icon} alt="thumbsup" />
+                    </span>
+                    <span>{ele.thumbsup}</span>
+                  </p>
                 </li>
               );
             })}

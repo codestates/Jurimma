@@ -1,6 +1,9 @@
 import React, { useState } from "react";
+import { useHistory } from "react-router";
 import styled from "styled-components";
 import logo from "../signout-logo.png";
+import axios from "axios";
+axios.defaults.withCredentials = true;
 
 const ModalBack = styled.div`
   width: 100vw;
@@ -111,14 +114,43 @@ const CancelButton = styled.button`
     margin-right: 20px;
   }
   :hover {
-    background-color: #9ee6c5;
+    background-color: rgba(158, 230, 197, 0.8);
     color: black;
+    font-weight: bold;
+    border: 2px solid black;
   }
 `;
 
 const KakaoWrap = styled.div``;
 
-function SignoutModal({ setOnSignoutModal }) {
+function SignoutModal({
+  setOnSignoutModal,
+  setAccToken,
+  setisLogin,
+  accToken,
+}) {
+  const url = process.env.REACT_APP_API_URL || `http://localhost:4000`;
+  const history = useHistory();
+
+  const handleSignOut = async () => {
+    try {
+      await axios({
+        url: `${url}/user/signout`,
+        method: "delete",
+        headers: { authorization: `Bearer ${accToken}` },
+      });
+      alert("슬빠... (슬프지만 빠이라는 뜻) ㅠ");
+      setOnSignoutModal(false);
+      setAccToken(null);
+      setisLogin(false);
+      localStorage.clear();
+      history.push("/");
+    } catch (error) {
+      console.log(error);
+      alert("다시 시도해주세요. (가지 말라는 뜻이 아닐까요?)");
+    }
+  };
+
   return (
     <>
       <ModalBack>
@@ -136,7 +168,7 @@ function SignoutModal({ setOnSignoutModal }) {
             <CancelButton onClick={() => setOnSignoutModal(false)}>
               <p>떠나지 않기</p>
             </CancelButton>
-            <SignoutButton>
+            <SignoutButton onClick={handleSignOut}>
               <p>떠나기...</p>
             </SignoutButton>
           </KakaoWrap>

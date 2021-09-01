@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import thumbs_up_icon from "../thumbs_up_icon.png";
+import axios from "axios";
 
 const ModalBack = styled.div`
   width: 100vw;
@@ -90,7 +91,32 @@ const Word = styled.div`
   }
 `;
 
-function MoreClickModal({ setMoreClickModal, currResult }) {
+function MoreClickModal({
+  setMoreClickModal,
+  currResult,
+  setAccToken,
+  accToken,
+  setNeedUpdate,
+  needUpdate,
+}) {
+  const url = process.env.REACT_APP_API_URL || `http://localhost:4000`;
+  const thumbsUpIncrease = async (eleId) => {
+    let thumbsupClicked = await axios.patch(
+      `${url}/contents/thumbsup`,
+      {
+        contentId: String(eleId),
+      },
+      {
+        headers: { authorization: `Bearer ${accToken}` },
+      }
+    );
+    if (thumbsupClicked.data.accessToken) {
+      setAccToken(thumbsupClicked.data.accessToken);
+    }
+    alert("좋아요 버튼을 눌렀습니다.");
+    setNeedUpdate(!needUpdate);
+    setMoreClickModal(false);
+  };
   return (
     <>
       <ModalBack>
@@ -103,7 +129,7 @@ function MoreClickModal({ setMoreClickModal, currResult }) {
             <div id="wordMean">
               <p>{currResult.data.wordMean}</p>
             </div>
-            <button>
+            <button onClick={() => thumbsUpIncrease(currResult.data.id)}>
               {/*추천 수, 추천하기 버튼*/}
               <img src={thumbs_up_icon} alt="thumbs up" />
               <p>{currResult.data.thumbsup}</p>

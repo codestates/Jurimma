@@ -10,13 +10,15 @@ const SearchWrap = styled.div`
   box-sizing: border-box;
   > .searchInput {
     width: 58%;
-    height: 3.2vw;
+    height: 4vw;
     min-height: 35px;
     border: 2px solid #000;
+    background-color: rgba(255, 255, 255, 0.7);
     border-radius: 30px;
     margin-right: 10px;
     outline: none;
     padding-left: 20px;
+    font-size: max(14px, 1vw);
   }
   > .searchBtn {
     width: 6vw;
@@ -34,28 +36,21 @@ const SearchWrap = styled.div`
     transition: 0.3s;
   }
   > .searchBtn:hover {
-    background-color: white;
+    background-color: rgba(255, 255, 255, 0.5);
     color: black;
+    font-weight: bold;
     border: 2px solid black;
   }
 `;
-function SearchInput({ searchValue, setSearchValue, setResult, setSearched }) {
-  const url = process.env.REACT_APP_API_URL || `http://localhost:4000`;
-
+function SearchInput({
+  searchValue,
+  setSearchValue,
+  setResult,
+  setSearched,
+  searchWord,
+}) {
   const handleSearchInputValue = (e) => {
     setSearchValue(e.target.value);
-  };
-
-  const searchWord = async (searchValue) => {
-    if (searchValue === "") {
-      alert("검색어를 입력해주세요.");
-    } else {
-      let searchRes = await axios.post(`${url}/search`, {
-        wordName: searchValue,
-      });
-      setResult(searchRes.data.data); // 결과값 업데이트
-      setSearched(true);
-    }
   };
 
   const handleKeyPressSearch = (e) => {
@@ -64,6 +59,13 @@ function SearchInput({ searchValue, setSearchValue, setResult, setSearched }) {
     }
   };
 
+  const searchBegin = (searchValue) => {
+    if (searchValue === "") {
+      alert("검색어를 입력해주세요.");
+    } else {
+      searchWord(searchValue);
+    }
+  };
   return (
     <>
       <SearchWrap className="searchWrap">
@@ -74,7 +76,7 @@ function SearchInput({ searchValue, setSearchValue, setResult, setSearched }) {
           onChange={handleSearchInputValue}
           onKeyPress={handleKeyPressSearch}
         ></input>
-        <button className="searchBtn" onClick={() => searchWord(searchValue)}>
+        <button className="searchBtn" onClick={() => searchBegin(searchValue)}>
           검색하기
         </button>
       </SearchWrap>

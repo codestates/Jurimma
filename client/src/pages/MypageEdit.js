@@ -33,7 +33,8 @@ const MyEdit = styled.div`
     width: 100%;
     height: max(40px, 3vw);
     margin-bottom: max(20px, 1vw);
-    background-color: transparent;
+    background-color: rgba(210, 248, 224, 0.9);
+    border-radius: 0px;
     border-bottom: 2px solid #000;
     transition: all 0.3s;
     line-height: max(50px, 3vw);
@@ -53,7 +54,7 @@ const MyEdit = styled.div`
   }
   > form > input:hover::-webkit-input-placeholder {
     /* Chrome/Opera/Safari */
-    font-size: 20px;
+    font-size: max(18px, 0.8vw);
     transition: 0.3s;
   }
   > form > #username {
@@ -89,14 +90,19 @@ const MyEdit = styled.div`
       width: max(90px, 10vw);
       height: max(40px, 3vw);
       border-radius: 40px;
-      background-color: #fff;
-      color: #000;
+      background-color: #000;
+      color: #fff;
       border: 2px solid black;
       cursor: pointer;
+      font-size: max(13px, 0.8vw);
       transition: all 0.3s;
       :hover {
-        background-color: #000;
-        color: #fff;
+        background-color: #fff;
+        color: #000;
+        background-color: rgba(255, 255, 255, 0.5);
+        color: black;
+        font-weight: bold;
+        border: 2px solid black;
       }
     }
   }
@@ -118,6 +124,7 @@ const MyEditExtra = styled.div`
     height: max(12vw, 120px);
     border-radius: 25vh;
     border: 3px solid #000;
+    box-shadow: 0px 7px 10px rgba(0, 0, 0, 0.8);
     margin-bottom: 2vw;
   }
   > #editPic {
@@ -125,15 +132,18 @@ const MyEditExtra = styled.div`
     width: max(100px, 10vw);
     height: max(40px, 3vw);
     border-radius: 40px;
-    background-color: #fff;
-    color: #000;
+    background-color: #000;
+    color: #fff;
     border: 2px solid black;
     cursor: pointer;
     transition: all 0.3s;
     margin-bottom: 1vw;
+    font-size: max(13px, 0.8vw);
     :hover {
-      background-color: #000;
-      color: #fff;
+      color: #000;
+      background-color: rgba(255, 255, 255, 0.5);
+      font-weight: bold;
+      border: 2px solid black;
     }
   }
   > #signOut {
@@ -144,7 +154,15 @@ const MyEditExtra = styled.div`
     background-color: #ff2400;
     color: #fff;
     cursor: pointer;
-    font-size: max(12px, 0.5vw);
+    border: 2px solid #ff2400;
+    font-size: max(11px, 0.8vw);
+    transition: all 0.3s;
+    :hover {
+      color: rgba(255, 255, 255, 1);
+      background-color: rgba(100, 0, 0);
+      font-weight: bold;
+      border: 2px solid rgba(100, 0, 0);
+    }
   }
 `;
 
@@ -205,7 +223,7 @@ function MypageEdit({
         if (editRes.data.accessToken) {
           setAccToken(editRes.data.accessToken);
         }
-        alert("정보가 업데이트 되었습니다. 다시 로그인해 주세요.");
+        alert("정보가 업데이트 되었습니다. 다시 로그인해주세요.");
         await axios.post(`${url}/user/logout`, null, {
           headers: { authorization: `Bearer ${accToken}` },
         });
@@ -217,17 +235,43 @@ function MypageEdit({
       }
     } catch (error) {
       console.log(error);
-      alert("다시 입력해 주세요.");
+      alert("다시 입력해주세요.");
     }
   };
 
-  const handleCancel = async () => {
+  const handleCancel = () => {
     setEditUser({
       username: "",
       oldPassword: "",
       newPassword: "",
       newPasswordRe: "",
     });
+  };
+
+  const handleUserPic = async () => {
+    try {
+      const userPicEdit = await axios({
+        url: `${url}/user/userPicEdit`,
+        method: "patch",
+        headers: { authorization: `Bearer ${accToken}` },
+        data: { userPic: userInfo.userPic },
+      });
+      if (userPicEdit.data.accessToken) {
+        setAccToken(userPicEdit.data.accessToken);
+      }
+      alert("사진이 변경되었습니다. 다시 로그인해주세요.");
+      await axios.post(`${url}/user/logout`, null, {
+        headers: { authorization: `Bearer ${accToken}` },
+      });
+      setCloseLogoutModal(false);
+      setAccToken(null);
+      setisLogin(false);
+      localStorage.clear();
+      history.push("/");
+    } catch (error) {
+      console.log(error);
+      alert("다시 시도해주세요.");
+    }
   };
 
   return (
@@ -283,7 +327,9 @@ function MypageEdit({
             </MyEdit>
             <MyEditExtra>
               <img src={userInfo.userPic} alt="이용자 사진" />
-              <button id="editPic">사진 변경하기</button>
+              <button id="editPic" onClick={handleUserPic}>
+                사진 변경하기
+              </button>
               <button id="signOut" onClick={() => setOnSignoutModal(true)}>
                 탈퇴하기
               </button>
