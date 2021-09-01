@@ -68,7 +68,7 @@ body:after {
   background-size: 3000px 1800px;
   overflow: hidden;
   /* transform: rotate(15deg) scale(1.3); */
-  animation: backgroundChange 60s ease-in-out infinite;
+  /* animation: backgroundChange 60s ease-in-out infinite; */
   width: 100%;
   height: 100%;
   opacity: 0.1;
