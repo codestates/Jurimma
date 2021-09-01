@@ -4,6 +4,8 @@ import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
 import profile from "../none_profile.jpeg";
+import axios from "axios";
+axios.defaults.withCredentials = true;
 
 const NavBtn = styled.button`
   display: none;
@@ -139,11 +141,15 @@ const ProfileWrap = styled.div`
 
 function Nav({
   isLogin,
+  accToken,
+  setAccToken,
   setOnModal,
+  setUserContent,
   setisLogin,
   setCloseLogoutModal,
   userInfo,
 }) {
+  const url = process.env.REACT_APP_API_URL || `http://localhost:4000`;
   const [isShow, setIsShow] = useState("none");
   const showNavClick = () => {
     isShow === "none" ? setIsShow("flex") : setIsShow("none");
@@ -184,6 +190,25 @@ function Nav({
     z-index: 50;
   `;
 
+  const searchUserWord = async () => {
+    try {
+      let userContent = await axios.get(`${url}/myContents`, {
+        header: { authorization: `Bearer ${accToken}` },
+      });
+      if (userContent.data.accessToken) {
+        setAccToken(userContent.data.accessToken);
+      }
+      setUserContent({
+        data: userContent.data.data.sort(
+          (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+        ),
+      });
+    } catch (err) {
+      console.log(err);
+      alert("다시 로그인 해주세요.");
+    }
+  }; // 유저가 쓴 글 가져오기
+
   return (
     <>
       {isLogin ? (
@@ -207,7 +232,7 @@ function Nav({
                 </button>
               </ProfileWrap>
               <Button2 onClick={logoutBtn}>LOGOUT</Button2>
-              <Button2>
+              <Button2 onClick={searchUserWord}>
                 <Link to="/mypage">MYPAGE</Link>
               </Button2>
             </div>
