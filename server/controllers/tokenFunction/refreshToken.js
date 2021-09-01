@@ -12,7 +12,6 @@ module.exports = {
       // secure: true,
       // sameSite: "none",
     });
-    res.json({ refreshToken });
   },
   refreshAuthorized: (req) => {
     // TODO: JWT 토큰 정보를 받아서 검증합니다.
