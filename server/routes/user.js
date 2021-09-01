@@ -1,4 +1,4 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
 
 const { userController } = require("../controllers");
@@ -9,5 +9,6 @@ router.post("/signup", userController.signup.post);
 router.delete("/signout", userController.signout.delete);
 router.patch("/edit", userController.edit.patch);
 router.patch("/userPicEdit", userController.userPicEdit.patch);
+router.post("/kakao", userController.kakaoLogin.post);
 
 module.exports = router;
