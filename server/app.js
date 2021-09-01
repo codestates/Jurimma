@@ -22,8 +22,9 @@ app.use(logger("dev"));
 
 app.use(
   cors({
-    origin: true,
+    origin: ["https://d3a2osb3syvck2.cloudfront.net", "http://localhost:3000"],
     credentials: true,
+    methods: ["GET", "POST", "PATCH", "DELETE", "OPTIONS"],
   })
 );
 app.use(cookieParser());
