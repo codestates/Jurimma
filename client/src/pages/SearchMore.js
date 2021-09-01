@@ -39,6 +39,7 @@ const Morebutton = styled.button`
     color: #000;
   }
 `;
+
 const ResultList = styled.ul`
   margin-top: 20px;
   width: 100%;
@@ -49,80 +50,50 @@ const ResultList = styled.ul`
     height: 8vh;
     margin: 2vh auto 0;
     border: 2px solid #000;
-    border-radius: 5vh;
-    margin: 0 auto 2vw;
-    font-size: max(12px, 0.8vw);
-    color: #fff;
-    transition: 0.3s;
+    border-radius: 40px;
+    text-align: center;
+    line-height: 8vh;
+    background-color: rgba(210, 248, 224, 0.9);
     cursor: pointer;
-    :hover {
-      background-color: #fff;
-      color: #000;
-      background-color: rgba(255, 255, 255, 0.5);
-      color: black;
+    transition: 0.3s;
+    p:first-child {
       font-weight: bold;
-      border: 2px solid black;
+      font-size: max(16px, 1vw);
     }
-  `;
-  const ResultList = styled.ul`
-    margin-top: 20px;
-    width: 100%;
-    margin: 0 auto;
-    li {
-      display: flex;
-      width: 75%;
-      height: 8vh;
-      margin: 2vh auto 0;
-      border: 2px solid #000;
-      border-radius: 40px;
-      text-align: center;
-      line-height: 8vh;
-      background-color: rgba(210, 248, 224, 0.9);
-      cursor: pointer;
-      transition: 0.3s;
-      p:first-child {
-        font-weight: bold;
-        font-size: max(16px, 1vw);
-      }
-      p {
-        flex: 1 1 auto;
-        font-size: max(14px, 1vw);
-      }
-      p:nth-child(2) {
-        flex: 3 1 auto;
-      }
-      .imgWrap {
-        position: relative;
-        right: 0.5vw;
-        padding: 0.35vw;
-        background-color: rgba(210, 248, 224, 0.9);
-        border-radius: 50px;
-      }
-      .imgWrap img {
-        position: relative;
-        top: 0.2vw;
-        width: max(1.1vw, 18px);
-        height: max(1.1vw, 18px);
-      }
+    p {
+      flex: 1 1 auto;
+      font-size: max(14px, 1vw);
+    }
+    p:nth-child(2) {
+      flex: 3 1 auto;
     }
     .imgWrap {
       position: relative;
       right: 0.5vw;
+      padding: 0.35vw;
+      background-color: rgba(210, 248, 224, 0.9);
+      border-radius: 50px;
     }
-    li:hover {
-      background-color: rgba(0, 0, 0, 0.8);
-      color: #fff;
-      p {
-        font-weight: bold;
-      }
+    .imgWrap img {
+      position: relative;
+      top: 0.2vw;
+      width: max(1.1vw, 18px);
+      height: max(1.1vw, 18px);
+    }
+  }
+  .imgWrap {
+    position: relative;
+    right: 0.5vw;
+  }
+  li:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+    color: #fff;
+    p {
+      font-weight: bold;
     }
   }
   li:nth-child(1) {
     margin-top: 0px;
-  }
-  li:hover {
-    background-color: white;
-    color: black;
   }
 `;
 const MoveDir = styled.div`

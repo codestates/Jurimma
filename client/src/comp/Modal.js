@@ -4,10 +4,7 @@ import logo from "../jurimma_logo.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronDown, faComment } from "@fortawesome/free-solid-svg-icons";
 import { useHistory } from "react-router";
-import KaKaoLogin from "react-kakao-login";
 import axios from "axios";
-import { KAKAO_AUTH_URL } from "./oauth";
-const { Kakao } = window;
 
 const checkModule = require("../checkModule");
 axios.defaults.withCredentials = true;
