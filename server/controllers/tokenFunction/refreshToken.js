@@ -11,6 +11,7 @@ module.exports = {
       httpOnly: true,
       // secure: true,
       sameSite: "none",
+      Secure,
     });
   },
   refreshAuthorized: (req) => {
