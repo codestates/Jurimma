@@ -3,6 +3,7 @@ import styled from "styled-components";
 import axios from "axios";
 import { Redirect } from "react-router";
 import { faExternalLinkAlt } from "@fortawesome/free-solid-svg-icons";
+axios.defaults.withCredentials = true;
 
 const MypageWrap = styled.div`
   width: 100%;
