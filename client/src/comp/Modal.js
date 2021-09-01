@@ -5,7 +5,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronDown, faComment } from "@fortawesome/free-solid-svg-icons";
 import { useHistory } from "react-router";
 import axios from "axios";
-
 const checkModule = require("../checkModule");
 axios.defaults.withCredentials = true;
 

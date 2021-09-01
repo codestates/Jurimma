@@ -193,7 +193,8 @@ function Nav({
   const searchUserWord = async () => {
     try {
       let userContent = await axios.get(`${url}/myContents`, {
-        header: { authorization: `Bearer ${accToken}` },
+        headers: { authorization: `Bearer ${accToken}` },
+        withCredentials: true,
       });
       if (userContent.data.accessToken) {
         setAccToken(userContent.data.accessToken);

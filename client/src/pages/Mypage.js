@@ -3,6 +3,7 @@ import styled from "styled-components";
 import axios from "axios";
 import { Redirect } from "react-router";
 import { faExternalLinkAlt } from "@fortawesome/free-solid-svg-icons";
+axios.defaults.withCredentials = true;
 
 const MypageWrap = styled.div`
   width: 100%;
@@ -122,24 +123,6 @@ function Mypage({
   );
   console.log(userContent.data);
 
-  // useEffect(() => {
-  //   checkUser();
-  // }, [userContent]); // 삭제시 다시 데이터 받아옴
-
-  const checkUser = async () => {
-    let userContent = await axios.get(`${url}/myContents`, {
-      header: { authorization: `Bearer ${accToken}` },
-    });
-    if (userContent.data.accessToken) {
-      setAccToken(userContent.data.accessToken);
-    }
-    setUserContent({
-      data: userContent.data.data.sort(
-        (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
-      ),
-    });
-  };
-
   const ordering = (value) => {
     if (value === "byThumbsup") {
       setOrderBy("byThumbsup");
@@ -198,7 +181,7 @@ function Mypage({
       setGotDeleted(!gotDeleted);
 
       let userContent = await axios.get(`${url}/myContents`, {
-        header: { authorization: `Bearer ${accToken}` },
+        headers: { authorization: `Bearer ${accToken}` },
       });
       if (userContent.data.accessToken) {
         setAccToken(userContent.data.accessToken);
