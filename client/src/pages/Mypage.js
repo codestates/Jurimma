@@ -210,6 +210,7 @@ function Mypage({
       });
     } catch (error) {
       console.log(error);
+      alert("다시 시도해주세요.");
     }
   }; // 만든 글 삭제하기
 
