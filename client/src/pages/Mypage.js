@@ -105,6 +105,7 @@ const ContentCheck = styled.div`
 function Mypage({
   userContent,
   setUserContent,
+  setAccToken,
   searchUserWord,
   isLogin,
   accToken,
@@ -119,11 +120,25 @@ function Mypage({
   const [checkedItems, setCheckedItems] = useState(
     userContent.data.map((el) => el.id)
   );
+  console.log(userContent.data);
 
-  console.log(userContent);
-  useEffect(() => {
-    searchUserWord();
-  }, [gotDeleted]); // 삭제시 다시 데이터 받아옴
+  // useEffect(() => {
+  //   checkUser();
+  // }, [userContent]); // 삭제시 다시 데이터 받아옴
+
+  const checkUser = async () => {
+    let userContent = await axios.get(`${url}/myContents`, {
+      header: { authorization: `Bearer ${accToken}` },
+    });
+    if (userContent.data.accessToken) {
+      setAccToken(userContent.data.accessToken);
+    }
+    setUserContent({
+      data: userContent.data.data.sort(
+        (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+      ),
+    });
+  };
 
   const ordering = (value) => {
     if (value === "byThumbsup") {
@@ -168,17 +183,34 @@ function Mypage({
   };
 
   const deleteContent = async () => {
-    await axios.post(
-      `${url}/contents/delete`,
-      {
-        contentId: checkedItems,
-      },
-      {
-        headers: { authorization: `Bearer ${accToken}` },
+    try {
+      let result = await axios.post(
+        `${url}/contents/delete`,
+        {
+          contentId: checkedItems,
+        },
+        {
+          headers: { authorization: `Bearer ${accToken}` },
+        }
+      );
+
+      alert("글이 삭제되었습니다.");
+      setGotDeleted(!gotDeleted);
+
+      let userContent = await axios.get(`${url}/myContents`, {
+        header: { authorization: `Bearer ${accToken}` },
+      });
+      if (userContent.data.accessToken) {
+        setAccToken(userContent.data.accessToken);
       }
-    );
-    alert("글이 삭제되었습니다.");
-    setGotDeleted(!gotDeleted);
+      setUserContent({
+        data: userContent.data.data.sort(
+          (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+        ),
+      });
+    } catch (error) {
+      console.log(error);
+    }
   }; // 만든 글 삭제하기
 
   const contentCount = userContent.data.length; // 전체 글 수
