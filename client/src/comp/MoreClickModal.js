@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import thumbs_up_icon from "../thumbs_up_icon.png";
 import axios from "axios";
+axios.defaults.withCredentials = true;
 
 const ModalBack = styled.div`
   width: 100vw;
