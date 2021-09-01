@@ -391,13 +391,40 @@ function Modal({ setOnModal, setisLogin, setUserInfo, setAccToken, accToken }) {
   const selectMenuHandler = (index) => {
     setCurrentTab(index);
   };
-  // const kakaoLoginHandler = () => {
-  //   const code = new URL(window.location.href).searchParams.get("code");
-  //   console.log(code);
-  // };
-  // const kakaoLoginHandler = async () => {
-  //   await loginWithKakao();
-  // };
+
+  const kakaoLoginHandler = async (res) => {
+    await loginWithKakao(res);
+  };
+
+  const loginWithKakao = async (res) => {
+    console.log(res);
+    const code = await new URL(window.location.href).searchParams.get("code");
+    const email = await JSON.stringify(res.profile.kakao_account.email);
+    const username = await JSON.stringify(res.profile.properties.nickname);
+    const userPic = await JSON.stringify(res.profile.properties.profile_image);
+    console.log(email, username, userPic);
+    const data = {
+      email: email.slice(1, -1),
+      username: username.slice(1, -1),
+      userPic: userPic.slice(1, -1),
+      password: "kakao1234!",
+      phone: "01077777777",
+    };
+    console.log(data);
+    console.log(data.userPic);
+    // let signupResult = await axios.post(`${url}/user/signup`, {
+    //   email: email,
+    //   password: "kakao1234login",
+    //   username: username,
+    //   phone: "01088888888",
+    //   userPic: userPic,
+    // });
+    // console.log(signupResult.data.message);
+    // history.push("/");
+    // setisLogin(true);
+    // setOnModal(false);
+    // alert("로그인 완료되었습니다.");
+  };
 
   // const loginWithKakao = async () => {
   //   const loginRes = await Kakao.Auth.login({
@@ -460,7 +487,7 @@ function Modal({ setOnModal, setisLogin, setUserInfo, setAccToken, accToken }) {
             <KakaoWrap>
               <KaKaoLogin
                 jsKey="1e2b4e1cf49e438a572407555898e7b1"
-                onSuccess={(res) => console.log(res)}
+                onSuccess={(res) => kakaoLoginHandler(res)}
                 onFailure={(res) => console.log(res)}
                 getProfile={true}
                 onLogout={console.info}
