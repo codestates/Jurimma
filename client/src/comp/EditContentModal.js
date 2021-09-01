@@ -111,6 +111,7 @@ function EditContentModal({
   editResult,
   needUpdate,
   setNeedUpdate,
+  setUserContent,
 }) {
   const url = process.env.REACT_APP_API_URL || `http://localhost:4000`;
   const [newWord, setNewWord] = useState({ data: editResult.data });
@@ -147,7 +148,19 @@ function EditContentModal({
       if (editWordMean.data.message === "ok") {
         alert("수정이 완료되었습니다");
         setEditContentModal(false);
-        setNeedUpdate(!needUpdate);
+        let userContent = await axios.get(`${url}/myContents`, {
+          header: { authorization: `Bearer ${accToken}` },
+        });
+        if (userContent.data.accessToken) {
+          setAccToken(userContent.data.accessToken);
+        }
+        setUserContent({
+          data: userContent.data.data.sort(
+            (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+          ),
+        });
+        console.log(userContent);
+        // setNeedUpdate(!needUpdate);
       }
     }
   };

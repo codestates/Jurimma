@@ -57,7 +57,6 @@ function App() {
 
   useEffect(async () => {
     await searchWord(searchValue);
-    await searchUserWord();
   }, [needUpdate]);
 
   const searchWord = async (searchValue) => {
@@ -67,17 +66,6 @@ function App() {
     setResult(searchRes.data.data); // 결과값 업데이트
     setSearched(true);
   };
-
-  const searchUserWord = async () => {
-    let userContent = await axios.get(`${url}/myContents`, {
-      header: { authorization: `Bearer ${accToken}` },
-    });
-    setUserContent({
-      data: userContent.data.data.sort(
-        (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
-      ),
-    });
-  }; // 유저가 쓴 글 가져오기
 
   return (
     <BrowserRouter>
@@ -142,16 +130,21 @@ function App() {
         {/*단어 뜻 수정 모달 */}
         {editContentModal ? (
           <EditContentModal
+            userContent={userContent}
             setAccToken={setAccToken}
             accToken={accToken}
             setEditContentModal={setEditContentModal}
             editResult={editResult}
             needUpdate={needUpdate}
             setNeedUpdate={setNeedUpdate}
+            setUserContent={setUserContent}
           />
         ) : null}
         <Nav
           isLogin={isLogin}
+          accToken={accToken}
+          setAccToken={setAccToken}
+          setUserContent={setUserContent}
           setOnModal={setOnModal}
           setisLogin={setisLogin}
           setCloseLogoutModal={setCloseLogoutModal}
@@ -182,7 +175,6 @@ function App() {
                   result={result}
                   setResult={setResult}
                   setCurrResult={setCurrResult}
-                  setNeedUpdate={setNeedUpdate}
                   searchWord={searchWord}
                 />
               </Route>
@@ -198,8 +190,8 @@ function App() {
               <Route exact path="/mypage">
                 <Mypage
                   userContent={userContent}
-                  searchUserWord={searchUserWord}
                   isLogin={isLogin}
+                  setAccToken={setAccToken}
                   accToken={accToken}
                   setMoreClickModal={setMoreClickModal}
                   setCurrResult={setCurrResult}
