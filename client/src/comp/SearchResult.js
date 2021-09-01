@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import styled from "styled-components";
+import thumbs_up_icon from "../thumbs_up_icon.png";
 import { Link, Redirect } from "react-router-dom";
 import empty from "../empty.png";
 
@@ -43,23 +44,29 @@ function SearchResult({
       cursor: pointer;
       transition: all 0.3s;
       p {
-        padding: 0 5px;
+        flex: 1 1 auto;
         font-size: max(14px, 1vw);
-        flex: 1 0 auto;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
       }
       p:nth-child(2) {
         flex: 3 1 auto;
+      }
+      .imgWrap {
+        position: relative;
+        right: 0.5vw;
+      }
+      .imgWrap img {
+        position: relative;
+        top: 0.2vw;
+        width: max(1.1vw, 18px);
+        height: max(1.1vw, 18px);
       }
     }
     li:nth-child(1) {
       margin-top: 0px;
     }
     li:hover {
-      background-color: #000;
-      color: #fff;
+      background-color: white;
+      color: black;
     }
   `;
   const EmptyResult = styled.div`
@@ -131,7 +138,12 @@ function SearchResult({
                 <li key={idx} onClick={() => showMore(ele)}>
                   <p>{ele.wordName}</p>
                   <p>{ele.wordMean}</p>
-                  <p>{ele.thumbsup}</p>
+                  <p>
+                    <span className="imgWrap">
+                      <img src={thumbs_up_icon} alt="thumbsup" />
+                    </span>
+                    <span>{ele.thumbsup}</span>
+                  </p>
                 </li>
               );
             })}

@@ -24,6 +24,28 @@ const UserContent = styled.div`
   padding: 1vw 0;
   border-bottom: 3px solid #000;
   margin-bottom: 2vw;
+  > p {
+    line-height: 20px;
+    font-size: max(0.9vw, 13px);
+    padding: 10px 0;
+    > span {
+      font-weight: 700;
+    }
+  }
+  > select {
+    width: max(5vw, 60px);
+    height: max(2vw, 20px);
+    background-color: white;
+    border-radius: 20px;
+    outline: none;
+    cursor: pointer;
+    text-align-last: center;
+    text-align: center;
+    border: 2px solid black;
+    -ms-text-align-last: center;
+    -moz-text-align-last: center;
+    font-size: max(0.8vw, 10px);
+  }
 `;
 
 const ContentList = styled.ul`
@@ -94,6 +116,7 @@ function Mypage({
     userContent.data.map((el) => el.id)
   );
 
+  console.log(userContent);
   useEffect(() => {
     searchUserWord();
   }, [gotDeleted]); // 삭제시 다시 데이터 받아옴
@@ -167,10 +190,20 @@ function Mypage({
           <MypageContent>
             {" "}
             {/* 내가 쓴 글 목록 */}
+            <div id="allCheck">
+              <input
+                type="checkbox"
+                checked={
+                  checkedItems.length === userContent.data.length ? true : false
+                }
+                onChange={(e) => handleAllCheck(e.target.checked)}
+              />
+              전체 선택
+            </div>
             <UserContent>
               <p>
-                작성하신 글은 {contentCount}개 이며, 최대 추천수는{" "}
-                {contentThumbsupCount}개 입니다
+                작성하신 글은 <span>{contentCount}개</span> 이며, 최대 추천수는{" "}
+                <span>{contentThumbsupCount}개</span> 입니다
               </p>
               <select
                 value={orderBy}
@@ -204,18 +237,6 @@ function Mypage({
               })}
             </ContentList>
             <ContentCheck>
-              <div id="allCheck">
-                <input
-                  type="checkbox"
-                  checked={
-                    checkedItems.length === userContent.data.length
-                      ? true
-                      : false
-                  }
-                  onChange={(e) => handleAllCheck(e.target.checked)}
-                />
-                전체 선택
-              </div>
               <button id="delete" onClick={() => deleteContent()}>
                 삭제
               </button>

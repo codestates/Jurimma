@@ -50,9 +50,7 @@ function Search({
           setAccToken={setAccToken}
           setCurrResult={setCurrResult}
         />
-      ) : (
-        <div id="hi">하이~ 에이치아이~</div>
-      )}
+      ) : null}
     </SearchSection>
   );
 }

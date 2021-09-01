@@ -1,5 +1,4 @@
 import "./app.css";
-import dummyData from "./dummy/dummyData";
 import Search from "./pages/Search";
 import SearchMore from "./pages/SearchMore";
 import { useEffect, useState } from "react";
@@ -113,6 +112,7 @@ function App() {
             setCloseLogoutModal={setCloseLogoutModal}
             setisLogin={setisLogin}
             accToken={accToken}
+            setSearched={setSearched}
             setAccToken={setAccToken}
           />
         ) : null}
@@ -205,6 +205,7 @@ function App() {
                   setCurrResult={setCurrResult}
                   setEditContentModal={setEditContentModal}
                   setEditResult={setEditResult}
+                  setUserContent={setUserContent}
                 />
               </Route>
               <Route exact path="/mypageEdit">
