@@ -11,7 +11,7 @@ module.exports = {
       httpOnly: true,
       domain: "jurimma-client.s3-website.ap-northeast-2.amazonaws.com",
       path: "/",
-      secure: false,
+      secure: true,
       sameSite: "none",
     });
   },
