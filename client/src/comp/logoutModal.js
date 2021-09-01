@@ -98,6 +98,7 @@ function LogoutModal({
   setCloseLogoutModal,
   setisLogin,
   accToken,
+  setSearched,
   setAccToken,
 }) {
   const url = process.env.REACT_APP_API_URL || `http://localhost:4000`;
@@ -109,6 +110,7 @@ function LogoutModal({
     setCloseLogoutModal(false);
     setAccToken(null);
     setisLogin(false);
+    setSearched(false);
     localStorage.clear();
     history.push("/");
   };

@@ -381,7 +381,7 @@ function Modal({ setOnModal, setisLogin, setUserInfo, setAccToken, accToken }) {
         console.log(signupResult.data.message); // {message:"~~"}
         history.push("/");
         setOnModal(false);
-        alert("회원가입이 완료되었습니다.");
+        alert("회원가입이 완료되었습니다. 로그인 해주세요.");
       }
     } catch (error) {
       console.log(error);

@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
+import thumbs_up_icon from "../thumbs_up_icon.png";
 import { Link, Redirect } from "react-router-dom";
 import thumbs_up_icon from "../thumbs_up_icon.png";
 import empty from "../empty.png";
@@ -13,12 +14,18 @@ function SearchResult({
   setMoreClickModal,
   accToken,
   setAccToken,
+  setCurrResult,
+  setResult,
 }) {
   let modifiedResult = result
     .sort((a, b) => b.thumbsup - a.thumbsup)
     .slice(0, 3);
 
-  // let result = [];
+  const showMore = (info) => {
+    setCurrResult({ data: info });
+    setMoreClickModal(true);
+  };
+
   const ResultList = styled.ul`
     margin-top: 20px;
     width: 65%;
@@ -43,15 +50,21 @@ function SearchResult({
         font-size: max(16px, 1vw);
       }
       p {
-        padding: 0 5px;
+        flex: 1 1 auto;
         font-size: max(14px, 1vw);
-        flex: 1 0 auto;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
       }
       p:nth-child(2) {
         flex: 3 1 auto;
+      }
+      .imgWrap {
+        position: relative;
+        right: 0.5vw;
+      }
+      .imgWrap img {
+        position: relative;
+        top: 0.2vw;
+        width: max(1.1vw, 18px);
+        height: max(1.1vw, 18px);
       }
     }
     li:nth-child(1) {
@@ -143,12 +156,12 @@ function SearchResult({
             {/* 검색하자마자 3개 */}
             {modifiedResult.map((ele, idx) => {
               return (
-                <li key={idx} onClick={() => setMoreClickModal(true)}>
+                <li key={idx} onClick={() => showMore(ele)}>
                   <p id="wordName">{ele.wordName}</p>
                   <p>{ele.wordMean}</p>
                   <p>
                     <span className="imgWrap">
-                      <img src={thumbs_up_icon}></img>
+                      <img src={thumbs_up_icon} alt="thumbsup" />
                     </span>
                     <span>{ele.thumbsup}</span>
                   </p>

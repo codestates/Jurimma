@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import thumbs_up_icon from "../thumbs_up_icon.png";
+import axios from "axios";
 
 const ModalBack = styled.div`
   width: 100vw;
@@ -90,7 +91,32 @@ const Word = styled.div`
   }
 `;
 
-function MoreClickModal({ setMoreClickModal }) {
+function MoreClickModal({
+  setMoreClickModal,
+  currResult,
+  setAccToken,
+  accToken,
+  setNeedUpdate,
+  needUpdate,
+}) {
+  const url = process.env.REACT_APP_API_URL || `http://localhost:4000`;
+  const thumbsUpIncrease = async (eleId) => {
+    let thumbsupClicked = await axios.patch(
+      `${url}/contents/thumbsup`,
+      {
+        contentId: String(eleId),
+      },
+      {
+        headers: { authorization: `Bearer ${accToken}` },
+      }
+    );
+    if (thumbsupClicked.data.accessToken) {
+      setAccToken(thumbsupClicked.data.accessToken);
+    }
+    alert("좋아요 버튼을 눌렀습니다.");
+    setNeedUpdate(!needUpdate);
+    setMoreClickModal(false);
+  };
   return (
     <>
       <ModalBack>
@@ -99,19 +125,14 @@ function MoreClickModal({ setMoreClickModal }) {
             &times;
           </div>
           <Word>
-            <h2>{/*단어*/}자만추</h2>
+            <h2>{currResult.data.wordName}</h2>
             <div id="wordMean">
-              <p>
-                {/*단어 뜻*/}자연스러운 만남 추구 자연스러운 만남 추구
-                자연스러운 만남 추구 자연스러운 만남 추구 자연스러운 만남 추구
-                자연스러운 만남 추구 자연스러운 만남 추구 자연스러운 만남 추구
-                자연스러운 만남 추구 자연스러운 만남 추구
-              </p>
+              <p>{currResult.data.wordMean}</p>
             </div>
-            <button>
+            <button onClick={() => thumbsUpIncrease(currResult.data.id)}>
               {/*추천 수, 추천하기 버튼*/}
               <img src={thumbs_up_icon} alt="thumbs up" />
-              <p>20</p>
+              <p>{currResult.data.thumbsup}</p>
             </button>
           </Word>
         </ModalBox>

@@ -184,6 +184,13 @@ function MypageEdit({
     newPassword: "",
     newPasswordRe: "",
   });
+
+  const handleKeyPressEdit = (e) => {
+    if (e.type === "keypress" && e.code === "Enter") {
+      handleEdit();
+    }
+  };
+
   const handleEditInputValue = (key) => (e) => {
     setEditUser({ ...editUser, [key]: e.target.value });
   };
@@ -216,7 +223,7 @@ function MypageEdit({
         if (editRes.data.accessToken) {
           setAccToken(editRes.data.accessToken);
         }
-        alert("정보가 업데이트 되었습니다. 다시 로그인해 주세요.");
+        alert("정보가 업데이트 되었습니다. 다시 로그인해주세요.");
         await axios.post(`${url}/user/logout`, null, {
           headers: { authorization: `Bearer ${accToken}` },
         });
@@ -228,17 +235,43 @@ function MypageEdit({
       }
     } catch (error) {
       console.log(error);
-      alert("다시 입력해 주세요.");
+      alert("다시 입력해주세요.");
     }
   };
 
-  const handleCancel = async () => {
+  const handleCancel = () => {
     setEditUser({
       username: "",
       oldPassword: "",
       newPassword: "",
       newPasswordRe: "",
     });
+  };
+
+  const handleUserPic = async () => {
+    try {
+      const userPicEdit = await axios({
+        url: `${url}/user/userPicEdit`,
+        method: "patch",
+        headers: { authorization: `Bearer ${accToken}` },
+        data: { userPic: userInfo.userPic },
+      });
+      if (userPicEdit.data.accessToken) {
+        setAccToken(userPicEdit.data.accessToken);
+      }
+      alert("사진이 변경되었습니다. 다시 로그인해주세요.");
+      await axios.post(`${url}/user/logout`, null, {
+        headers: { authorization: `Bearer ${accToken}` },
+      });
+      setCloseLogoutModal(false);
+      setAccToken(null);
+      setisLogin(false);
+      localStorage.clear();
+      history.push("/");
+    } catch (error) {
+      console.log(error);
+      alert("다시 시도해주세요.");
+    }
   };
 
   return (
@@ -255,6 +288,7 @@ function MypageEdit({
                   id="username"
                   placeholder="사용자 이름"
                   onChange={handleEditInputValue("username")}
+                  onKeyPress={handleKeyPressEdit}
                   value={editUser.username}
                 ></input>
                 <input
@@ -262,6 +296,7 @@ function MypageEdit({
                   id="oldPassword"
                   placeholder="예전 비밀번호"
                   onChange={handleEditInputValue("oldPassword")}
+                  onKeyPress={handleKeyPressEdit}
                   value={editUser.oldPassword}
                 ></input>
                 <input
@@ -269,6 +304,7 @@ function MypageEdit({
                   id="newPassword"
                   placeholder="새로운 비밀번호"
                   onChange={handleEditInputValue("newPassword")}
+                  onKeyPress={handleKeyPressEdit}
                   value={editUser.newPassword}
                 ></input>
                 <input
@@ -276,6 +312,7 @@ function MypageEdit({
                   id="newRePassword"
                   placeholder="새로운 비밀번호 재입력"
                   onChange={handleEditInputValue("newPasswordRe")}
+                  onKeyPress={handleKeyPressEdit}
                   value={editUser.newPasswordRe}
                 ></input>
               </form>
@@ -290,7 +327,9 @@ function MypageEdit({
             </MyEdit>
             <MyEditExtra>
               <img src={userInfo.userPic} alt="이용자 사진" />
-              <button id="editPic">사진 변경하기</button>
+              <button id="editPic" onClick={handleUserPic}>
+                사진 변경하기
+              </button>
               <button id="signOut" onClick={() => setOnSignoutModal(true)}>
                 탈퇴하기
               </button>
