@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import styled from "styled-components";
 import thumbs_up_icon from "../thumbs_up_icon.png";
 import { Link, Redirect } from "react-router-dom";
-import thumbs_up_icon from "../thumbs_up_icon.png";
 import empty from "../empty.png";
 
 function SearchResult({

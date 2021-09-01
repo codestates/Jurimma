@@ -4,10 +4,7 @@ import logo from "../jurimma_logo.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronDown, faComment } from "@fortawesome/free-solid-svg-icons";
 import { useHistory } from "react-router";
-import KaKaoLogin from "react-kakao-login";
 import axios from "axios";
-import { KAKAO_AUTH_URL } from "./oauth";
-const { Kakao } = window;
 
 const checkModule = require("../checkModule");
 axios.defaults.withCredentials = true;
@@ -485,21 +482,10 @@ function Modal({ setOnModal, setisLogin, setUserInfo, setAccToken, accToken }) {
             </WelcomeBox>
 
             <KakaoWrap>
-              <KaKaoLogin
-                jsKey="1e2b4e1cf49e438a572407555898e7b1"
-                onSuccess={(res) => kakaoLoginHandler(res)}
-                onFailure={(res) => console.log(res)}
-                getProfile={true}
-                onLogout={console.info}
-                style={{
-                  width: "100%",
-                }}
-              >
-                <KakaoLogin>
-                  <FontAwesomeIcon icon={faComment} id="socialLogin" />
-                  <p>카카오 로그인</p>
-                </KakaoLogin>
-              </KaKaoLogin>
+              <KakaoLogin>
+                <FontAwesomeIcon icon={faComment} id="socialLogin" />
+                <p>카카오 로그인</p>
+              </KakaoLogin>
             </KakaoWrap>
           </BoxOne>
 
