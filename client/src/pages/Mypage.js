@@ -199,7 +199,7 @@ function Mypage({
       setGotDeleted(!gotDeleted);
 
       let userContent = await axios.get(`${url}/myContents`, {
-        header: { authorization: `Bearer ${accToken}` },
+        headers: { authorization: `Bearer ${accToken}` },
       });
       if (userContent.data.accessToken) {
         setAccToken(userContent.data.accessToken);
