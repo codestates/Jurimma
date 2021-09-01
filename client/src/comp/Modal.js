@@ -266,6 +266,8 @@ const SignupBox = styled.div`
 `;
 
 function Modal({ setOnModal, setisLogin, setUserInfo, setAccToken, accToken }) {
+  const redirect_uri =
+    process.env.KAKAO_REDIRECT_URI || "http://localhost:3000";
   const url = process.env.REACT_APP_API_URL || `http://localhost:4000`;
   const history = useHistory();
   const [currentTab, setCurrentTab] = useState(0);
@@ -388,39 +390,46 @@ function Modal({ setOnModal, setisLogin, setUserInfo, setAccToken, accToken }) {
     setCurrentTab(index);
   };
 
-  const kakaoLoginHandler = async (res) => {
-    await loginWithKakao(res);
+  const kakaoLoginHandler = () => {
+    window.location
+      .assign(
+        `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=e1e24cec9152fba320c623c4789d450e&redirect_uri=${redirect_uri}`
+      )
+      .then((res) => {})
+      .catch((err) => {
+        console.error(err);
+      });
   };
 
-  const loginWithKakao = async (res) => {
-    console.log(res);
-    const code = await new URL(window.location.href).searchParams.get("code");
-    const email = await JSON.stringify(res.profile.kakao_account.email);
-    const username = await JSON.stringify(res.profile.properties.nickname);
-    const userPic = await JSON.stringify(res.profile.properties.profile_image);
-    console.log(email, username, userPic);
-    const data = {
-      email: email.slice(1, -1),
-      username: username.slice(1, -1),
-      userPic: userPic.slice(1, -1),
-      password: "kakao1234!",
-      phone: "01077777777",
-    };
-    console.log(data);
-    console.log(data.userPic);
-    // let signupResult = await axios.post(`${url}/user/signup`, {
-    //   email: email,
-    //   password: "kakao1234login",
-    //   username: username,
-    //   phone: "01088888888",
-    //   userPic: userPic,
-    // });
-    // console.log(signupResult.data.message);
-    // history.push("/");
-    // setisLogin(true);
-    // setOnModal(false);
-    // alert("로그인 완료되었습니다.");
-  };
+  // const loginWithKakao = async (res) => {
+  //   console.log(res);
+  //   const code = await new URL(window.location.href).searchParams.get("code");
+  //   const email = await JSON.stringify(res.profile.kakao_account.email);
+  //   const username = await JSON.stringify(res.profile.properties.nickname);
+  //   const userPic = await JSON.stringify(res.profile.properties.profile_image);
+  //   console.log(email, username, userPic);
+  //   const data = {
+  //     email: email.slice(1, -1),
+  //     username: username.slice(1, -1),
+  //     userPic: userPic.slice(1, -1),
+  //     password: "kakao1234!",
+  //     phone: "01077777777",
+  //   };
+  //   console.log(data);
+  //   console.log(data.userPic);
+  // let signupResult = await axios.post(`${url}/user/signup`, {
+  //   email: email,
+  //   password: "kakao1234login",
+  //   username: username,
+  //   phone: "01088888888",
+  //   userPic: userPic,
+  // });
+  // console.log(signupResult.data.message);
+  // history.push("/");
+  // setisLogin(true);
+  // setOnModal(false);
+  // alert("로그인 완료되었습니다.");
+  // };
 
   // const loginWithKakao = async () => {
   //   const loginRes = await Kakao.Auth.login({
@@ -481,7 +490,7 @@ function Modal({ setOnModal, setisLogin, setUserInfo, setAccToken, accToken }) {
             </WelcomeBox>
 
             <KakaoWrap>
-              <KakaoLogin>
+              <KakaoLogin onClick={kakaoLoginHandler}>
                 <FontAwesomeIcon icon={faComment} id="socialLogin" />
                 <p>카카오 로그인</p>
               </KakaoLogin>
