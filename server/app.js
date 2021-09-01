@@ -22,7 +22,7 @@ app.use(logger("dev"));
 
 app.use(
   cors({
-    origin: "http://jurimma-client.s3-website.ap-northeast-2.amazonaws.com",
+    origin: "jurimma-client.s3-website.ap-northeast-2.amazonaws.com",
     credentials: true,
   })
 );

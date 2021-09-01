@@ -9,7 +9,7 @@ module.exports = {
     // TODO: JWT 토큰을 쿠키로 전달합니다.
     res.cookie("refreshToken", refreshToken, {
       httpOnly: true,
-      domain: "http://jurimma-client.s3-website.ap-northeast-2.amazonaws.com",
+      domain: "jurimma-client.s3-website.ap-northeast-2.amazonaws.com",
       path: "/",
       secure: false,
       sameSite: "none",
