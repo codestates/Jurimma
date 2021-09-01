@@ -80,10 +80,6 @@ const ResultList = styled.ul`
       height: max(1.1vw, 18px);
     }
   }
-  .imgWrap {
-    position: relative;
-    right: 0.5vw;
-  }
   li:hover {
     background-color: rgba(0, 0, 0, 0.8);
     color: #fff;
