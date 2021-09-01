@@ -2,7 +2,6 @@ import { useState } from "react";
 import styled from "styled-components";
 import SearchInput from "../comp/SearchInput";
 import SearchResult from "../comp/SearchResult";
-import SearchMore from "./SearchMore";
 
 const SearchSection = styled.section`
   min-height: 55vh;
@@ -13,21 +12,45 @@ const SearchSection = styled.section`
   }
 `;
 
-function Search({ data, isLogin, setWriteModal, setOnModal, searched, setMoreClickModal }) {
+function Search({
+  isLogin,
+  setWriteModal,
+  setOnModal,
+  searched,
+  setSearched,
+  setMoreClickModal,
+  searchValue,
+  setSearchValue,
+  accToken,
+  setAccToken,
+  result,
+  setResult,
+  setCurrResult,
+  searchWord,
+}) {
   return (
     <SearchSection>
-      <SearchInput />
-      {searched? (
+      <SearchInput
+        searchValue={searchValue}
+        setSearchValue={setSearchValue}
+        setSearched={setSearched}
+        setResult={setResult}
+        searchWord={searchWord}
+      />
+      {searched ? (
         <SearchResult
-          data={data}
+          result={result}
+          setResult={setResult}
           isLogin={isLogin}
           setWriteModal={setWriteModal}
           setOnModal={setOnModal}
           setMoreClickModal={setMoreClickModal}
+          searchValue={searchValue}
+          accToken={accToken}
+          setAccToken={setAccToken}
+          setCurrResult={setCurrResult}
         />
-      ) : (
-        <div id="hi">하이~ 에이치아이~</div>
-      )}
+      ) : null}
     </SearchSection>
   );
 }

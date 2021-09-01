@@ -40,13 +40,62 @@ button {
 
 body {
   line-height: 1;
-  background: #9ee6c5;
+  /* background: #9ee6c5; */
   padding: 0;
   margin: 0;
   border: 0;
   vertical-align: baseline;
+  /* background-color: #9ee6c5; */
+  background: linear-gradient(-45deg, #ff006a, #9ee6c5, #9443df);
   box-sizing: border-box;
   font-family: "Nanum Gothic", "Noto Sans", sans-serif;
+  /* background: url("bg.png"); */
+  position: relative;
+  animation: backgroundChangeback 15s ease-in-out infinite;
+  background-size: 6000px 3000px;
+  background-repeat: no-repeat;
+  /* overflow: hidden; */
+}
+body:after {
+  opacity: 0.2;
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-image: url("bg.png");
+  background-repeat: repeat;
+  background-size: 3000px 1800px;
+  overflow: hidden;
+  /* transform: rotate(15deg) scale(1.3); */
+  animation: backgroundChange 60s ease-in-out infinite;
+  width: 100%;
+  height: 100%;
+  opacity: 0.1;
+  z-index: -1;
+  overflow: hidden;
+}
+@keyframes backgroundChange {
+  0% {
+    background-position: 0% 300%;
+  }
+  50% {
+    background-position: 150% 0%;
+  }
+  100% {
+    background-position: 0 300%;
+  }
+}
+@keyframes backgroundChangeback {
+  0% {
+    background-position: 100% 0%;
+  }
+  50% {
+    background-position: 0% 100%;
+  }
+  100% {
+    background-position: 100% 0;
+  }
 }
 ol,
 ul {
@@ -76,12 +125,15 @@ h1 {
 }
 
 #jurimma {
-  width: 200px;
-  height: 200px;
+  width: 250px;
+  height: 250px;
   background-image: url("jurimma_logo.png");
   background-repeat: no-repeat;
   background-size: 200px 200px;
+  background-position: center;
+  background-size: 100%;
   transition: 0.3s;
+  border-radius: 60px;
 }
 #jurimma:hover {
   background-image: url("jurimma_logo_hover.png");
@@ -109,5 +161,7 @@ footer {
   height: 10vh;
   line-height: 10vh;
   text-align: center;
-  font-size: max(0.85vw, 11px);
+  color: rgba(63, 9, 9, 0.5);
+  font-weight: bold;
+  font-size: max(0.85vw, 20px);
 }

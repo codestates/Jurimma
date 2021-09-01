@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { useHistory } from "react-router";
 import axios from "axios";
 
 axios.defaults.withCredentials = true;
@@ -45,7 +44,7 @@ const ModalBox = styled.div`
   }
 `;
 
-const NewWord = styled.input`
+const NewWord = styled.h2`
   width: 70%;
   height: 3vw;
   min-height: 30px;
@@ -85,7 +84,7 @@ const WordMean = styled.textarea`
   }
 `;
 
-const Addbutton = styled.button`
+const Editbutton = styled.button`
   width: 50%;
   height: 5vh;
   min-height: 30px;
@@ -105,59 +104,51 @@ const Addbutton = styled.button`
   }
 `;
 
-function WriteModal({
-  setWriteModal,
+function EditContentModal({
   accToken,
   setAccToken,
-  userInfo,
-  setNeedUpdate,
+  setEditContentModal,
+  editResult,
   needUpdate,
+  setNeedUpdate,
 }) {
   const url = process.env.REACT_APP_API_URL || `http://localhost:4000`;
-  const history = useHistory();
-  const [newWord, setNewWord] = useState({
-    wordName: "",
-    userId: userInfo.id,
-    wordMean: "",
-  });
-
-  const handleKeyPressWrite = (e) => {
+  const [newWord, setNewWord] = useState({ data: editResult.data });
+  const handleEditInputValue = (e) => {
+    setNewWord({
+      data: {
+        ...editResult.data,
+        wordMean: e.target.value,
+      },
+    });
+  };
+  const handleKeyPressEdit = (e) => {
     if (e.type === "keypress" && e.code === "Enter") {
-      handleWrite();
+      handleEditWord();
     }
   };
-
-  const handleWriteInputValue = (key) => (e) => {
-    setNewWord({ ...newWord, [key]: e.target.value });
-  };
-
-  const handleWrite = async () => {
-    try {
-      if (!newWord.wordName) {
-        alert("줄임말 이름을 입력해주세요.");
-      } else if (!newWord.wordMean) {
-        alert("줄임말 뜻을 입력해주세요.");
-      } else if (!WordNameLength(newWord.wordName)) {
-        alert("20자 미만으로 입력해주세요.");
-      } else if (!WordMeanLength(newWord.wordMean)) {
-        alert("200자 미만으로 입력해주세요.");
-      } else {
-        let writeRes = await axios({
-          url: `${url}/contents`,
-          method: "post",
-          headers: { authorization: `Bearer ${accToken}` },
-          data: newWord,
-        });
-        if (writeRes.data.accessToken) {
-          setAccToken(writeRes.data.accessToken);
-        }
-        alert("새로운 줄임말이 등록되었습니다.");
-        setNeedUpdate(!needUpdate);
-        setWriteModal(false);
+  const handleEditWord = async () => {
+    if (newWord.data.wordMean.length === editResult.data.wordMean.length) {
+      alert("변경 사항이 없습니다.");
+    } else if (newWord.data.wordMean.length > 200) {
+      alert("200자 미만으로 입력해주세요.");
+    } else {
+      let editWordMean = await axios.patch(
+        `${url}/contents`,
+        {
+          contentId: newWord.data.id,
+          wordMean: newWord.data.wordMean,
+        },
+        { headers: { authorization: `Bearer ${accToken}` } }
+      );
+      if (editWordMean.data.accessToken) {
+        setAccToken(editWordMean.data.accessToken);
       }
-    } catch (error) {
-      alert("다시 로그인해주세요.");
-      setWriteModal(false);
+      if (editWordMean.data.message === "ok") {
+        alert("수정이 완료되었습니다");
+        setEditContentModal(false);
+        setNeedUpdate(!needUpdate);
+      }
     }
   };
 
@@ -165,26 +156,21 @@ function WriteModal({
     <>
       <ModalBack>
         {" "}
-        {/* 새로운 글 전송 */}
+        {/* 글 수정 */}
         <ModalBox>
-          <div onClick={() => setWriteModal(false)}>&times;</div>
-          <NewWord
-            type="text"
-            placeholder="새로 쓸 단어를 입력해주세요"
-            onChange={handleWriteInputValue("wordName")}
-            value={newWord.wordName}
-            onKeyPress={handleKeyPressWrite}
-          ></NewWord>
+          <div onClick={() => setEditContentModal(false)}>&times;</div>
+          <NewWord>{newWord.data.wordName}</NewWord>
           <WordMean
-            onChange={handleWriteInputValue("wordMean")}
-            value={newWord.wordMean}
-            onKeyPress={handleKeyPressWrite}
+            placeholder="200자 미만으로 입력해주세요."
+            value={newWord.data.wordMean}
+            onChange={(e) => handleEditInputValue(e)}
+            onKeyPress={(e) => handleKeyPressEdit(e)}
           />
-          <Addbutton onClick={handleWrite}>추가하기</Addbutton>
+          <Editbutton onClick={handleEditWord}>수정하기</Editbutton>
         </ModalBox>
       </ModalBack>
     </>
   );
 }
 
-export default WriteModal;
+export default EditContentModal;
