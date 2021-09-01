@@ -31,13 +31,13 @@ const Button1 = styled.button`
   height: 7vh;
   border: none;
   border-radius: 40px;
-  font-size: 0.98rem;
+  // font-size: max(1.1rem, 1vw);
   font-weight: 700;
   display: block;
   margin-top: 5vh;
   transition: 0.3s;
   cursor: pointer;
-  background-color: white;
+  background-color: rgba(158, 230, 197, 0.4);
   border: 2px solid black;
   cursor: pointer;
   > a {
@@ -48,7 +48,7 @@ const Button1 = styled.button`
     box-sizing: border-box;
   }
   :hover {
-    background-color: black;
+    background-color: rgba(0, 0, 0, 0.8);
     color: white;
   }
   &:nth-child(1) {
@@ -61,13 +61,13 @@ const Button2 = styled.button`
   min-width: 20vh;
   height: 7vh;
   border-radius: 40px;
-  font-size: 0.98rem;
+  font-size: max(1.1rem, 1vw);
   font-weight: 700;
   display: block;
   margin: 5vh auto 0;
   cursor: pointer;
   transition: 0.3s;
-  background-color: white;
+  background-color: rgba(158, 230, 197, 0.4);
   border: 2px solid black;
   cursor: pointer;
   > a {
@@ -78,7 +78,7 @@ const Button2 = styled.button`
     box-sizing: border-box;
   }
   :hover {
-    background-color: black;
+    background-color: rgba(0, 0, 0, 0.8);
     color: white;
   }
   &:nth-child(1) {
@@ -96,6 +96,11 @@ const ProfileWrap = styled.div`
     border-radius: 25vh;
     border: 3px solid black;
     margin-bottom: 5vh;
+    box-shadow: 0px 7px 10px rgba(0, 0, 0, 0.8);
+    transition: 0.2s;
+  }
+  > img:hover {
+    transform: translateY(-5%);
   }
   > button {
     width: 100%;
@@ -103,12 +108,12 @@ const ProfileWrap = styled.div`
     height: 7vh;
     border: none;
     border-radius: 40px;
-    font-size: 0.98rem;
+    font-size: max(1.1rem, 1vw);
     font-weight: 700;
     display: block;
     margin: 0 auto;
     cursor: pointer;
-    background-color: white;
+    background-color: rgba(158, 230, 197, 0.4);
     border: 2px solid black;
     box-sizing: border-box;
     > a {
@@ -120,13 +125,13 @@ const ProfileWrap = styled.div`
     }
   }
   > button:hover {
-    background-color: black;
+    background-color: rgba(0, 0, 0, 0.8);
     color: white;
     transition: 0.3s;
   }
   > p {
     margin-top: -3.3vh;
-    font-size: 1.1rem;
+    font-size: max(1.1rem, 1vw);
     margin-bottom: 1.5vh;
     font-weight: 700;
   }
@@ -166,7 +171,8 @@ function Nav({
       align-items: center;
       overflow: hidden;
     }
-    background-color: #edfff7;
+    background-color: rgba(237, 255, 247, 0.8);
+    box-shadow: 10px 0px 100px darkgray;
     position: sticky;
     top: 0;
     flex: 1 1 auto;
@@ -214,6 +220,13 @@ function Nav({
           </NavBtn>
           <Navbar>
             <div>
+              <ProfileWrap>
+                <img src={profile} alt="none" />
+                <p>
+                  <br></br>
+                  <br></br>로그인하면 원하는 줄임말을 추가할 수 있어요!
+                </p>
+              </ProfileWrap>
               <Button1 onClick={() => setOnModal(true)}>LOGIN / SIGNUP</Button1>
               <Button1 onClick={() => setOnModal(true)}>MYPAGE</Button1>
             </div>

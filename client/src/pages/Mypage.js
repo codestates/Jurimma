@@ -84,8 +84,10 @@ const ContentCheck = styled.div`
   > button {
     width: 9vw;
     min-width: 75px;
-    height: 5vh;
+    background-color: #000;
+    color: #fff;
     border: 2px solid black;
+    height: 5vh;
     box-sizing: border-box;
     border-radius: 5vh;
     word-break: keep-all;
@@ -93,8 +95,10 @@ const ContentCheck = styled.div`
     transition: 0.3s;
   }
   > button:hover {
-    background-color: black;
-    color: white;
+    color: #000;
+    background-color: rgba(255, 255, 255, 0.5);
+    font-weight: bold;
+    border: 2px solid black;
   }
 `;
 

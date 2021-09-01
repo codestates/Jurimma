@@ -85,8 +85,10 @@ const LogoutButton = styled.button`
     margin-right: 20px;
   }
   :hover {
-    background-color: #9ee6c5;
+    background-color: rgba(158, 230, 197, 0.8);
     color: black;
+    font-weight: bold;
+    border: 2px solid black;
   }
 `;
 
