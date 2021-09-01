@@ -129,39 +129,44 @@ function EditContentModal({
     }
   };
   const handleEditWord = async () => {
-    if (newWord.data.wordMean.length === editResult.data.wordMean.length) {
-      alert("변경 사항이 없습니다.");
-    } else if (newWord.data.wordMean.length > 200) {
-      alert("200자 미만으로 입력해주세요.");
-    } else {
-      let editWordMean = await axios.patch(
-        `${url}/contents`,
-        {
-          contentId: newWord.data.id,
-          wordMean: newWord.data.wordMean,
-        },
-        { headers: { authorization: `Bearer ${accToken}` } }
-      );
-      if (editWordMean.data.accessToken) {
-        setAccToken(editWordMean.data.accessToken);
-      }
-      if (editWordMean.data.message === "ok") {
-        alert("수정이 완료되었습니다");
-        setEditContentModal(false);
-        let userContent = await axios.get(`${url}/myContents`, {
-          header: { authorization: `Bearer ${accToken}` },
-        });
-        if (userContent.data.accessToken) {
-          setAccToken(userContent.data.accessToken);
+    try {
+      if (newWord.data.wordMean.length === editResult.data.wordMean.length) {
+        alert("변경 사항이 없습니다.");
+      } else if (newWord.data.wordMean.length > 200) {
+        alert("200자 미만으로 입력해주세요.");
+      } else {
+        let editWordMean = await axios.patch(
+          `${url}/contents`,
+          {
+            contentId: newWord.data.id,
+            wordMean: newWord.data.wordMean,
+          },
+          { headers: { authorization: `Bearer ${accToken}` } }
+        );
+        if (editWordMean.data.accessToken) {
+          setAccToken(editWordMean.data.accessToken);
         }
-        setUserContent({
-          data: userContent.data.data.sort(
-            (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
-          ),
-        });
-        console.log(userContent);
-        // setNeedUpdate(!needUpdate);
+        if (editWordMean.data.message === "ok") {
+          alert("수정이 완료되었습니다");
+          setEditContentModal(false);
+          let userContent = await axios.get(`${url}/myContents`, {
+            header: { authorization: `Bearer ${accToken}` },
+          });
+          if (userContent.data.accessToken) {
+            setAccToken(userContent.data.accessToken);
+          }
+          setUserContent({
+            data: userContent.data.data.sort(
+              (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+            ),
+          });
+          console.log(userContent);
+          // setNeedUpdate(!needUpdate);
+        }
       }
+    } catch (err) {
+      console.log(err);
+      alert("다시 시도해주세요.");
     }
   };
 
