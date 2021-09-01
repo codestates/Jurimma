@@ -9,7 +9,7 @@ module.exports = {
     // TODO: JWT 토큰을 쿠키로 전달합니다.
     res.cookie("refreshToken", refreshToken, {
       httpOnly: true,
-      secure: false,
+      secure: true,
       sameSite: "none",
     });
   },
