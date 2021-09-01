@@ -54,7 +54,7 @@ body {
   animation: backgroundChangeback 15s ease-in-out infinite;
   background-size: 6000px 3000px;
   background-repeat: no-repeat;
-  overflow: hidden;
+  /* overflow: hidden; */
 }
 body:after {
   opacity: 0.2;
