@@ -4,7 +4,11 @@ import logo from "../jurimma_logo.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronDown, faComment } from "@fortawesome/free-solid-svg-icons";
 import { useHistory } from "react-router";
+import KaKaoLogin from "react-kakao-login";
 import axios from "axios";
+import { KAKAO_AUTH_URL } from "./oauth";
+const { Kakao } = window;
+
 const checkModule = require("../checkModule");
 axios.defaults.withCredentials = true;
 
@@ -343,11 +347,6 @@ function Modal({ setOnModal, setisLogin, setUserInfo, setAccToken, accToken }) {
     }
   };
 
-  //   signupUsername: "",
-  // signupEmail: "",
-  // signupPhone: "",
-  // signupPassword: "",
-  // signupRePassword: "",
   const handleSignup = async () => {
     try {
       if (
@@ -393,6 +392,86 @@ function Modal({ setOnModal, setisLogin, setUserInfo, setAccToken, accToken }) {
     setCurrentTab(index);
   };
 
+  const kakaoLoginHandler = async (res) => {
+    await loginWithKakao(res);
+  };
+
+  const loginWithKakao = async (res) => {
+    console.log(res);
+    const code = await new URL(window.location.href).searchParams.get("code");
+    const email = await JSON.stringify(res.profile.kakao_account.email);
+    const username = await JSON.stringify(res.profile.properties.nickname);
+    const userPic = await JSON.stringify(res.profile.properties.profile_image);
+    console.log(email, username, userPic);
+    const data = {
+      email: email.slice(1, -1),
+      username: username.slice(1, -1),
+      userPic: userPic.slice(1, -1),
+      password: "kakao1234!",
+      phone: "01077777777",
+    };
+    console.log(data);
+    console.log(data.userPic);
+    // let signupResult = await axios.post(`${url}/user/signup`, {
+    //   email: email,
+    //   password: "kakao1234login",
+    //   username: username,
+    //   phone: "01088888888",
+    //   userPic: userPic,
+    // });
+    // console.log(signupResult.data.message);
+    // history.push("/");
+    // setisLogin(true);
+    // setOnModal(false);
+    // alert("로그인 완료되었습니다.");
+  };
+
+  // const loginWithKakao = async () => {
+  //   const loginRes = await Kakao.Auth.login({
+  //     success: async function (authObj) {
+  //       // alert(JSON.stringify(authObj));
+  //       let res = await axios({
+  //         url: "https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=1e2b4e1cf49e438a572407555898e7b1&redirect_uri=http://localhost:3000/oauth",
+  //         method: "post",
+  //         accept: "application/json",
+  //         data: JSON.stringify({ access_token: authObj.access_token }),
+  //       });
+  //       await localStorage.setItem("Kakao_token", res.access_token);
+  //       if (res.access_token) {
+  //         setOnModal(false);
+  //         setisLogin(true);
+  //         history.push("/");
+  //       }
+  //     },
+  //     fail: function (err) {
+  //       alert(JSON.stringify(err));
+  //     },
+  //   });
+  //   console.log(loginRes);
+  // };
+
+  // // // 아래는 데모를 위한 UI 코드입니다.
+  // displayToken();
+  // function displayToken() {
+  //   const token = getCookie("authorize-access-token");
+  //   if (token) {
+  //     Kakao.Auth.setAccessToken(token);
+  //     Kakao.Auth.getStatusInfo(({ status }) => {
+  //       if (status === "connected") {
+  //         document.getElementById("token-result").innerText =
+  //           "login success. token: " + Kakao.Auth.getAccessToken();
+  //       } else {
+  //         Kakao.Auth.setAccessToken(null);
+  //       }
+  //     });
+  //   }
+  // }
+  // function getCookie(name) {
+  //   const value = "; " + document.cookie;
+  //   const parts = value.split("; " + name + "=");
+  //   if (parts.length === 2) return parts.pop().split(";").shift();
+  // }
+  // const KaKaoLogin = styled(KakaoLogin)``;
   return (
     <>
       <ModalBack>
@@ -406,10 +485,21 @@ function Modal({ setOnModal, setisLogin, setUserInfo, setAccToken, accToken }) {
             </WelcomeBox>
 
             <KakaoWrap>
-              <KakaoLogin>
-                <FontAwesomeIcon icon={faComment} id="socialLogin" />
-                <p>카카오 로그인</p>
-              </KakaoLogin>
+              <KaKaoLogin
+                jsKey="1e2b4e1cf49e438a572407555898e7b1"
+                onSuccess={(res) => kakaoLoginHandler(res)}
+                onFailure={(res) => console.log(res)}
+                getProfile={true}
+                onLogout={console.info}
+                style={{
+                  width: "100%",
+                }}
+              >
+                <KakaoLogin>
+                  <FontAwesomeIcon icon={faComment} id="socialLogin" />
+                  <p>카카오 로그인</p>
+                </KakaoLogin>
+              </KaKaoLogin>
             </KakaoWrap>
           </BoxOne>
 
