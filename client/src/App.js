@@ -120,7 +120,6 @@ function App() {
             setisLogin={setisLogin}
             setUserInfo={setUserInfo}
             setAccToken={setAccToken}
-            accToken={accToken}
           />
         ) : null}
 
@@ -131,7 +130,6 @@ function App() {
             accToken={accToken}
             setAccToken={setAccToken}
             userInfo={userInfo}
-            isLogin={isLogin}
             setNeedUpdate={setNeedUpdate}
             needUpdate={needUpdate}
           />
@@ -178,8 +176,6 @@ function App() {
             accToken={accToken}
             setEditContentModal={setEditContentModal}
             editResult={editResult}
-            needUpdate={needUpdate}
-            setNeedUpdate={setNeedUpdate}
             setUserContent={setUserContent}
           />
         ) : null}
@@ -189,7 +185,6 @@ function App() {
           setAccToken={setAccToken}
           setUserContent={setUserContent}
           setOnModal={setOnModal}
-          setisLogin={setisLogin}
           setCloseLogoutModal={setCloseLogoutModal}
           userInfo={userInfo}
         />
@@ -227,31 +222,29 @@ function App() {
                   setMoreClickModal={setMoreClickModal}
                   setWriteModal={setWriteModal}
                   setCurrResult={setCurrResult}
-                  setResult={setResult}
                 />
               </Route>
               <Route exact path="/mypage">
                 <Mypage
                   userContent={userContent}
-                  isLogin={isLogin}
+                  setUserContent={setUserContent}
                   setAccToken={setAccToken}
+                  isLogin={isLogin}
                   accToken={accToken}
                   setMoreClickModal={setMoreClickModal}
                   setCurrResult={setCurrResult}
-                  setEditContentModal={setEditContentModal}
                   setEditResult={setEditResult}
-                  setUserContent={setUserContent}
+                  setEditContentModal={setEditContentModal}
                 />
               </Route>
               <Route exact path="/mypageEdit">
                 <MypageEdit
                   isLogin={isLogin}
                   setOnSignoutModal={setOnSignoutModal}
-                  setUserInfo={setUserInfo}
                   userInfo={userInfo}
+                  setCloseLogoutModal={setCloseLogoutModal}
                   accToken={accToken}
                   setAccToken={setAccToken}
-                  setCloseLogoutModal={setCloseLogoutModal}
                   setisLogin={setisLogin}
                 />
               </Route>

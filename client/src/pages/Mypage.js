@@ -1,8 +1,8 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import axios from "axios";
 import { Redirect } from "react-router";
-import { faExternalLinkAlt } from "@fortawesome/free-solid-svg-icons";
+
 axios.defaults.withCredentials = true;
 
 const MypageWrap = styled.div`
@@ -107,7 +107,6 @@ function Mypage({
   userContent,
   setUserContent,
   setAccToken,
-  searchUserWord,
   isLogin,
   accToken,
   setMoreClickModal,
@@ -121,7 +120,7 @@ function Mypage({
   const [checkedItems, setCheckedItems] = useState(
     userContent.data.map((el) => el.id)
   );
-  console.log(userContent.data);
+  // console.log(userContent.data);
 
   const ordering = (value) => {
     if (value === "byThumbsup") {
@@ -167,7 +166,7 @@ function Mypage({
 
   const deleteContent = async () => {
     try {
-      let result = await axios.post(
+      await axios.post(
         `${url}/contents/delete`,
         {
           contentId: checkedItems,

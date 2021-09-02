@@ -145,7 +145,6 @@ function Nav({
   setAccToken,
   setOnModal,
   setUserContent,
-  setisLogin,
   setCloseLogoutModal,
   userInfo,
 }) {

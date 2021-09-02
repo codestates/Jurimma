@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import logo from "../jurimma_logo.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faChevronDown, faComment } from "@fortawesome/free-solid-svg-icons";
+import { faComment } from "@fortawesome/free-solid-svg-icons";
 import { useHistory } from "react-router";
 import KaKaoLogin from "react-kakao-login";
 import axios from "axios";
@@ -266,9 +266,7 @@ const SignupBox = styled.div`
   }
 `;
 
-function Modal({ setOnModal, setisLogin, setUserInfo, setAccToken, accToken }) {
-  const redirect_uri =
-    process.env.KAKAO_REDIRECT_URI || "http://localhost:3000";
+function Modal({ setOnModal, setisLogin, setUserInfo, setAccToken }) {
   const Kakao_key = "1e2b4e1cf49e438a572407555898e7b1";
   const url = process.env.REACT_APP_API_URL || `http://localhost:4000`;
   const history = useHistory();
@@ -319,7 +317,7 @@ function Modal({ setOnModal, setisLogin, setUserInfo, setAccToken, accToken }) {
           email: loginInfo.loginEmail,
           password: loginInfo.loginPassword,
         });
-        console.log(loginResult.data); // {accerssToken, userInfo,...}
+        // console.log(loginResult.data); // {accerssToken, userInfo,...}
         await setUserInfo({
           id: loginResult.data.userInfo.id,
           username: loginResult.data.userInfo.username,
@@ -372,13 +370,13 @@ function Modal({ setOnModal, setisLogin, setUserInfo, setAccToken, accToken }) {
       } else if (checkModule.OnlyKorEng(signupInfo.signupUsername) === false) {
         alert("유효하지 않은 이름입니다.");
       } else {
-        let signupResult = await axios.post(`${url}/user/signup`, {
+        await axios.post(`${url}/user/signup`, {
           email: signupInfo.signupEmail,
           password: signupInfo.signupPassword,
           username: signupInfo.signupUsername,
           phone: signupInfo.signupPhone,
         });
-        console.log(signupResult.data.message); // {message:"~~"}
+        // console.log(signupResult.data.message); // {message:"~~"}
         history.push("/");
         setOnModal(false);
         alert("회원가입이 완료되었습니다. 로그인 해주세요.");
@@ -407,7 +405,7 @@ function Modal({ setOnModal, setisLogin, setUserInfo, setAccToken, accToken }) {
   };
 
   const loginWithKakao = async (res) => {
-    console.log(res.profile);
+    // console.log(res.profile);
     const userPic = await JSON.stringify(
       res.profile.kakao_account.profile.profile_image_url
     );
@@ -415,19 +413,19 @@ function Modal({ setOnModal, setisLogin, setUserInfo, setAccToken, accToken }) {
     const username = await JSON.stringify(
       res.profile.kakao_account.profile.nickname
     );
-    console.log(email, username, userPic);
+    // console.log(email, username, userPic);
     const data = {
       email: email.slice(1, -1),
       username: username.slice(1, -1),
       userPic: userPic.slice(1, -1),
     };
-    console.log(data);
+    // console.log(data);
     const kakaoRes = await axios({
       method: "post",
       url: `${url}/user/kakao`,
       data: data,
     });
-    console.log(kakaoRes);
+    // console.log(kakaoRes);
     // if (
     //   kakaoRes.data.message === "ok" ||
     //   kakaoRes.data.message === "signup success"
