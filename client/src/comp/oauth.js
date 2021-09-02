@@ -1,4 +1,4 @@
-const CLIENT_ID = "1e2b4e1cf49e438a572407555898e7b1";
-const REDIRECT_URI = "http://localhost:3000/oauth";
+import dotenv from "dotenv";
+dotenv.config();
 
-export const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=code`;
+export const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?client_id=${process.env.KAKAO_KEY}&redirect_uri=${process.env.KAKAO_REDIRECT_URI}&response_type=code`;

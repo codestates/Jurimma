@@ -6,18 +6,18 @@ import Nav from "./comp/Nav";
 import Modal from "./comp/Modal";
 import LogoutModal from "./comp/logoutModal";
 import Mypage from "./pages/Mypage";
-import { BrowserRouter, Switch, Route, Link, Redirect } from "react-router-dom";
+import { BrowserRouter, Switch, Route, Link } from "react-router-dom";
 import WriteModal from "./comp/WriteModal";
 import MypageEdit from "./pages/MypageEdit";
 import SignoutModal from "./comp/SignoutModal";
 import MoreClickModal from "./comp/MoreClickModal";
 import axios from "axios";
 import EditContentModal from "./comp/EditContentModal";
+require("dotenv").config();
+
 axios.defaults.withCredentials = true;
-const { Kakao } = window;
 
 function App() {
-  // console.log(dummyData);
   const url = process.env.REACT_APP_API_URL || `http://localhost:4000`;
   const [isLogin, setisLogin] = useState(false); // 로그인 여부
   const [userInfo, setUserInfo] = useState(
@@ -45,49 +45,50 @@ function App() {
   const [moreClickModal, setMoreClickModal] = useState(false);
   const [editContentModal, setEditContentModal] = useState(false);
 
-  useEffect(async () => {
-    Kakao.init("e1e24cec9152fba320c623c4789d450e");
-    console.log(Kakao.isInitialized());
-    setSearched(false);
-    try {
-      const url = new URL(window.location.href);
-      const authorizationCode = url.searchParams.get("code");
-      console.log("인증 코드 : ", authorizationCode);
-      if (authorizationCode) {
-        // authorization server로부터 클라이언트로 리디렉션된 경우, authorization code가 함께 전달됩니다.
-        // ex) http://localhost:3000/?code=5e52fb85d6a1ed46a51f
-        const url = process.env.REACT_APP_API_URL || `http://localhost:4000`;
-        const payload = {
-          authorizationCode,
-        };
-        const loginResult = await axios.post(`${url}/user/kakao`, payload);
-        console.log("loginResult : ", loginResult);
-        await setUserInfo({
-          id: loginResult.data.userInfo.id,
-          username: loginResult.data.userInfo.username,
-          email: loginResult.data.userInfo.email,
-          userPic: loginResult.data.userInfo.userPic,
-        });
-        await setAccToken(loginResult.data.accessToken);
-        localStorage.setItem("accessToken", loginResult.data.accessToken);
-        localStorage.setItem(
-          "userInfo",
-          JSON.stringify({
-            id: loginResult.data.userInfo.id,
-            username: loginResult.data.userInfo.username,
-            email: loginResult.data.userInfo.email,
-            userPic: loginResult.data.userInfo.userPic,
-          })
-        );
-        // history.push("/");
-        setisLogin(true);
-        setOnModal(false);
-      }
-    } catch (error) {
-      console.log(error);
-      alert("로그인 정보가 없습니다.");
-    }
-  }, []);
+  // useEffect(async () => {
+  //   console.log(process.env.KAKAO_KEY);
+  //   Kakao.init(process.env.KAKAO_KEY);
+  //   console.log(Kakao.isInitialized());
+  //   setSearched(false);
+  //   //   try {
+  //   const url = new URL(window.location.href);
+  //   const authorizationCode = url.searchParams.get("code");
+  //   console.log("인증 코드 : ", authorizationCode);
+  //     if (authorizationCode) {
+  //       // authorization server로부터 클라이언트로 리디렉션된 경우, authorization code가 함께 전달됩니다.
+  //       // ex) http://localhost:3000/?code=5e52fb85d6a1ed46a51f
+  //       const url = process.env.REACT_APP_API_URL || `http://localhost:4000`;
+  //       const payload = {
+  //         authorizationCode,
+  //       };
+  //       const loginResult = await axios.post(`${url}/user/kakao`, payload);
+  //       console.log("loginResult : ", loginResult);
+  //       await setUserInfo({
+  //         id: loginResult.data.userInfo.id,
+  //         username: loginResult.data.userInfo.username,
+  //         email: loginResult.data.userInfo.email,
+  //         userPic: loginResult.data.userInfo.userPic,
+  //       });
+  //       await setAccToken(loginResult.data.accessToken);
+  //       localStorage.setItem("accessToken", loginResult.data.accessToken);
+  //       localStorage.setItem(
+  //         "userInfo",
+  //         JSON.stringify({
+  //           id: loginResult.data.userInfo.id,
+  //           username: loginResult.data.userInfo.username,
+  //           email: loginResult.data.userInfo.email,
+  //           userPic: loginResult.data.userInfo.userPic,
+  //         })
+  //       );
+  //       // history.push("/");
+  //       setisLogin(true);
+  //       setOnModal(false);
+  //     }
+  //   } catch (error) {
+  //     console.log(error);
+  //     alert("로그인 정보가 없습니다.");
+  //   }
+  // }, []);
 
   useEffect(() => {
     if (!accToken) {
@@ -196,7 +197,7 @@ function App() {
         <div className="exNav">
           <header>
             <Link to="/">
-              <h1 id="jurimma"></h1>
+              <h1 id="jurimma"> </h1>
             </Link>
           </header>
 
