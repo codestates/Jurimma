@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { useHistory } from "react-router";
 import axios from "axios";
 
 axios.defaults.withCredentials = true;
@@ -114,7 +113,6 @@ function WriteModal({
   needUpdate,
 }) {
   const url = process.env.REACT_APP_API_URL || `http://localhost:4000`;
-  const history = useHistory();
   const [newWord, setNewWord] = useState({
     wordName: "",
     userId: userInfo.id,

@@ -1,4 +1,3 @@
-import { useState } from "react";
 import styled from "styled-components";
 import SearchInput from "../comp/SearchInput";
 import SearchResult from "../comp/SearchResult";
@@ -33,21 +32,15 @@ function Search({
       <SearchInput
         searchValue={searchValue}
         setSearchValue={setSearchValue}
-        setSearched={setSearched}
-        setResult={setResult}
         searchWord={searchWord}
       />
       {searched ? (
         <SearchResult
           result={result}
-          setResult={setResult}
           isLogin={isLogin}
           setWriteModal={setWriteModal}
           setOnModal={setOnModal}
           setMoreClickModal={setMoreClickModal}
-          searchValue={searchValue}
-          accToken={accToken}
-          setAccToken={setAccToken}
           setCurrResult={setCurrResult}
         />
       ) : null}

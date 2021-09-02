@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import profile from "../none_profile.jpeg";
 import { Redirect, useHistory } from "react-router";
 import { useState } from "react";
 import axios from "axios";

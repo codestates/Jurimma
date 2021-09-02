@@ -3,7 +3,6 @@ import styled from "styled-components";
 import axios from "axios";
 
 axios.defaults.withCredentials = true;
-const { WordNameLength, WordMeanLength } = require("../checkModule");
 
 const ModalBack = styled.div`
   width: 100vw;
@@ -109,8 +108,6 @@ function EditContentModal({
   setAccToken,
   setEditContentModal,
   editResult,
-  needUpdate,
-  setNeedUpdate,
   setUserContent,
 }) {
   const url = process.env.REACT_APP_API_URL || `http://localhost:4000`;
@@ -160,7 +157,7 @@ function EditContentModal({
               (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
             ),
           });
-          console.log(userContent);
+          // console.log(userContent);
           // setNeedUpdate(!needUpdate);
         }
       }

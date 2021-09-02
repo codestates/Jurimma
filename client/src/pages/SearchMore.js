@@ -1,9 +1,7 @@
-import React, { useEffect } from "react";
+import React from "react";
 import styled from "styled-components";
 import empty from "../empty.png";
 import thumbs_up_icon from "../thumbs_up_icon.png";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faChevronDown, faChevronUp } from "@fortawesome/free-solid-svg-icons";
 
 const EmptyResult = styled.div`
   text-align: center;
@@ -103,34 +101,12 @@ const ResultList = styled.ul`
     margin-top: 0px;
   }
 `;
-const MoveDir = styled.div`
-  width: 5vh;
-  height: 10vh;
-  border: 1px solid #000;
-  border-radius: 30px;
-  overflow: hidden;
-  position: fixed;
-  right: 2vh;
-  bottom: 5vh;
-  display: flex;
-  flex-direction: column;
-  background-color: #000;
-  > .fit {
-    flex: 1 1 auto;
-    margin: 0 auto;
-    width: 50%;
-    background-color: #000;
-    color: #fff;
-    cursor: pointer;
-  }
-`;
 
 function SearchMore({
   result,
   setMoreClickModal,
   setWriteModal,
   setCurrResult,
-  setResult,
 }) {
   let moreResult = result.sort((a, b) => b.thumbsup - a.thumbsup);
   const showSearchMore = (info) => {
@@ -195,10 +171,6 @@ function SearchMore({
               );
             })}
           </ResultList>
-          <MoveDir>
-            <FontAwesomeIcon icon={faChevronUp} className="fit" />
-            <FontAwesomeIcon icon={faChevronDown} className="fit" />
-          </MoveDir>
         </Result>
       )}
     </>

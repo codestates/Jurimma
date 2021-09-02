@@ -1,5 +1,4 @@
 import React from "react";
-import axios from "axios";
 import styled from "styled-components";
 
 const SearchWrap = styled.div`
@@ -42,13 +41,7 @@ const SearchWrap = styled.div`
     border: 2px solid black;
   }
 `;
-function SearchInput({
-  searchValue,
-  setSearchValue,
-  setResult,
-  setSearched,
-  searchWord,
-}) {
+function SearchInput({ searchValue, setSearchValue, searchWord }) {
   const handleSearchInputValue = (e) => {
     setSearchValue(e.target.value);
   };
