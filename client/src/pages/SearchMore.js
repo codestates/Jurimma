@@ -39,6 +39,7 @@ const Morebutton = styled.button`
     color: #000;
   }
 `;
+
 const ResultList = styled.ul`
   margin-top: 20px;
   width: 100%;
@@ -92,8 +93,14 @@ const ResultList = styled.ul`
     margin-top: 0px;
   }
   li:hover {
-    background-color: white;
-    color: black;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: #fff;
+    p {
+      font-weight: bold;
+    }
+  }
+  li:nth-child(1) {
+    margin-top: 0px;
   }
 `;
 const MoveDir = styled.div`
