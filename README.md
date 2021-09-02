@@ -4,10 +4,7 @@
 
 # 🏇 Project 1 : Jurimma 🏇
 
-<!--
-![](https://media.discordapp.net/attachments/878131777485565993/880410029881180200/Jurimma-logo.png?width=250&height=250) -->
-
-<img src="https://cdn.discordapp.com/attachments/878131777485565993/880129438510100510/jurimma_logo_sigcol.jpg" width=320 height=230>
+<img src="https://cdn.discordapp.com/attachments/878131777485565993/882832763852558366/jurimma_logo_sigcol_circle.png" width=320 height=230>
 
 > **별다줄** : 별걸 다 줄인다. 의 줄임말입니다.
 
@@ -50,6 +47,7 @@
 <img src="https://img.shields.io/badge/React-0088CC?style=flat-square&logo=react&logoColor=white"/></a>
 <img src="https://img.shields.io/badge/React Router-CA4245?style=flat-square&logo=react router&logoColor=white"/></a>
 <img src="https://img.shields.io/badge/Axios-0088CC?style=flat-square&logo=node.js&logoColor=white"/></a>
+<img src="https://img.shields.io/badge/React Kakao Login-FFCD00?style=flat-square&logo=Kakao&logoColor=white"/></a>
 
 ### 🙈 Back-End 🙈
 
