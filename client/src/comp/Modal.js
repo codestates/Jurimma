@@ -269,7 +269,7 @@ const SignupBox = styled.div`
 function Modal({ setOnModal, setisLogin, setUserInfo, setAccToken, accToken }) {
   const redirect_uri =
     process.env.KAKAO_REDIRECT_URI || "http://localhost:3000";
-  const Kakao_key = process.env.KAKAO_KEY;
+  const Kakao_key = "1e2b4e1cf49e438a572407555898e7b1";
   const url = process.env.REACT_APP_API_URL || `http://localhost:4000`;
   const history = useHistory();
   const [currentTab, setCurrentTab] = useState(0);
