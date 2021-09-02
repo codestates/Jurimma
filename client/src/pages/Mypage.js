@@ -15,9 +15,6 @@ const MypageContent = styled.div`
   width: 75%;
   min-width: 200px;
   margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
 `;
 const UserContent = styled.div`
   display: flex;
@@ -52,7 +49,6 @@ const UserContent = styled.div`
 const ContentList = styled.ul`
   display: flex;
   flex-direction: column;
-  margin-bottom: 2vw;
   > .content {
     display: flex;
     /* justify-content: space-between; */
@@ -94,6 +90,7 @@ const ContentCheck = styled.div`
     word-break: keep-all;
     cursor: pointer;
     transition: 0.3s;
+    margin-top: 30px;
   }
   > button:hover {
     color: #000;
